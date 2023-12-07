@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class BotBase : MonoBehaviour
 {
     [SerializeField] private bool isEnemy;
 
     [Header("Vie")]
+    [SerializeField] private Image healthBar;
     [SerializeField] private int maxHealth;
     private int health;
 
@@ -14,7 +16,6 @@ public abstract class BotBase : MonoBehaviour
     [Header("Déplacements")]
     [HideInInspector] public BotBase target;
     [SerializeField] private float moveSpeed;
-    private string CurrentState;
 
     [Header("Ciblage")]
     [SerializeField] private float AttackRange;
