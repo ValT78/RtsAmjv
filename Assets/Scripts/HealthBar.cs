@@ -9,20 +9,30 @@ public class HealthBar : MonoBehaviour
     private float targetHealth;
     [SerializeField] private Image healthBar;
     [SerializeField] private Image holder;
+    [SerializeField] private Image sigle;
     [SerializeField] private float reduceSpeed;
 
     [Header("shake")]
     public float shakeDuration;
     public float shakeAmount;
-
     private float initialYPosition;
     private float shakeTimer;
+
+    [Header("fade")]
+    public float fadeTime;
+    public float timeBeforeFade;
+    private float fadeTimer;
+
+    private IEnumerator co1;
+    private IEnumerator co2;
 
     // Start is called before the first frame update
     void Start()
     {
         m_Camera = Camera.main;
         initialYPosition = transform.position.y;
+        co1 = Shake();
+        co2 = Fade();
 
     }
 
@@ -32,22 +42,35 @@ public class HealthBar : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(transform.position - m_Camera.transform.position);
         healthBar.fillAmount = Mathf.MoveTowards(healthBar.fillAmount, targetHealth, reduceSpeed * Time.deltaTime);
 
-
+        
     }
 
     public void DamageHealthBar(float health, float maxHealth)
     {
         targetHealth = health / maxHealth;
         shakeTimer = shakeDuration;
-        StopCoroutine(Shake());
-        StartCoroutine(Shake());
+        fadeTimer = fadeTime;
+        healthBar.color = new Color(255, 255, 255, 1);
+        holder.color = new Color(255, 255, 255, 1);
+        sigle.color = new Color(255, 255, 255, 1);
+        StopCoroutine(co1);
+        StopCoroutine(co2);
+        co1 = Shake();
+        co2 = Fade();
+        StartCoroutine(co1);
+        StartCoroutine(co2);
     }
     public void HealHealthBar(float health, float maxHealth)
     {
         targetHealth = health / maxHealth;
         shakeTimer = shakeDuration;
-        StopCoroutine(Shake());
+        fadeTimer = fadeTime;
+        healthBar.color = new Color(255, 255, 255, 1);
+        holder.color = new Color(255, 255, 255, 1);
+        sigle.color = new Color(255, 255, 255, 1); 
         StartCoroutine(Shake());
+        StartCoroutine(Fade());
+
     }
 
     private IEnumerator Shake()
@@ -62,5 +85,24 @@ public class HealthBar : MonoBehaviour
         }
         
         transform.position = new Vector3(transform.position.x, initialYPosition, transform.position.z);
+    }
+
+    private IEnumerator Fade()
+    {
+        yield return new WaitForSeconds(timeBeforeFade);
+        while (fadeTimer > 0)
+        {
+            fadeTimer -= Time.deltaTime;
+
+            if (fadeTimer >= 0)
+            {
+                float alpha = Mathf.Lerp(1f, 0f, (fadeTime - fadeTimer) / fadeTime);
+                print(alpha);
+                healthBar.color = new Color(255, 255, 255, alpha);
+                holder.color = new Color(255, 255, 255, alpha);
+                sigle.color = new Color(255, 255, 255, alpha);
+            }
+            yield return new WaitForFixedUpdate();
+        }
     }
 }
