@@ -8,7 +8,7 @@ public abstract class BotBase : MonoBehaviour
     [SerializeField] private bool isEnemy;
 
     [Header("Vie")]
-    [SerializeField] private Image healthBar;
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
     private int health;
 
@@ -35,7 +35,7 @@ public abstract class BotBase : MonoBehaviour
     private void Start()
     {
         initialShotTimer = initialShotTime;
-        health = maxHealth;
+        ModifyHealth(maxHealth);
     }
 
     private void Update()
@@ -126,6 +126,7 @@ public abstract class BotBase : MonoBehaviour
     public void ModifyHealth(int value)
     {
         health = Mathf.Min(health + value, maxHealth);
+        healthBar.DamageHealthBar(health, maxHealth);
         if (health <= 0)
         {
             GameManager.KillBot(gameObject);
