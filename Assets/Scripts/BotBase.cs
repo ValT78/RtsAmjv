@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BotBase : MonoBehaviour
 {
-
+    [SerializeField] private bool isEnemy;
 
     [Header("Vie")]
     [SerializeField] private int maxHealth;
@@ -21,6 +21,8 @@ public abstract class BotBase : MonoBehaviour
     [SerializeField] private float timeBetweenShot;
     [SerializeField] private float initialShotTime;
     private float initialShotTimer;
+    private BotBase toShoot;
+    private bool isAttacking;
 
     [Header("Projectile")]
     [SerializeField] private GameObject projectilePrefab;
@@ -32,43 +34,70 @@ public abstract class BotBase : MonoBehaviour
     private void Start()
     {
         initialShotTimer = initialShotTime;
+        health = maxHealth;
+    }
+
+    private void Update()
+    {
+        UpdateBehavior();
     }
 
     public virtual void UpdateBehavior()
     {
-        // Logique commune à tous les bots.
-        if (target != null)
+        if(toShoot != null)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-            if (distanceToTarget <= AttackRange)
+            initialShotTimer -= Time.deltaTime;
+            // Passer à l'état d'attaque si la cible est à portée.
+            if (initialShotTimer < 0 && !isAttacking)
             {
-                initialShotTimer -= Time.deltaTime;
-                // Passer à l'état d'attaque si la cible est à portée.
-                if (initialShotTimer < 0 && CurrentState != "Attack")
-                {
-                    StartCoroutine(Attack());
-                    CurrentState = "Attack";
-                }
+                StartCoroutine(Attack(toShoot));
+                isAttacking = true;
             }
-            else 
-            {
-                // Avancer vers la cible.
-                initialShotTimer = initialShotTime;
-
-                CurrentState = "Move";
-                MoveTowardsTarget();
-            }
-            
         }
         else
         {
+            isAttacking = false;
             initialShotTimer = initialShotTime;
+            BotBase newToShoot = ClosestBot(GameManager.GetOppositeBots(isEnemy), AttackRange);
 
-            CurrentState = "Wait";
+            if (newToShoot != null) toShoot = newToShoot;
+
+            else
+            {
+                if (target != null)
+                {
+                        MoveTowardsTarget();
+                }
+                else
+                {
+                    // Waiting
+                }
+            }
+            
         }
+
+        
     }
 
-   
+    public BotBase ClosestBot(List<BotBase> troupList, float maxRange)
+    {
+        if (troupList.Count == 0) return null;
+        float cloasestRange = maxRange;
+        BotBase closestBot = null;
+        // Logique pour détecter les troupes dans la visionRange.
+        foreach (var troop in troupList)
+        {
+            float distanceToTroop = Vector3.Distance(transform.position, troop.transform.position);
+            if (distanceToTroop <= cloasestRange)
+            {
+                // La troupe détectée devient la nouvelle cible.
+                closestBot = troop;
+                cloasestRange = distanceToTroop;
+            }
+        }
+
+        return closestBot;
+    }
 
     protected void MoveTowardsTarget()
     {
@@ -79,24 +108,24 @@ public abstract class BotBase : MonoBehaviour
         transform.Translate(moveSpeed * Time.deltaTime * direction);
     }
 
-    private IEnumerator Attack()
+    private IEnumerator Attack(BotBase toShoot)
     {
         // Logique pour attaquer la cible en lançant un projectile.
         GameObject projectile = Instantiate(projectilePrefab, attackOrigin.position, attackOrigin.rotation);
-        projectile.GetComponent<Rigidbody>().AddForce((target.transform.position-attackOrigin.position).normalized*projectileSpeed, ForceMode.Impulse);
+        projectile.GetComponent<Rigidbody>().AddForce((toShoot.transform.position-attackOrigin.position).normalized*projectileSpeed, ForceMode.Impulse);
         if (projectile.TryGetComponent<Projectile>(out var projectileScript))
             {
-                projectileScript.Initialize(target, projectileLifeTime, damage);
+                projectileScript.Initialize(isEnemy, projectileLifeTime, damage);
 
             }
         yield return new WaitForSeconds(timeBetweenShot);
-        if(CurrentState=="Attack") StartCoroutine(Attack());
+        if(toShoot!=null) StartCoroutine(Attack(toShoot));
     }
 
     public void ModifyHealth(int value)
     {
         health = Mathf.Min(health + value, maxHealth);
-        if (health < 0)
+        if (health <= 0)
         {
             GameManager.KillBot(gameObject);
         }

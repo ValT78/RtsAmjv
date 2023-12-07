@@ -48,4 +48,16 @@ public class GameManager : MonoBehaviour
         }
         Destroy(botObject);
     }
+
+    public static List<BotBase> GetOppositeBots(bool isEnemy)
+    {
+        if(isEnemy)
+        {
+            return troopUnits.Select(troopBot => (BotBase)troopBot).ToList();
+        }
+        else
+        {
+            return enemyUnits.Select(enemyBot => (BotBase)enemyBot).ToList();
+        }
+    }
 }
