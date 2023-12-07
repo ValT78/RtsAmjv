@@ -5,10 +5,11 @@ using UnityEngine;
 public class EnemyBot : BotBase
 {
     [SerializeField] private float VisionRange; // Définir la portée de vision des ennemis.
+    private float cloasestRange;
    
     void Update()
     {
-        DetectTroups(GameManager.troopUnits);
+        target = FollowTroop(GameManager.troopUnits, VisionRange);
         UpdateBehavior();
     }
 
@@ -19,19 +20,24 @@ public class EnemyBot : BotBase
         // Logique spécifique aux ennemis, si nécessaire.
     }
 
-    public void DetectTroups(List<TroopBot> troupList)
+    public BotBase FollowTroop(List<TroopBot> troupList, float maxRange)
     {
+        float cloasestRange = maxRange;
+        BotBase closestBot = null;
         // Logique pour détecter les troupes dans la visionRange.
         foreach (var troop in troupList)
         {
             float distanceToTroop = Vector3.Distance(transform.position, troop.transform.position);
-            if (distanceToTroop <= VisionRange)
+            if (distanceToTroop <= cloasestRange)
             {
                 // La troupe détectée devient la nouvelle cible.
-                target = troop.gameObject;
+                closestBot = troop;
+                cloasestRange = distanceToTroop;
             }
         }
+
+        return closestBot;
     }
 
-    
+
 }

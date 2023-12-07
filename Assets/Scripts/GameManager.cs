@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Récupérer toutes les unités de troupe dans la scène et les ajouter à la liste
-        TroopBot[] troopsInScene = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<TroopBot>().ToArray();
+        TroopBot[] troopsInScene = GameObject.FindObjectsOfType<TroopBot>().ToArray();
         troopUnits.AddRange(troopsInScene);
 
         // Récupérer toutes les unités d'ennemi dans la scène et les ajouter à la liste
-        EnemyBot[] enemiesInScene = GameObject.FindObjectsOfType<MonoBehaviour>().OfType<EnemyBot>().ToArray();
+        EnemyBot[] enemiesInScene = GameObject.FindObjectsOfType<EnemyBot>().ToArray();
         enemyUnits.AddRange(enemiesInScene);
     }
 

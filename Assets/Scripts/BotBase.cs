@@ -12,7 +12,7 @@ public abstract class BotBase : MonoBehaviour
 
 
     [Header("Déplacements")]
-    [HideInInspector] public GameObject target;
+    [HideInInspector] public BotBase target;
     [SerializeField] private float moveSpeed;
     private string CurrentState;
 
@@ -67,6 +67,9 @@ public abstract class BotBase : MonoBehaviour
             CurrentState = "Wait";
         }
     }
+
+   
+
     protected void MoveTowardsTarget()
     {
         // Calculer la direction vers la cible
