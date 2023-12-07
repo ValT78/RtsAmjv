@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4855118310215935770}
   - component: {fileID: 7761792073348143355}
   m_Layer: 0
-  m_Name: Healer
+  m_Name: Troop
   m_TagString: Troup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
