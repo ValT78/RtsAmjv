@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class BotBase : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public abstract class BotBase : MonoBehaviour
     [HideInInspector] public BotBase target;
     [SerializeField] private float moveSpeed;
     private string CurrentState;
+    private NavMeshAgent agent;
 
     [Header("Ciblage")]
     [SerializeField] private float AttackRange;
@@ -35,6 +37,7 @@ public abstract class BotBase : MonoBehaviour
     {
         initialShotTimer = initialShotTime;
         health = maxHealth;
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
@@ -64,7 +67,7 @@ public abstract class BotBase : MonoBehaviour
 
             else
             {
-                if (target != null)
+                if (target != null && !agent.hasPath)
                 {
                         MoveTowardsTarget();
                 }
@@ -101,11 +104,7 @@ public abstract class BotBase : MonoBehaviour
 
     protected void MoveTowardsTarget()
     {
-        // Calculer la direction vers la cible
-        Vector3 direction = (target.transform.position - transform.position).normalized;
-
-        // Déplacer l'objet dans la direction de la cible
-        transform.Translate(moveSpeed * Time.deltaTime * direction);
+        agent.SetDestination(target.transform.position);
     }
 
     private IEnumerator Attack(BotBase toShoot)
