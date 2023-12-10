@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 3647539865071632589}
   - component: {fileID: 3004979293294258728}
   - component: {fileID: 4737082135239160392}
+  - component: {fileID: -9125251467962153891}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -134,7 +135,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -183,8 +184,10 @@ MonoBehaviour:
   healthBar: {fileID: 1126833239862953482}
   maxHealth: 150
   moveSpeed: 2
+  timeComputeDestination: 0.5
   target: {fileID: 0}
-  AttackRange: 2
+  awareRange: 10
+  attackRange: 5
   initialShotTime: 2
   timeBetweenShot: 1
   projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
@@ -197,7 +200,28 @@ MonoBehaviour:
   boostDamage: 0
   boostRadius: 0
   boostDuration: 0
-  VisionRange: 10
+--- !u!195 &-9125251467962153891
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238263588557447100}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &3677127681092215797
 PrefabInstance:
   m_ObjectHideFlags: 0

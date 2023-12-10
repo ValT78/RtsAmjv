@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System.Linq;
 
 public abstract class BotBase : MonoBehaviour
 {
@@ -16,15 +17,20 @@ public abstract class BotBase : MonoBehaviour
 
     [Header("Deplacements")]
     [SerializeField] private float moveSpeed;
-    private NavMeshAgent agent;
+    [SerializeField] private float timeComputeDestination;
+    private float timerComputeDestination;
+    protected NavMeshAgent agent;
     [HideInInspector] public AttackController target;
+    [SerializeField] protected float awareRange;
+    protected bool isAware;
+    protected Vector3 mainTarget;
 
     [Header("Ciblage")]
-    [SerializeField] private float AttackRange;
+    [SerializeField] private float attackRange;
     [SerializeField] private float initialShotTime;
     [SerializeField] protected float timeBetweenShot;
     private float initialShotTimer;
-    private AttackController toShoot;
+    protected AttackController toShoot;
     private bool isAttacking;
 
 
@@ -51,6 +57,7 @@ public abstract class BotBase : MonoBehaviour
         initialShotTimer = initialShotTime;
         ModifyHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
+        mainTarget = transform.position;
         StartBehavior();
     }
     public virtual void StartBehavior()
@@ -64,6 +71,7 @@ public abstract class BotBase : MonoBehaviour
         {
             SpecialAttack();
         }
+
         if (toShoot != null)
         {
             initialShotTimer -= Time.deltaTime;
@@ -76,25 +84,31 @@ public abstract class BotBase : MonoBehaviour
         }
         else
         {
-            isAttacking = false;
-            initialShotTimer = initialShotTime;
-            AttackController newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), AttackRange);
-
-            if (newToShoot != null) toShoot = newToShoot;
-
-            else
+            if (isAware)
             {
-                if (target != null && !agent.hasPath)
+                AttackController newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
+                if (newTarget != null)
                 {
-                    MoveTowardsTarget();
+                    target = newTarget;
                 }
-                else
+                else if(target == null)
                 {
-                    // Waiting
+                    PathFind(mainTarget);
                 }
+                
             }
 
+            if (target != null)
+            {
+                PathFind(target.transform.position);
+            }
+            else
+            {
+                // Nothing
+            }
         }
+        if(target != null) FindTarget();
+
         UpdateBehavior();
     }
 
@@ -123,9 +137,49 @@ public abstract class BotBase : MonoBehaviour
         return closestBot;
     }
 
-    protected void MoveTowardsTarget()
+    private void FindTarget()
     {
-        agent.SetDestination(target.transform.position);
+        if (!isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+        {
+            if (toShoot != target)
+            {
+                agent.ResetPath();
+                toShoot = target;
+                isAttacking = false;
+                initialShotTimer = initialShotTime;
+            }
+        }
+        else
+        {
+            if (Vector3.Distance(target.transform.position, transform.position) > attackRange)
+            {
+                toShoot = null;
+
+            }
+            AttackController newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
+            if (newToShoot == null)
+            {
+                toShoot = null;
+            }
+            else if (toShoot == null)
+            {
+                toShoot = newToShoot;
+                isAttacking = false;
+                initialShotTimer = initialShotTime;
+                if(isEnemy) agent.ResetPath();
+
+            }
+        }
+    }
+
+    protected void PathFind(Vector3 target)
+    {
+        timerComputeDestination -= Time.deltaTime;
+        if(timerComputeDestination < 0)
+        {
+            agent.SetDestination(target);
+            timerComputeDestination = timeComputeDestination;
+        }
     }
 
     

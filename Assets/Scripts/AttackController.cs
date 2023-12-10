@@ -25,14 +25,12 @@ public class AttackController : BotBase
     {
         if(boostTimer> 0)
         {
-            print(boostTimer);
 
             boostTimer -= (Time.deltaTime);
             if(boostTimer <= 0) {
 
                 damage -= boostDamage;
                 isBoosted = false;
-                print(damage);
 
             }
         }
@@ -52,7 +50,7 @@ public class AttackController : BotBase
         if (fighterType == FighterTypes.Healer) HealerAttack();
 
         yield return new WaitForSeconds(timeBetweenShot);
-        if (toShoot != null) StartCoroutine(Attack(toShoot));
+        if (toShoot != null && toShoot == this.toShoot) StartCoroutine(Attack(toShoot));
     }
 
     public override void SpecialAttack()
