@@ -59,6 +59,7 @@ public class UnitController : MonoBehaviour
                     Gizmos.DrawSphere(unitAgent.transform.position + Vector3.up * 2, 0.1f);
                     if (unitAgent.hasPath)
                     {
+                        Gizmos.DrawLine(unitAgent.transform.position, hitb.point);    
                         Gizmos.DrawSphere(hitb.point, 0.5f);
                     }
                 }
