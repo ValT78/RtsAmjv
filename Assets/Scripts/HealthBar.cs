@@ -75,13 +75,14 @@ public class HealthBar : MonoBehaviour
 
     private IEnumerator Shake()
     {
+
         while (shakeTimer > 0)
         {
             // Déplacer la barre de vie de manière aléatoire
             transform.position = new Vector3(transform.position.x, initialYPosition + Random.Range(-shakeAmount, shakeAmount), transform.position.z);
 
             shakeTimer -= Time.deltaTime;
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForEndOfFrame();
         }
         
         transform.position = new Vector3(transform.position.x, initialYPosition, transform.position.z);

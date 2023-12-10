@@ -86,6 +86,7 @@ public abstract class BotBase : MonoBehaviour
         {
             if (isAware)
             {
+                // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
                 AttackController newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
                 if (newTarget != null)
                 {
@@ -107,7 +108,7 @@ public abstract class BotBase : MonoBehaviour
                 // Nothing
             }
         }
-        if(target != null) FindTarget();
+        if(target != null) FindToShoot();
 
         UpdateBehavior();
     }
@@ -137,9 +138,9 @@ public abstract class BotBase : MonoBehaviour
         return closestBot;
     }
 
-    private void FindTarget()
+    private void FindToShoot()
     {
-        if (!isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+        if (!isEnemy && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
         {
             if (toShoot != target)
             {
@@ -151,7 +152,7 @@ public abstract class BotBase : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(target.transform.position, transform.position) > attackRange)
+            if (Vector3.Distance(toShoot.transform.position, transform.position) > attackRange)
             {
                 toShoot = null;
 
