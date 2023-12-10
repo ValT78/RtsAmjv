@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class UnitController : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
     [SerializeField] private Camera cam;
     private RaycastHit hita;
     private RaycastHit hitb;
