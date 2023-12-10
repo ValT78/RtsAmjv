@@ -179,19 +179,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e66a347e554d24198320fe234fc725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 1
+  fighterType: 0
   healthBar: {fileID: 1126833239862953482}
-  maxHealth: 5
-  target: {fileID: 0}
+  maxHealth: 150
   moveSpeed: 2
+  target: {fileID: 0}
   AttackRange: 2
-  timeBetweenShot: 1
   initialShotTime: 2
+  timeBetweenShot: 1
   projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
   attackOrigin: {fileID: 2756461415361972415}
   projectileSpeed: 2
   projectileLifeTime: 2
   damage: 1
+  healRadius: 0
+  healAmount: 0
+  boostDamage: 0
+  boostRadius: 0
+  boostDuration: 0
   VisionRange: 10
 --- !u!1001 &3677127681092215797
 PrefabInstance:

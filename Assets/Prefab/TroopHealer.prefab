@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 6282231876017285191}
   - component: {fileID: 2624541496332390079}
   - component: {fileID: 4855118310215935770}
-  - component: {fileID: 7761792073348143355}
+  - component: {fileID: 8108620969600205151}
   m_Layer: 0
-  m_Name: Troop
+  m_Name: TroopHealer
   m_TagString: Troup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5281f98bc2775f54db968a7b81d7efe5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7761792073348143355
+--- !u!114 &8108620969600205151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,19 +179,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333a89b319c06d742b8c3038df76936e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 0
+  fighterType: 1
   healthBar: {fileID: 6218158935578809174}
-  maxHealth: 5
+  maxHealth: 15
+  moveSpeed: 5
   target: {fileID: 0}
-  moveSpeed: 2
-  AttackRange: 2
-  timeBetweenShot: 1
+  AttackRange: 6
   initialShotTime: 1
+  timeBetweenShot: 1
   projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
   attackOrigin: {fileID: 3500237893619273016}
-  projectileSpeed: 2
+  projectileSpeed: 5
   projectileLifeTime: 2
   damage: 1
+  healRadius: 10
+  healAmount: 1
+  boostDamage: 5
+  boostRadius: 10
+  boostDuration: 2
 --- !u!1001 &7705604412562683561
 PrefabInstance:
   m_ObjectHideFlags: 0
