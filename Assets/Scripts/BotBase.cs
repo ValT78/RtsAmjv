@@ -16,7 +16,6 @@ public abstract class BotBase : MonoBehaviour
 
     [Header("Deplacements")]
     [SerializeField] private float moveSpeed;
-    private string CurrentState;
     private NavMeshAgent agent;
     [HideInInspector] public AttackController target;
 
