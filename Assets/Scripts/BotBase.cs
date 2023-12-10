@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public abstract class BotBase : MonoBehaviour
@@ -8,6 +9,7 @@ public abstract class BotBase : MonoBehaviour
     [SerializeField] private bool isEnemy;
 
     [Header("Vie")]
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
     private int health;
 
@@ -36,7 +38,7 @@ public abstract class BotBase : MonoBehaviour
     private void Start()
     {
         initialShotTimer = initialShotTime;
-        health = maxHealth;
+        ModifyHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -124,6 +126,7 @@ public abstract class BotBase : MonoBehaviour
     public void ModifyHealth(int value)
     {
         health = Mathf.Min(health + value, maxHealth);
+        healthBar.DamageHealthBar(health, maxHealth);
         if (health <= 0)
         {
             GameManager.KillBot(gameObject);
