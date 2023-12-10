@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TroopBot : BotBase
+public class TroopBot : AttackController
 {
 
-    private void Update()
-    {
-        UpdateBehavior();
-
-    }
     public override void UpdateBehavior()
     {
         base.UpdateBehavior();
         // Logique spécifique aux troupes, si nécessaire.
+    }
+
+    public override void StartBehavior()
+    {
+        base.StartBehavior();
+        isEnemy = false;
     }
 
 }

@@ -17,22 +17,22 @@ public class HealthBar : MonoBehaviour
     public float shakeAmount;
     private float initialYPosition;
     private float shakeTimer;
+    private IEnumerator co1;
 
     [Header("fade")]
     public float fadeTime;
     public float timeBeforeFade;
     private float fadeTimer;
-
-    private IEnumerator co1;
     private IEnumerator co2;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_Camera = Camera.main;
         initialYPosition = transform.position.y;
         co1 = Shake();
         co2 = Fade();
+
 
     }
 
@@ -63,12 +63,12 @@ public class HealthBar : MonoBehaviour
     public void HealHealthBar(float health, float maxHealth)
     {
         targetHealth = health / maxHealth;
-        shakeTimer = shakeDuration;
         fadeTimer = fadeTime;
         healthBar.color = new Color(255, 255, 255, 1);
         holder.color = new Color(255, 255, 255, 1);
-        sigle.color = new Color(255, 255, 255, 1); 
-        StartCoroutine(Shake());
+        sigle.color = new Color(255, 255, 255, 1);
+        StopCoroutine(co2);
+        co2 = Fade();
         StartCoroutine(Fade());
 
     }
@@ -97,7 +97,6 @@ public class HealthBar : MonoBehaviour
             if (fadeTimer >= 0)
             {
                 float alpha = Mathf.Lerp(1f, 0f, (fadeTime - fadeTimer) / fadeTime);
-                print(alpha);
                 healthBar.color = new Color(255, 255, 255, alpha);
                 holder.color = new Color(255, 255, 255, alpha);
                 sigle.color = new Color(255, 255, 255, alpha);
