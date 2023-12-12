@@ -18,8 +18,9 @@ public class TroopBot : AttackController
         isEnemy = false;
     }
 
-    public void GoToPosition()
+    public void GoToPosition(Vector3 position)
     {
+        agent.SetDestination(position);
         isAware = false;
         target = null;
     }

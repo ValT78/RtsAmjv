@@ -182,24 +182,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fighterType: 1
   healthBar: {fileID: 6218158935578809174}
-  maxHealth: 15
-  moveSpeed: 5
+  maxHealth: 5
+  armor: 0
+  moveSpeed: 8
   timeComputeDestination: 0.5
   target: {fileID: 0}
-  awareRange: 10
-  attackRange: 3
-  initialShotTime: 1
+  awareRange: 15
+  attackRange: 5
+  initialShotTime: 0.2
   timeBetweenShot: 1
   projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
   attackOrigin: {fileID: 3500237893619273016}
   projectileSpeed: 5
-  projectileLifeTime: 2
+  projectileLifeTime: 3
   damage: 1
+  specialRange: Infinity
   healRadius: 10
   healAmount: 1
   boostDamage: 5
   boostRadius: 10
   boostDuration: 2
+  throwHeight: 0
+  throwDuration: 0
+  trap: {fileID: 0}
 --- !u!195 &1788485675621777814
 NavMeshAgent:
   m_ObjectHideFlags: 0

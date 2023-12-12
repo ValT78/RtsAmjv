@@ -9,10 +9,12 @@ public abstract class BotBase : MonoBehaviour
 {
     protected bool isEnemy;
     public FighterTypes fighterType;
+    protected Camera mainCamera;
 
     [Header("Vie")]
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
+    [SerializeField] private int armor;
     private int health;
 
     [Header("Deplacements")]
@@ -54,6 +56,7 @@ public abstract class BotBase : MonoBehaviour
     }
     private void Start()
     {
+        mainCamera = Camera.main;
         initialShotTimer = initialShotTime;
         ModifyHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
@@ -108,7 +111,7 @@ public abstract class BotBase : MonoBehaviour
                 // Nothing
             }
         }
-        if(target != null) FindToShoot();
+        FindToShoot();
 
         UpdateBehavior();
     }
@@ -140,7 +143,7 @@ public abstract class BotBase : MonoBehaviour
 
     private void FindToShoot()
     {
-        if (!isEnemy && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+        if (!isEnemy && target!= null && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
         {
             if (toShoot != target)
             {
@@ -152,11 +155,7 @@ public abstract class BotBase : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(toShoot.transform.position, transform.position) > attackRange)
-            {
-                toShoot = null;
-
-            }
+            
             AttackController newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
             if (newToShoot == null)
             {
@@ -168,6 +167,11 @@ public abstract class BotBase : MonoBehaviour
                 isAttacking = false;
                 initialShotTimer = initialShotTime;
                 if(isEnemy) agent.ResetPath();
+
+            }
+            else if (Vector3.Distance(toShoot.transform.position, transform.position) > attackRange)
+            {
+                toShoot = null;
 
             }
         }
@@ -186,7 +190,12 @@ public abstract class BotBase : MonoBehaviour
     
     public void ModifyHealth(int value)
     {
+        if (value < 0)
+        {
+            value = Mathf.Min(armor + value, 0);
+        }
         health = Mathf.Min(health + value, maxHealth);
+
         if (value <= 0) {
             healthBar.DamageHealthBar(health, maxHealth);
         }
