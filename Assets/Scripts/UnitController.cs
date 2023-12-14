@@ -9,8 +9,8 @@ public class UnitController : MonoBehaviour
     [SerializeField] private Camera cam;
     private RaycastHit hita;
     private RaycastHit hitb;
-    private List<NavMeshAgent> unitsAgent = new List<NavMeshAgent>();
-    private List<TroopBot> selectedTroops = new List<TroopBot>();
+    private List<NavMeshAgent> unitsAgent = new();
+    private List<TroopBot> selectedTroops = new();
     [SerializeField] private bool isSelected;
     [SerializeField] private float maxSelectDist;
     // Start is called before the first frame update

@@ -3,29 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System.Linq;
 
 public abstract class BotBase : MonoBehaviour
 {
     protected bool isEnemy;
     public FighterTypes fighterType;
+    protected Camera mainCamera;
 
     [Header("Vie")]
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
+    [SerializeField] private int armor;
     private int health;
 
     [Header("Deplacements")]
     [SerializeField] private float moveSpeed;
-    private string CurrentState;
-    private NavMeshAgent agent;
+    [SerializeField] private float timeComputeDestination;
+    private float timerComputeDestination;
+    protected NavMeshAgent agent;
     [HideInInspector] public AttackController target;
+    [SerializeField] protected float awareRange;
+    protected bool isAware;
+    protected Vector3 mainTarget;
 
     [Header("Ciblage")]
-    [SerializeField] private float AttackRange;
+    [SerializeField] private float attackRange;
     [SerializeField] private float initialShotTime;
     [SerializeField] protected float timeBetweenShot;
     private float initialShotTimer;
-    private AttackController toShoot;
+    protected AttackController toShoot;
     private bool isAttacking;
 
 
@@ -49,9 +56,11 @@ public abstract class BotBase : MonoBehaviour
     }
     private void Start()
     {
+        mainCamera = Camera.main;
         initialShotTimer = initialShotTime;
         ModifyHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
+        mainTarget = transform.position;
         StartBehavior();
     }
     public virtual void StartBehavior()
@@ -65,6 +74,7 @@ public abstract class BotBase : MonoBehaviour
         {
             SpecialAttack();
         }
+
         if (toShoot != null)
         {
             initialShotTimer -= Time.deltaTime;
@@ -77,25 +87,32 @@ public abstract class BotBase : MonoBehaviour
         }
         else
         {
-            isAttacking = false;
-            initialShotTimer = initialShotTime;
-            AttackController newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), AttackRange);
-
-            if (newToShoot != null) toShoot = newToShoot;
-
-            else
+            if (isAware)
             {
-                if (target != null && !agent.hasPath)
+                // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
+                AttackController newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
+                if (newTarget != null)
                 {
-                    MoveTowardsTarget();
+                    target = newTarget;
                 }
-                else
+                else if(target == null)
                 {
-                    // Waiting
+                    PathFind(mainTarget);
                 }
+                
             }
 
+            if (target != null)
+            {
+                PathFind(target.transform.position);
+            }
+            else
+            {
+                // Nothing
+            }
         }
+        FindToShoot();
+
         UpdateBehavior();
     }
 
@@ -124,15 +141,61 @@ public abstract class BotBase : MonoBehaviour
         return closestBot;
     }
 
-    protected void MoveTowardsTarget()
+    private void FindToShoot()
     {
-        agent.SetDestination(target.transform.position);
+        if (!isEnemy && target!= null && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+        {
+            if (toShoot != target)
+            {
+                agent.ResetPath();
+                toShoot = target;
+                isAttacking = false;
+                initialShotTimer = initialShotTime;
+            }
+        }
+        else
+        {
+            
+            AttackController newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
+            if (newToShoot == null)
+            {
+                toShoot = null;
+            }
+            else if (toShoot == null)
+            {
+                toShoot = newToShoot;
+                isAttacking = false;
+                initialShotTimer = initialShotTime;
+                if(isEnemy) agent.ResetPath();
+
+            }
+            else if (Vector3.Distance(toShoot.transform.position, transform.position) > attackRange)
+            {
+                toShoot = null;
+
+            }
+        }
+    }
+
+    protected void PathFind(Vector3 target)
+    {
+        timerComputeDestination -= Time.deltaTime;
+        if(timerComputeDestination < 0)
+        {
+            agent.SetDestination(target);
+            timerComputeDestination = timeComputeDestination;
+        }
     }
 
     
     public void ModifyHealth(int value)
     {
+        if (value < 0)
+        {
+            value = Mathf.Min(armor + value, 0);
+        }
         health = Mathf.Min(health + value, maxHealth);
+
         if (value <= 0) {
             healthBar.DamageHealthBar(health, maxHealth);
         }
