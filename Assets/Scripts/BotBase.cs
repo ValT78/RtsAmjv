@@ -35,6 +35,10 @@ public abstract class BotBase : MonoBehaviour
     protected AttackController toShoot;
     private bool isAttacking;
 
+    [Header("Miscellaneous")]
+    private Transform crown;
+    private bool hasCrown;
+
 
     public enum FighterTypes
     {
@@ -56,6 +60,7 @@ public abstract class BotBase : MonoBehaviour
     }
     private void Start()
     {
+        crown = transform.Find("Crown");
         mainCamera = Camera.main;
         initialShotTimer = initialShotTime;
         ModifyHealth(maxHealth);
@@ -208,5 +213,10 @@ public abstract class BotBase : MonoBehaviour
         {
             GameManager.KillBot(gameObject);
         }
+    }
+
+    public void giveCrown()
+    {
+        crown.gameObject.SetActive(true);
     }
 }
