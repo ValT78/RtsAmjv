@@ -203,6 +203,7 @@ public abstract class BotBase : MonoBehaviour
     public BotBase GetToShoot()
     {
         return toShoot;
+    }
     public void giveCrown()
     {
         crown.gameObject.SetActive(true);
