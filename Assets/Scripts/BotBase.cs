@@ -33,9 +33,14 @@ public abstract class BotBase : MonoBehaviour
     private float initialShotTimer;
     protected BotBase toShoot;
     private bool isAttacking;
-    
+
+    [Header("Miscellaneous")]
+    private Transform crown;
+    private bool hasCrown;
+
     private void Start()
     {
+        crown = transform.Find("Crown");
         mainCamera = Camera.main;
         initialShotTimer = initialShotTime;
         ModifyHealth(maxHealth);
@@ -58,7 +63,7 @@ public abstract class BotBase : MonoBehaviour
         if (toShoot != null)
         {
             initialShotTimer -= Time.deltaTime;
-            // Passer à l'état d'attaque si la cible est à portée.
+            // Passer ï¿½ l'ï¿½tat d'attaque si la cible est ï¿½ portï¿½e.
             if (initialShotTimer < 0 && !isAttacking)
             {
                 StartCoroutine(attackController.Basic(toShoot));
@@ -106,13 +111,13 @@ public abstract class BotBase : MonoBehaviour
         if (troupList.Count == 0) return null;
         float cloasestRange = maxRange;
         BotBase closestBot = null;
-        // Logique pour détecter les troupes dans la visionRange.
+        // Logique pour dï¿½tecter les troupes dans la visionRange.
         foreach (var troop in troupList)
         {
             float distanceToTroop = Vector3.Distance(transform.position, troop.transform.position);
             if (distanceToTroop <= cloasestRange)
             {
-                // La troupe détectée devient la nouvelle cible.
+                // La troupe dï¿½tectï¿½e devient la nouvelle cible.
                 closestBot = troop;
                 cloasestRange = distanceToTroop;
             }
@@ -198,5 +203,8 @@ public abstract class BotBase : MonoBehaviour
     public BotBase GetToShoot()
     {
         return toShoot;
+    public void giveCrown()
+    {
+        crown.gameObject.SetActive(true);
     }
 }
