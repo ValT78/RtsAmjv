@@ -7,8 +7,8 @@ using System.Linq;
 
 public abstract class BotBase : MonoBehaviour
 {
-    protected bool isEnemy;
-    public FighterTypes fighterType;
+    public bool isEnemy;
+    public AttackController attackController;
     protected Camera mainCamera;
 
     [Header("Vie")]
@@ -22,7 +22,7 @@ public abstract class BotBase : MonoBehaviour
     [SerializeField] private float timeComputeDestination;
     private float timerComputeDestination;
     protected NavMeshAgent agent;
-    [HideInInspector] public AttackController target;
+    [HideInInspector] public BotBase target;
     [SerializeField] protected float awareRange;
     protected bool isAware;
     protected Vector3 mainTarget;
@@ -30,30 +30,10 @@ public abstract class BotBase : MonoBehaviour
     [Header("Ciblage")]
     [SerializeField] private float attackRange;
     [SerializeField] private float initialShotTime;
-    [SerializeField] protected float timeBetweenShot;
     private float initialShotTimer;
-    protected AttackController toShoot;
+    protected BotBase toShoot;
     private bool isAttacking;
-
-
-    public enum FighterTypes
-    {
-        Assassin,
-        Healer,
-        Tank,
-        Swarmies,
-        Sniper,
-        Sorcier
-
-    }
-    public virtual IEnumerator Attack(AttackController toShoot)
-    {
-        yield return null;
-    }
-    public virtual void SpecialAttack()
-    {
-        return;
-    }
+    
     private void Start()
     {
         mainCamera = Camera.main;
@@ -72,7 +52,7 @@ public abstract class BotBase : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            SpecialAttack();
+            attackController.Special();
         }
 
         if (toShoot != null)
@@ -81,7 +61,7 @@ public abstract class BotBase : MonoBehaviour
             // Passer à l'état d'attaque si la cible est à portée.
             if (initialShotTimer < 0 && !isAttacking)
             {
-                StartCoroutine(Attack(toShoot));
+                StartCoroutine(attackController.Basic(toShoot));
                 isAttacking = true;
             }
         }
@@ -90,7 +70,7 @@ public abstract class BotBase : MonoBehaviour
             if (isAware)
             {
                 // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
-                AttackController newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
+                BotBase newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
                 if (newTarget != null)
                 {
                     target = newTarget;
@@ -121,11 +101,11 @@ public abstract class BotBase : MonoBehaviour
         
     }
 
-    protected AttackController ClosestBot(List<AttackController> troupList, float maxRange)
+    protected BotBase ClosestBot(List<BotBase> troupList, float maxRange)
     {
         if (troupList.Count == 0) return null;
         float cloasestRange = maxRange;
-        AttackController closestBot = null;
+        BotBase closestBot = null;
         // Logique pour détecter les troupes dans la visionRange.
         foreach (var troop in troupList)
         {
@@ -156,7 +136,7 @@ public abstract class BotBase : MonoBehaviour
         else
         {
             
-            AttackController newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
+            BotBase newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
             if (newToShoot == null)
             {
                 toShoot = null;
@@ -208,5 +188,15 @@ public abstract class BotBase : MonoBehaviour
         {
             GameManager.KillBot(gameObject);
         }
+    }
+
+    public BotBase GetTarget()
+    {
+        return target;
+    }
+
+    public BotBase GetToShoot()
+    {
+        return toShoot;
     }
 }

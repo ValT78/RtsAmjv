@@ -49,15 +49,15 @@ public class GameManager : MonoBehaviour
         Destroy(botObject);
     }
 
-    public static List<AttackController> GetCrewBots(bool isEnemy)
+    public static List<BotBase> GetCrewBots(bool isEnemy)
     {
         if(isEnemy)
         {
-            return enemyUnits.Select(enemyBot => (AttackController)enemyBot).ToList();
+            return enemyUnits.Select(enemyBot => (BotBase)enemyBot).ToList();
         }
         else
         {
-            return troopUnits.Select(troopBot => (AttackController)troopBot).ToList();
+            return troopUnits.Select(troopBot => (BotBase)troopBot).ToList();
         }
     }
 }

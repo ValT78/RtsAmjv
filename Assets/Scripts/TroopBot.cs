@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TroopBot : AttackController
+public class TroopBot : BotBase
 {
     
     public override void UpdateBehavior()
@@ -25,7 +25,7 @@ public class TroopBot : AttackController
         target = null;
     }
 
-    public void GoToBot(AttackController target)
+    public void GoToBot(BotBase target)
     {
         isAware = false;
         this.target = target;
