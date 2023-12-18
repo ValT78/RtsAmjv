@@ -1,21 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.AI;
-using System.Linq;
 
-public abstract class BotBase : MonoBehaviour
+public abstract class BotBase : AliveObject
 {
-    public bool isEnemy;
-    public AttackController attackController;
+    [HideInInspector] public AttackController attackController;
     protected Camera mainCamera;
-
-    [Header("Vie")]
-    [SerializeField] private HealthBar healthBar;
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int armor;
-    private int health;
 
     [Header("Deplacements")]
     [SerializeField] private float moveSpeed;
@@ -38,24 +29,22 @@ public abstract class BotBase : MonoBehaviour
     private Transform crown;
     private bool hasCrown;
 
-    private void Start()
+    public override void StartBehavior()
     {
+        base.StartBehavior();
         crown = transform.Find("Crown");
         mainCamera = Camera.main;
         initialShotTimer = initialShotTime;
-        ModifyHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
         mainTarget = transform.position;
-        StartBehavior();
-    }
-    public virtual void StartBehavior()
-    {
-
+        attackController = GetComponent<AttackController>();
     }
 
-    private void Update()
+
+    public override void UpdateBehavior()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        base.UpdateBehavior();
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             attackController.Special();
         }
@@ -80,11 +69,11 @@ public abstract class BotBase : MonoBehaviour
                 {
                     target = newTarget;
                 }
-                else if(target == null)
+                else if (target == null)
                 {
                     PathFind(mainTarget);
                 }
-                
+
             }
 
             if (target != null)
@@ -98,12 +87,6 @@ public abstract class BotBase : MonoBehaviour
         }
         FindToShoot();
 
-        UpdateBehavior();
-    }
-
-    public virtual void UpdateBehavior()
-    {
-        
     }
 
     protected BotBase ClosestBot(List<BotBase> troupList, float maxRange)
@@ -172,29 +155,6 @@ public abstract class BotBase : MonoBehaviour
         }
     }
 
-    
-    public void ModifyHealth(int value)
-    {
-        if (value < 0)
-        {
-            value = Mathf.Min(armor + value, 0);
-        }
-        health = Mathf.Min(health + value, maxHealth);
-
-        if (value <= 0) {
-            healthBar.DamageHealthBar(health, maxHealth);
-        }
-        else
-        {
-            healthBar.HealHealthBar(health, maxHealth);
-        }
-
-        if (health <= 0)
-        {
-            GameManager.KillBot(gameObject);
-        }
-    }
-
     public BotBase GetTarget()
     {
         return target;
@@ -204,7 +164,7 @@ public abstract class BotBase : MonoBehaviour
     {
         return toShoot;
     }
-    public void giveCrown()
+    public void GiveCrown()
     {
         crown.gameObject.SetActive(true);
     }

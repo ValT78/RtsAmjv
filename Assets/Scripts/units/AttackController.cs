@@ -30,9 +30,14 @@ public class AttackController : MonoBehaviour
 
     public void Start()
     {
-        
+        mainCamera = Camera.main;
+        StartBehavior();
     }
 
+    public virtual void StartBehavior()
+    {
+
+    }
     public void Update()
     {
         
@@ -69,7 +74,7 @@ public class AttackController : MonoBehaviour
         }
         else
         {
-            specialUsed = true;
+            //specialUsed = true;
             // Vérifiez si le rayon touche un objet
             if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit) && Vector3.Distance(transform.position, hit.point) < specialRange)
             {

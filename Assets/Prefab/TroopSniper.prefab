@@ -181,9 +181,11 @@ MonoBehaviour:
   projectileLifeTime: 2
   damage: 5
   specialRange: 10
-  throwHeight: 5
-  throwDuration: 2
+  throwDuration: 1
   trap: {fileID: 558324709960684974, guid: 3bf0e105e0992224380b812a9f708904, type: 3}
+  spawnHeight: 1
+  launchAngle: 1.57
+  gravity: 9.81
 --- !u!195 &8656527486992526601
 NavMeshAgent:
   m_ObjectHideFlags: 0
