@@ -13,7 +13,7 @@ public class AliveObject : MonoBehaviour
     private int health;
 
     [Header("Tank")]
-    [HideInInspector] public bool isArmorBoosted;
+    [HideInInspector] public int armorBoostCount;
 
 
 
@@ -62,6 +62,20 @@ public class AliveObject : MonoBehaviour
         {
             GameManager.KillBot(gameObject);
         }
+    }
+
+    public void SwitchBoostArmor(int value)
+    {
+        if(value > 0) {
+            if (armorBoostCount == 0) ModifyArmor(value);
+            armorBoostCount++;
+        }
+        else
+        {
+            armorBoostCount--;
+            if (armorBoostCount == 0) ModifyArmor(value);
+        }
+
     }
 
     public void ModifyArmor(int value)

@@ -15,7 +15,7 @@ public class Sniper : AttackController
     public override void SpecialAttack(Vector3 targetPosition)
     {
         GameObject trapPrefab = Instantiate(trap, transform.position, Quaternion.identity);
-        trapPrefab.GetComponent<Cloche>().Initialize(targetPosition, throwDuration);
+        trapPrefab.GetComponent<Cloche>().Initialize(targetPosition, throwDuration, botBase.isEnemy);
     }
 
     

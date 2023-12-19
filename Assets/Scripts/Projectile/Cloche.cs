@@ -14,11 +14,13 @@ public class Cloche : MonoBehaviour
     private Vector3 targetPosition;
     private float throwDuration;
     private float v0;
+    private bool isEnemy;
 
-    public void Initialize(Vector3 targetPosition, float throwDuration)
+    public void Initialize(Vector3 targetPosition, float throwDuration, bool isEnemy)
     {
         this.targetPosition = targetPosition;
         this.throwDuration = throwDuration;
+        this.isEnemy = isEnemy;
         transform.position += new Vector3(0f, spawnHeight, 0f);
         v0 = (gravity * throwDuration / 2 - (spawnHeight - endHeight) / throwDuration) / Mathf.Sin(launchAngle);
         StartCoroutine(LifeCycle());
@@ -58,5 +60,9 @@ public class Cloche : MonoBehaviour
     void InstantiateHitEffect(Vector3 position)
     {
         Instantiate(product, transform.position+new Vector3(0f,0.5f,0f), Quaternion.identity);
+        if(product.TryGetComponent<Trap>(out Trap trap))
+        {
+            trap.Initialize(isEnemy);
+        }
     }
 }

@@ -23,20 +23,18 @@ public class Tank : AttackController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && !obj.isArmorBoosted)
+        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
         {
-            obj.ModifyArmor(boostArmor);
-            obj.isArmorBoosted = true;
+            obj.SwitchBoostArmor(boostArmor);
 
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && obj.isArmorBoosted)
+        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
         {
-            obj.ModifyArmor(-boostArmor);
-            obj.isArmorBoosted = false;
+            obj.SwitchBoostArmor(-boostArmor);
 
         }
     }
@@ -51,10 +49,9 @@ public class Tank : AttackController
         isBoostActive = true;
         foreach (Collider col in Physics.OverlapSphere(transform.position, boostRadius))
         {
-            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && !obj.isArmorBoosted)
+            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
             {
-                obj.ModifyArmor(boostArmor);
-                obj.isArmorBoosted = true;
+                obj.SwitchBoostArmor(boostArmor);
 
             }
         }
@@ -64,11 +61,12 @@ public class Tank : AttackController
 
         foreach (Collider col in Physics.OverlapSphere(transform.position, boostRadius))
         {
-            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && obj.isArmorBoosted)
+            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
             {
-                obj.ModifyArmor(-boostArmor);
-                obj.isArmorBoosted = false;
+                obj.SwitchBoostArmor(-boostArmor);
             }
         }
     }
+
+    
 }

@@ -9,7 +9,7 @@ public class UnitController : MonoBehaviour
     [SerializeField] private Camera cam;
     private RaycastHit hita;
     private RaycastHit hitb;
-    private List<TroopBot> selectedTroops = new();
+    private List<TroopBot> selectedTroops = new List<TroopBot>();
     [SerializeField] private bool isSelected;
     [SerializeField] private float maxSelectDist;
     private bool capacitiActive;

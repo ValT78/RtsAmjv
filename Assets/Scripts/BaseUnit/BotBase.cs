@@ -38,6 +38,7 @@ public class BotBase : AliveObject
         agent = GetComponent<NavMeshAgent>();
         mainTarget = transform.position;
         attackController = GetComponent<AttackController>();
+        agent.speed = moveSpeed;
     }
 
 
@@ -61,6 +62,10 @@ public class BotBase : AliveObject
         }
         else
         {
+            if(isEnemy)
+            {
+
+            }
             if (isAware)
             {
                 // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
