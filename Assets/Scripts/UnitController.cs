@@ -9,42 +9,69 @@ public class UnitController : MonoBehaviour
     [SerializeField] private Camera cam;
     private RaycastHit hita;
     private RaycastHit hitb;
-    private List<NavMeshAgent> unitsAgent = new();
     private List<TroopBot> selectedTroops = new();
     [SerializeField] private bool isSelected;
     [SerializeField] private float maxSelectDist;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-
-    }
+    private bool capacitiActive;
+    private EnemyBot target;
 
     // Update is called once per frame
     void Update()
     {
+        // Clear selection with escape
+        if (Input.GetKeyDown(KeyCode.Escape)) ClearSelection();
+
         Ray mouseRay = cam.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita)) hitb = hita;
-        if (Input.GetMouseButtonUp(0) && Physics.Raycast(mouseRay, out hitb))
+        // selection des unités
+        if (!isSelected)
         {
-            if (isSelected) foreach (NavMeshAgent unitAgent in unitsAgent) unitAgent.SetDestination(hitb.point);
-            else
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita)) hitb = hita;
+            if (Input.GetMouseButtonUp(0) && Physics.Raycast(mouseRay, out hitb))
             {
-                if (Vector3.Distance(hita.point, hitb.point) < 0.5f) isSelected = SelectAgent(hita.point); // Single target mode
-                else isSelected = SelectAgent(hita.point, hitb.point); // Multitarget mod
+                if (Vector3.Distance(hita.point, hitb.point) < 0.5f) isSelected = SelectTroop(hita.point); // Single target mode
+                else isSelected = SelectTroop(hita.point, hitb.point); // Multitarget mod
             }
-            
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        else
         {
-            isSelected = false;
-            
-            hita = new RaycastHit();
-            hitb = new RaycastHit();
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita))
+            {
+                /* 4 possibilité : 
+                 *  - avancer vers une postion avec GoToPosition(Vector3 position) click sur le sol
+                 *  - avancer vers un enemy avec GoToBot(AttackController target) clic sur un bot
+                 *  - capacité spécial [bientot] E puis clic 
+                 *  - Avancer vers une position MAIS si un ennemi entre dans son champs de vision,
+                 *  ça devient sa cible temporaire AwarePosition(Vector3 mainTarget) shift + clic
+                 *  
+                 *  Pour faciliter et optimiser la résoltion de ces évenement on va les faire dans l'odre 3 4 2 1
+                 */
 
-            unitsAgent.Clear();
+                if (capacitiActive) Debug.Log("capa"); //activer la capa
+                else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                {
+                    foreach (TroopBot troop in selectedTroops) troop.AwarePosition(hita.point);
+                }
+                else if (SelectEnemy(hita.point))
+                {
+                    foreach (TroopBot troop in selectedTroops) troop.GoToBot(target);
+                }
+                else foreach (TroopBot troop in selectedTroops) troop.GoToPosition(hita.point);
+
+
+            }
+
         }
 
+        if (Input.GetKeyDown(KeyCode.E)) capacitiActive = !capacitiActive;
+
+    }
+
+    private void ClearSelection()
+    {
+        isSelected = false;
+        hita = new RaycastHit();
+        hitb = new RaycastHit();
+        selectedTroops.Clear();
     }
 
     private void OnDrawGizmos()
@@ -53,15 +80,15 @@ public class UnitController : MonoBehaviour
         {
 
 
-            if (unitsAgent.Count != 0)
+            if (selectedTroops.Count != 0)
             {
-                foreach (NavMeshAgent unitAgent in unitsAgent)
+                foreach (TroopBot troop in selectedTroops)
                 {
-                    Gizmos.DrawSphere(unitAgent.transform.position + Vector3.up * 2, 0.1f);
-                    if (unitAgent.hasPath)
+                    Gizmos.DrawSphere(troop.transform.position + Vector3.up * 2, 0.1f);
+                    if (troop.GetComponent<NavMeshAgent>().hasPath)
                     {
-                        Gizmos.DrawLine(unitAgent.transform.position, hitb.point);    
-                        Gizmos.DrawSphere(hitb.point, 0.5f);
+                        Gizmos.DrawLine(troop.transform.position, hita.point);    
+                        Gizmos.DrawSphere(hita.point, 0.5f);
                     }
                 }
             }
@@ -89,7 +116,7 @@ public class UnitController : MonoBehaviour
     {
         Gizmos.DrawWireCube(new Vector3(rect.center.x, 0.01f, rect.center.y), new Vector3(rect.size.x, 0.01f, rect.size.y));
     }
-    private bool SelectAgent(Vector3 hitpoint)
+    private bool SelectTroop(Vector3 hitpoint)
     {
         // mono mode 
         float mindist = maxSelectDist;
@@ -105,22 +132,37 @@ public class UnitController : MonoBehaviour
             }
         }
         if (selectedTroop == null) return false;
-        unitsAgent.Add(selectedTroop.GetComponent<NavMeshAgent>());
+        selectedTroops.Add(selectedTroop);
         return true;
     }
 
-    private bool SelectAgent(Vector3 hitpointa, Vector3 hitpointb)
+    private bool SelectTroop(Vector3 hitpointa, Vector3 hitpointb)
     {
         // multimode
-        List<TroopBot> selectedTroops = new List<TroopBot>();
         Rect zone = CreateRect(hitpointa, hitpointb);
         foreach (TroopBot troop in GameManager.troopUnits)
         {
             Vector2 pos = new Vector2(troop.transform.position.x, troop.transform.position.z);
             if (zone.Contains(pos)) selectedTroops.Add(troop);
         }
-        if (selectedTroops.Count == 0) return false;
-        foreach (TroopBot selectedTroop in selectedTroops) unitsAgent.Add(selectedTroop.GetComponent<NavMeshAgent>());
-        return true;
+        return selectedTroops.Count != 0;
+    }
+
+    private bool SelectEnemy(Vector3 hitpoint)
+    {
+        // mono mode 
+        float mindist = maxSelectDist;
+        float dist;
+        target = null;
+        foreach (EnemyBot troop in GameManager.enemyUnits)
+        {
+            dist = Vector3.Distance(hitpoint, troop.transform.position);
+            if (dist < mindist)
+            {
+                mindist = dist;
+                target = troop;
+            }
+        }
+        return target != null;
     }
 }
