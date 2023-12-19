@@ -19,5 +19,9 @@ public class FlagController : MonoBehaviour
         player.GiveCrown();
         crown.SetActive(false);
         hasFlag = false;
+        foreach(EnemyBot enemy in GameManager.enemyUnits)
+        {
+            enemy.SetKingTarget(player);
+        }
     }
 }

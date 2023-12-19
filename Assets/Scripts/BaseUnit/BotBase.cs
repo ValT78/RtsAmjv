@@ -16,6 +16,7 @@ public class BotBase : AliveObject
     [HideInInspector] public AliveObject target;
     [SerializeField] protected float awareRange;
     [SerializeField] protected bool isAware;
+    [SerializeField] protected float voiceRange;
     protected Vector3 mainTarget;
 
     [Header("Ciblage")]
@@ -28,6 +29,8 @@ public class BotBase : AliveObject
     [Header("Miscellaneous")]
     private Transform crown;
     private bool hasCrown;
+    private AliveObject kingTarget;
+
 
     public override void StartBehavior()
     {
@@ -62,10 +65,7 @@ public class BotBase : AliveObject
         }
         else
         {
-            if(isEnemy)
-            {
 
-            }
             if (isAware)
             {
                 // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
@@ -73,10 +73,24 @@ public class BotBase : AliveObject
                 if (newTarget != null)
                 {
                     target = newTarget;
+                    if(isEnemy)
+                    {
+                        foreach (EnemyBot enemy in GameManager.enemyUnits)
+                        {
+                            if(Vector3.Distance(transform.position, enemy.transform.position) < voiceRange && enemy.target == null)
+                            {
+                               enemy.target = target;
+                               
+                            }
+                            
+                        }
+
+                    }
                 }
                 else if (target == null)
                 {
-                    PathFind(mainTarget);
+                    if (kingTarget != null) PathFind(kingTarget.transform.position);
+                    else PathFind(mainTarget);
                 }
 
             }
@@ -175,4 +189,9 @@ public class BotBase : AliveObject
         crown.gameObject.SetActive(true);
         hasCrown = true;
     }
+    public void SetKingTarget(AliveObject target)
+    {
+        kingTarget = target;
+    }
+
 }
