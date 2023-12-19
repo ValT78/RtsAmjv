@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2624541496332390079}
   - component: {fileID: 4855118310215935770}
   - component: {fileID: 8108620969600205151}
+  - component: {fileID: 5587239442055584148}
   - component: {fileID: 1788485675621777814}
   m_Layer: 0
   m_Name: TroopHealer
@@ -181,7 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333a89b319c06d742b8c3038df76936e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighterType: 1
+  isEnemy: 0
+  attackController: {fileID: 5587239442055584148}
   healthBar: {fileID: 6218158935578809174}
   maxHealth: 5
   armor: 0
@@ -191,21 +193,31 @@ MonoBehaviour:
   awareRange: 15
   attackRange: 5
   initialShotTime: 0.2
-  timeBetweenShot: 1
+--- !u!114 &5587239442055584148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6952798115056532155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d251e72448c3b4d9d9cbeaed10c966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botBase: {fileID: 8108620969600205151}
   projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
   attackOrigin: {fileID: 3500237893619273016}
+  timeBetweenShot: 1
   projectileSpeed: 5
-  projectileLifeTime: 3
+  projectileLifeTime: 2
   damage: 1
   specialRange: Infinity
-  healRadius: 10
+  healRadius: 5
   healAmount: 1
   boostDamage: 5
   boostRadius: 10
-  boostDuration: 2
-  throwHeight: 0
-  throwDuration: 0
-  trap: {fileID: 0}
+  boostDuration: 3
 --- !u!195 &1788485675621777814
 NavMeshAgent:
   m_ObjectHideFlags: 0

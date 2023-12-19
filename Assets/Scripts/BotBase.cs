@@ -1,28 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.AI;
-using System.Linq;
 
-public abstract class BotBase : MonoBehaviour
+public abstract class BotBase : AliveObject
 {
-    protected bool isEnemy;
-    public FighterTypes fighterType;
+    [HideInInspector] public AttackController attackController;
     protected Camera mainCamera;
-
-    [Header("Vie")]
-    [SerializeField] private HealthBar healthBar;
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int armor;
-    private int health;
 
     [Header("Deplacements")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float timeComputeDestination;
     private float timerComputeDestination;
     protected NavMeshAgent agent;
-    [HideInInspector] public AttackController target;
+    [HideInInspector] public BotBase target;
     [SerializeField] protected float awareRange;
     protected bool isAware;
     protected Vector3 mainTarget;
@@ -30,63 +21,41 @@ public abstract class BotBase : MonoBehaviour
     [Header("Ciblage")]
     [SerializeField] private float attackRange;
     [SerializeField] private float initialShotTime;
-    [SerializeField] protected float timeBetweenShot;
     private float initialShotTimer;
-    protected AttackController toShoot;
+    protected BotBase toShoot;
     private bool isAttacking;
 
     [Header("Miscellaneous")]
     private Transform crown;
     private bool hasCrown;
 
-
-    public enum FighterTypes
+    public override void StartBehavior()
     {
-        Assassin,
-        Healer,
-        Tank,
-        Swarmies,
-        Sniper,
-        Sorcier
-
-    }
-    public virtual IEnumerator Attack(AttackController toShoot)
-    {
-        yield return null;
-    }
-    public virtual void SpecialAttack()
-    {
-        return;
-    }
-    private void Start()
-    {
+        base.StartBehavior();
         crown = transform.Find("Crown");
         mainCamera = Camera.main;
         initialShotTimer = initialShotTime;
-        ModifyHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
         mainTarget = transform.position;
-        StartBehavior();
-    }
-    public virtual void StartBehavior()
-    {
-
+        attackController = GetComponent<AttackController>();
     }
 
-    private void Update()
+
+    public override void UpdateBehavior()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        base.UpdateBehavior();
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            SpecialAttack();
+            attackController.Special();
         }
 
         if (toShoot != null)
         {
             initialShotTimer -= Time.deltaTime;
-            // Passer à l'état d'attaque si la cible est à portée.
+            // Passer ï¿½ l'ï¿½tat d'attaque si la cible est ï¿½ portï¿½e.
             if (initialShotTimer < 0 && !isAttacking)
             {
-                StartCoroutine(Attack(toShoot));
+                StartCoroutine(attackController.Basic(toShoot));
                 isAttacking = true;
             }
         }
@@ -95,16 +64,16 @@ public abstract class BotBase : MonoBehaviour
             if (isAware)
             {
                 // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
-                AttackController newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
+                BotBase newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
                 if (newTarget != null)
                 {
                     target = newTarget;
                 }
-                else if(target == null)
+                else if (target == null)
                 {
                     PathFind(mainTarget);
                 }
-                
+
             }
 
             if (target != null)
@@ -118,26 +87,20 @@ public abstract class BotBase : MonoBehaviour
         }
         FindToShoot();
 
-        UpdateBehavior();
     }
 
-    public virtual void UpdateBehavior()
-    {
-        
-    }
-
-    protected AttackController ClosestBot(List<AttackController> troupList, float maxRange)
+    protected BotBase ClosestBot(List<BotBase> troupList, float maxRange)
     {
         if (troupList.Count == 0) return null;
         float cloasestRange = maxRange;
-        AttackController closestBot = null;
-        // Logique pour détecter les troupes dans la visionRange.
+        BotBase closestBot = null;
+        // Logique pour dï¿½tecter les troupes dans la visionRange.
         foreach (var troop in troupList)
         {
             float distanceToTroop = Vector3.Distance(transform.position, troop.transform.position);
             if (distanceToTroop <= cloasestRange)
             {
-                // La troupe détectée devient la nouvelle cible.
+                // La troupe dï¿½tectï¿½e devient la nouvelle cible.
                 closestBot = troop;
                 cloasestRange = distanceToTroop;
             }
@@ -161,7 +124,7 @@ public abstract class BotBase : MonoBehaviour
         else
         {
             
-            AttackController newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
+            BotBase newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
             if (newToShoot == null)
             {
                 toShoot = null;
@@ -192,30 +155,16 @@ public abstract class BotBase : MonoBehaviour
         }
     }
 
-    
-    public void ModifyHealth(int value)
+    public BotBase GetTarget()
     {
-        if (value < 0)
-        {
-            value = Mathf.Min(armor + value, 0);
-        }
-        health = Mathf.Min(health + value, maxHealth);
-
-        if (value <= 0) {
-            healthBar.DamageHealthBar(health, maxHealth);
-        }
-        else
-        {
-            healthBar.HealHealthBar(health, maxHealth);
-        }
-
-        if (health <= 0)
-        {
-            GameManager.KillBot(gameObject);
-        }
+        return target;
     }
 
-    public void giveCrown()
+    public BotBase GetToShoot()
+    {
+        return toShoot;
+    }
+    public void GiveCrown()
     {
         crown.gameObject.SetActive(true);
     }
