@@ -85,6 +85,7 @@ public class UnitController : MonoBehaviour
             {
                 foreach (TroopBot troop in selectedTroops)
                 {
+                    if (troop == null) return;
                     Gizmos.DrawSphere(troop.transform.position + Vector3.up * 2, 0.1f);
                     if (troop.GetComponent<NavMeshAgent>().hasPath)
                     {

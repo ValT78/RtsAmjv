@@ -168,5 +168,6 @@ public class BotBase : AliveObject
     public void GiveCrown()
     {
         crown.gameObject.SetActive(true);
+        hasCrown = true;
     }
 }

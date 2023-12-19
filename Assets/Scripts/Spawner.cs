@@ -20,11 +20,11 @@ public class Spawner : AliveObject
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         Debug.Log(pS.shape.arcSpeed.constant);
         ParticleSystem.ShapeModule shape = pS.shape;
-        shape.arcSpeed = Mathf.Lerp(0f, 5f, ticksCount / delay);
-        */
+        shape.arcSpeed = Mathf.Lerp(0f, 5f, (ticksCount + 0f) / delay);
+
     }
 
     private void FixedUpdate()
