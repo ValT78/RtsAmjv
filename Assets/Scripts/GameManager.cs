@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     // Listes statiques d'unités
     public static List<TroopBot> troopUnits = new();
     public static List<EnemyBot> enemyUnits = new();
+    public static int deadEnemy;
+    public static int deadAllie;
+    public UIController UIController;
+
+
 
     private void Start()
     {
@@ -18,6 +23,8 @@ public class GameManager : MonoBehaviour
         // Récupérer toutes les unités d'ennemi dans la scène et les ajouter à la liste
         EnemyBot[] enemiesInScene = GameObject.FindObjectsOfType<EnemyBot>().ToArray();
         enemyUnits.AddRange(enemiesInScene);
+
+        // UIController.ActiveWinUI();
     }
 
 
@@ -41,10 +48,12 @@ public class GameManager : MonoBehaviour
         if (botObject.TryGetComponent<EnemyBot>(out var enemy))
         {
             enemyUnits.Remove(enemy);
+            deadEnemy++;
         }
         else if (botObject.TryGetComponent<TroopBot>(out var troop))
         {
             troopUnits.Remove(troop);
+            deadAllie++;
         }
         Destroy(botObject);
     }
