@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     {
        // Vérifier la distance parcourue.
         distance -= Time.deltaTime*bulletSpeed;
-        transform.Translate(bulletSpeed * Time.deltaTime * transform.forward);
+        transform.Translate(bulletSpeed * Time.deltaTime * Vector3.forward);
         if (distance <= 0)
         {
             Destroy(gameObject);

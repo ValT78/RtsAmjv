@@ -52,7 +52,7 @@ public class AttackController : MonoBehaviour
     public IEnumerator Basic(AliveObject toShoot)
     {
         // Logique pour attaquer la cible en lançant un projectile.
-        GameObject projectile = Instantiate(projectilePrefab, attackOrigin.position, attackOrigin.rotation);
+        GameObject projectile = Instantiate(projectilePrefab, attackOrigin.position, transform.rotation);
         if (projectile.TryGetComponent<Projectile>(out var projectileScript))
         {
             projectileScript.Initialize(botBase.isEnemy, botBase.attackRange, projectileSpeed, damage);
