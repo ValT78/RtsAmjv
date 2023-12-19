@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FlagController : MonoBehaviour
 {
-    [SerializeField] bool isForPlayer;
-    [SerializeField] bool hasFlag = true;
+    [SerializeField] static bool isForPlayer;
+    [SerializeField] static bool hasFlag = true;
     private GameObject crown;
 
     private void Start()
