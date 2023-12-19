@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class BotBase : AliveObject
+public class BotBase : AliveObject
 {
     [HideInInspector] public AttackController attackController;
     protected Camera mainCamera;
@@ -13,16 +13,16 @@ public abstract class BotBase : AliveObject
     [SerializeField] private float timeComputeDestination;
     private float timerComputeDestination;
     protected NavMeshAgent agent;
-    [HideInInspector] public BotBase target;
+    [HideInInspector] public AliveObject target;
     [SerializeField] protected float awareRange;
-    protected bool isAware;
+    [SerializeField] protected bool isAware;
     protected Vector3 mainTarget;
 
     [Header("Ciblage")]
     [SerializeField] private float attackRange;
     [SerializeField] private float initialShotTime;
     private float initialShotTimer;
-    protected BotBase toShoot;
+    protected AliveObject toShoot;
     private bool isAttacking;
 
     [Header("Miscellaneous")]
@@ -44,13 +44,13 @@ public abstract class BotBase : AliveObject
     public override void UpdateBehavior()
     {
         base.UpdateBehavior();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isEnemy)
         {
             attackController.Special();
         }
 
         if (toShoot != null)
-        {
+        {   transform.LookAt(toShoot.transform.position);
             initialShotTimer -= Time.deltaTime;
             // Passer � l'�tat d'attaque si la cible est � port�e.
             if (initialShotTimer < 0 && !isAttacking)
@@ -111,6 +111,7 @@ public abstract class BotBase : AliveObject
 
     private void FindToShoot()
     {
+        // Les unités contrôlées par le joueur vise forcément leur target si elle est dans leur range d'attaque
         if (!isEnemy && target!= null && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
         {
             if (toShoot != target)
@@ -123,8 +124,8 @@ public abstract class BotBase : AliveObject
         }
         else
         {
-            
-            BotBase newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
+            // ON cherche 
+            AliveObject newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
             if (newToShoot == null)
             {
                 toShoot = null;
@@ -155,12 +156,12 @@ public abstract class BotBase : AliveObject
         }
     }
 
-    public BotBase GetTarget()
+    public AliveObject GetTarget()
     {
         return target;
     }
 
-    public BotBase GetToShoot()
+    public AliveObject GetToShoot()
     {
         return toShoot;
     }

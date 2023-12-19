@@ -12,6 +12,10 @@ public class AliveObject : MonoBehaviour
     [SerializeField] private int armor;
     private int health;
 
+    [Header("Tank")]
+    [HideInInspector] public bool isArmorBoosted;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +44,10 @@ public class AliveObject : MonoBehaviour
         if (value < 0)
         {
             value = Mathf.Min(armor + value, 0);
+
         }
         health = Mathf.Min(health + value, maxHealth);
+        
 
         if (value <= 0)
         {
@@ -56,5 +62,10 @@ public class AliveObject : MonoBehaviour
         {
             GameManager.KillBot(gameObject);
         }
+    }
+
+    public void ModifyArmor(int value)
+    {
+        armor += value;
     }
 }

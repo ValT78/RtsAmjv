@@ -20,9 +20,10 @@ public class AttackController : MonoBehaviour
     private bool specialUsed;
 
     [Header("Healer")]
-    private int boostNumber;
+    private int damageBoostNumber;
 
     
+
 
     public virtual void BasicAttack() { }
 
@@ -49,7 +50,7 @@ public class AttackController : MonoBehaviour
         
     }
 
-    public IEnumerator Basic(BotBase toShoot)
+    public IEnumerator Basic(AliveObject toShoot)
     {
         // Logique pour attaquer la cible en lançant un projectile.
         GameObject projectile = Instantiate(projectilePrefab, attackOrigin.position, attackOrigin.rotation);
@@ -87,12 +88,12 @@ public class AttackController : MonoBehaviour
 
     public IEnumerator HealerBoost(int damageBoost, float boostDuration)
     {
-        if(boostNumber==0) ModifyDamage(damageBoost);
-        boostNumber++;
+        if(damageBoostNumber==0) ModifyDamage(damageBoost);
+        damageBoostNumber++;
         
         yield return new WaitForSeconds(boostDuration);
-        boostNumber--;
-        if(boostNumber==0) ModifyDamage(-damageBoost);
+        damageBoostNumber--;
+        if(damageBoostNumber==0) ModifyDamage(-damageBoost);
 
     }
 
