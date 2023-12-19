@@ -29,18 +29,21 @@ public class GameManager : MonoBehaviour
 
 
     // Méthode pour invoquer un prefab de bot à une position spécifique
-    public static void SpawnBot(GameObject botPrefab, Vector3 position)
+    public static BotBase SpawnBot(GameObject botPrefab, Vector3 position)
     {
         GameObject botObject = Instantiate(botPrefab, position, Quaternion.identity);
         
         if (botObject.TryGetComponent<EnemyBot>(out var enemy))
         {
             enemyUnits.Add(enemy);
+            return enemy;
         }
         else if (botObject.TryGetComponent<TroopBot>(out var troop))
         {
             troopUnits.Add(troop);
+            return troop;
         }
+        return null;
     }
 
     public static void KillBot(GameObject botObject)

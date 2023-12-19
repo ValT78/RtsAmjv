@@ -46,7 +46,10 @@ public class UnitController : MonoBehaviour
                  *  Pour faciliter et optimiser la résoltion de ces évenement on va les faire dans l'odre 3 4 2 1
                  */
 
-                if (capacitiActive) Debug.Log("capa"); //activer la capa
+                if (capacitiActive)
+                {
+                    foreach (TroopBot troop in selectedTroops) troop.attackController.Special();
+                } 
                 else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                 {
                     foreach (TroopBot troop in selectedTroops) troop.AwarePosition(hita.point);
@@ -78,9 +81,7 @@ public class UnitController : MonoBehaviour
     {
         if (Application.isPlaying)
         {
-
-
-            if (selectedTroops.Count != 0)
+            if (isSelected)
             {
                 foreach (TroopBot troop in selectedTroops)
                 {
@@ -97,6 +98,13 @@ public class UnitController : MonoBehaviour
                 Gizmos.DrawSphere(hita.point, 0.5f);
                 Gizmos.DrawSphere(hitb.point, 0.5f);
                 DrawRect(CreateRect(hita.point, hitb.point));
+            }
+
+            if(target != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(target.transform.position + Vector3.up * 2, 0.2f);
+                Gizmos.color = Color.grey;
             }
         }
     }
