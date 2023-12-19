@@ -5,21 +5,24 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private bool isEnemy;
-    private float lifeTime;
+    private float distance;
+    private float bulletSpeed;
     private int damage;
 
-    public void Initialize(bool isEnemy, float lifeTime, int damage)
+    public void Initialize(bool isEnemy, float distance, float bulletSpeed, int damage)
     {
         this.isEnemy = isEnemy;
-        this.lifeTime = lifeTime;
+        this.distance = distance;
+        this.bulletSpeed = bulletSpeed;
         this.damage = damage;
     }
 
     void Update()
     {
        // Vérifier la distance parcourue.
-        lifeTime -= Time.deltaTime;
-        if (lifeTime <= 0)
+        distance -= Time.deltaTime*bulletSpeed;
+        transform.Translate(bulletSpeed * Time.deltaTime * transform.forward);
+        if (distance <= 0)
         {
             Destroy(gameObject);
         }

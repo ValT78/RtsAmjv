@@ -12,7 +12,6 @@ public class AttackController : MonoBehaviour
     [SerializeField] private Transform attackOrigin;
     [SerializeField] protected float timeBetweenShot;
     [SerializeField] private float projectileSpeed;
-    [SerializeField] private float projectileLifeTime;
     [SerializeField] protected int damage;
 
     [Header("CapaSpé")]
@@ -54,11 +53,13 @@ public class AttackController : MonoBehaviour
     {
         // Logique pour attaquer la cible en lançant un projectile.
         GameObject projectile = Instantiate(projectilePrefab, attackOrigin.position, attackOrigin.rotation);
-        projectile.GetComponent<Rigidbody>().AddForce((toShoot.transform.position - attackOrigin.position).normalized * projectileSpeed, ForceMode.Impulse);
         if (projectile.TryGetComponent<Projectile>(out var projectileScript))
         {
-            projectileScript.Initialize(botBase.isEnemy, projectileLifeTime, damage);
-
+            projectileScript.Initialize(botBase.isEnemy, botBase.attackRange, projectileSpeed, damage);
+        }
+        else if (projectile.TryGetComponent<Cloche>(out var clocheScript))
+        {
+            clocheScript.Initialize(toShoot.transform.position, projectileSpeed, botBase.isEnemy);
         }
 
         BasicAttack();

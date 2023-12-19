@@ -20,7 +20,7 @@ public class BotBase : AliveObject
     protected Vector3 mainTarget;
 
     [Header("Ciblage")]
-    [SerializeField] private float attackRange;
+    public float attackRange;
     [SerializeField] private float initialShotTime;
     private float initialShotTimer;
     protected AliveObject toShoot;

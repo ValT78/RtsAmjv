@@ -155,13 +155,14 @@ MonoBehaviour:
   healthBar: {fileID: 3943048012943540169}
   maxHealth: 1
   armor: 0
-  isArmorBoosted: 0
+  armorBoostCount: 0
   attackController: {fileID: -106877691336824406}
   moveSpeed: 2
   timeComputeDestination: 0.5
   target: {fileID: 0}
   awareRange: 20
   isAware: 0
+  voiceRange: 0
   attackRange: 15
   initialShotTime: 2
 --- !u!114 &-106877691336824406
@@ -181,10 +182,9 @@ MonoBehaviour:
   attackOrigin: {fileID: 5791774308566983079}
   timeBetweenShot: 2
   projectileSpeed: 8
-  projectileLifeTime: 2
   damage: 5
   specialRange: 10
-  throwDuration: 1
+  throwSpeed: 5
   trap: {fileID: 558324709960684974, guid: 3bf0e105e0992224380b812a9f708904, type: 3}
 --- !u!195 &8656527486992526601
 NavMeshAgent:
