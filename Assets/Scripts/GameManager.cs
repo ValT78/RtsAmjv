@@ -61,10 +61,12 @@ public class GameManager : MonoBehaviour
         }
         else if (botObject.TryGetComponent<TroopBot>(out var troop))
         {
-            print(troop.ToString());
+            print("avant" + troopUnits.Count);
             troopUnits.Remove(troop);
+            print("après" + troopUnits.Count);
             deadAllie++;
         }
+
         Destroy(botObject);
     }
 

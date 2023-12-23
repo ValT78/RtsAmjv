@@ -201,4 +201,13 @@ public class BotBase : AliveObject
         isStunned = false;
     }
 
+    public void SetIsSwarm(Swarmies swarmies)
+    {
+        isSwarm = swarmies;
+    }
+    public Swarmies GetIsSwarm()
+    {
+        return isSwarm;
+    }
+
 }

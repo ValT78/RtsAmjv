@@ -11,11 +11,17 @@ public class Swarmies : MonoBehaviour
 
     private void Start()
     {
-        foreach (TroopBot swarm in swarmies.Cast<TroopBot>())
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, 0)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(1.5f, 0, 0)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(-1.5f, 0, 0)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(1f, 0, 1.5f)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(-1f, 0, 1.5f)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, -1.5f)));
+        foreach (var swarm in swarmies)
         {
-            GameManager.troopUnits.Add(swarm);
-
+            swarm.SetIsSwarm(this);
         }
+        
     }
 
     public void SetEveryTarget(AliveObject target)
@@ -59,11 +65,14 @@ public class Swarmies : MonoBehaviour
             {
                 swarmies.Remove(swarm);
                 swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, 0)));
+
             }
         }
         foreach (BotBase swarm in swarmies)
         {
             GetComponent<Swarmy>().SetSpecialUsed(true);
+            swarm.SetIsSwarm(this);
+
         }
     }
 
