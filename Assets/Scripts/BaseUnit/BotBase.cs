@@ -13,10 +13,11 @@ public class BotBase : AliveObject
     [SerializeField] private float timeComputeDestination;
     private float timerComputeDestination;
     protected NavMeshAgent agent;
-    [HideInInspector] public AliveObject target;
+    private AliveObject target;
     [SerializeField] protected float awareRange;
     [SerializeField] protected bool isAware;
     [SerializeField] protected float voiceRange;
+    [SerializeField] protected Swarmies isSwarm;
     protected Vector3 mainTarget;
 
     [Header("Ciblage")]
@@ -30,6 +31,7 @@ public class BotBase : AliveObject
     private Transform crown;
     private bool hasCrown;
     private AliveObject kingTarget;
+    private bool isStunned =false;
 
 
     public override void StartBehavior()
@@ -48,6 +50,7 @@ public class BotBase : AliveObject
     public override void UpdateBehavior()
     {
         base.UpdateBehavior();
+        if (isStunned) return;
         if (Input.GetKeyDown(KeyCode.Space) && !isEnemy)
         {
             attackController.Special();
@@ -68,18 +71,18 @@ public class BotBase : AliveObject
 
             if (isAware)
             {
-                // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
-                BotBase newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
+                BotBase newTarget = GameManager.ClosestBot(!isEnemy, transform.position, awareRange);
                 if (newTarget != null)
                 {
-                    target = newTarget;
+                    SetTarget(newTarget);
+
                     if(isEnemy)
                     {
                         foreach (EnemyBot enemy in GameManager.enemyUnits)
                         {
-                            if(Vector3.Distance(transform.position, enemy.transform.position) < voiceRange && enemy.target == null)
+                            if(Vector3.Distance(transform.position, enemy.transform.position) < voiceRange && enemy.GetTarget() == null)
                             {
-                               enemy.target = target;
+                               enemy.SetTarget(target);
                                
                             }
                             
@@ -108,26 +111,7 @@ public class BotBase : AliveObject
 
     }
 
-    protected BotBase ClosestBot(List<BotBase> troupList, float maxRange)
-    {
-        if (troupList.Count == 0) return null;
-        float cloasestRange = maxRange;
-        BotBase closestBot = null;
-        // Logique pour d�tecter les troupes dans la visionRange.
-        foreach (var troop in troupList)
-        {
-            float distanceToTroop = Vector3.Distance(transform.position, troop.transform.position);
-            if (distanceToTroop <= cloasestRange)
-            {
-                // La troupe d�tect�e devient la nouvelle cible.
-                closestBot = troop;
-                cloasestRange = distanceToTroop;
-            }
-        }
-
-        return closestBot;
-    }
-
+    
     private void FindToShoot()
     {
         // Les unités contrôlées par le joueur vise forcément leur target si elle est dans leur range d'attaque
@@ -144,7 +128,7 @@ public class BotBase : AliveObject
         else
         {
             // ON cherche 
-            AliveObject newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
+            AliveObject newToShoot = GameManager.ClosestBot(!isEnemy,transform.position, attackRange);
             if (newToShoot == null)
             {
                 toShoot = null;
@@ -180,6 +164,21 @@ public class BotBase : AliveObject
         return target;
     }
 
+    public void SetTarget(AliveObject target, bool otherSwarm = false)
+    {
+
+        if (isSwarm && !otherSwarm)
+        {
+            isSwarm.SetEveryTarget(target);
+        }
+        else
+        {
+            this.target = target;
+            isAware = false;
+        }
+
+    }
+
     public AliveObject GetToShoot()
     {
         return toShoot;
@@ -192,6 +191,14 @@ public class BotBase : AliveObject
     public void SetKingTarget(AliveObject target)
     {
         kingTarget = target;
+    }
+
+    public IEnumerator StunnedCoroutine(float delay)
+    {
+        isStunned = true;
+        agent.ResetPath();        
+        yield return new WaitForSeconds(delay);
+        isStunned = false;
     }
 
 }

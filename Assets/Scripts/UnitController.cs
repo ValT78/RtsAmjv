@@ -133,6 +133,7 @@ public class UnitController : MonoBehaviour
         TroopBot selectedTroop = null;
         foreach(TroopBot troop in GameManager.troopUnits)
         {
+            if(troop==null) continue;
             dist = Vector3.Distance(hitpoint, troop.transform.position);
             if (dist < mindist)
             {

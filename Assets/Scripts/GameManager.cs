@@ -1,11 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Listes statiques d'unités
+    // Listes statiques d'unitÃ©s
     public static List<TroopBot> troopUnits = new();
     public static List<EnemyBot> enemyUnits = new();
     public static int deadEnemy;
@@ -16,19 +17,24 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Récupérer toutes les unités de troupe dans la scène et les ajouter à la liste
-        TroopBot[] troopsInScene = GameObject.FindObjectsOfType<TroopBot>().ToArray();
-        troopUnits.AddRange(troopsInScene);
+        // RÃ©cupÃ©rer toutes les unitÃ©s de troupe dans la scÃ¨ne et les ajouter Ã  la liste
+        troopUnits.AddRange(FindObjectsOfType<TroopBot>().ToArray());
 
-        // Récupérer toutes les unités d'ennemi dans la scène et les ajouter à la liste
-        EnemyBot[] enemiesInScene = GameObject.FindObjectsOfType<EnemyBot>().ToArray();
-        enemyUnits.AddRange(enemiesInScene);
+        // RÃ©cupÃ©rer toutes les unitÃ©s d'ennemi dans la scÃ¨ne et les ajouter Ã  la liste
+        enemyUnits.AddRange(FindObjectsOfType<EnemyBot>().ToArray());
 
         // UIController.ActiveWinUI();
     }
 
+    private void Update()
+    {
+        /*foreach (var t in troopUnits)
+        {
+            print(t.ToString());
+        }*/
+    }
 
-    // Méthode pour invoquer un prefab de bot à une position spécifique
+    // MÃ©thode pour invoquer un prefab de bot Ã  une position spÃ©cifique
     public static BotBase SpawnBot(GameObject botPrefab, Vector3 position)
     {
         GameObject botObject = Instantiate(botPrefab, position, Quaternion.identity);
@@ -55,6 +61,7 @@ public class GameManager : MonoBehaviour
         }
         else if (botObject.TryGetComponent<TroopBot>(out var troop))
         {
+            print(troop.ToString());
             troopUnits.Remove(troop);
             deadAllie++;
         }
@@ -72,4 +79,29 @@ public class GameManager : MonoBehaviour
             return troopUnits.Select(troopBot => (BotBase)troopBot).ToList();
         }
     }
+
+    public static BotBase ClosestBot(bool isEnemy, Vector3 position, float maxRange)
+    {
+        List<BotBase> botList = GetCrewBots(isEnemy);
+
+        if (botList.Count == 0) return null;
+        float cloasestRange = maxRange;
+        BotBase closestBot = null;
+        // Logique pour dï¿½tecter les troupes dans la visionRange.
+        foreach (var troop in botList)
+        {
+            if(troop == null) continue;
+            float distanceToTroop = Vector3.Distance(position, troop.transform.position);
+
+            if (distanceToTroop <= cloasestRange)
+            {
+                // La troupe dÃ©tectee devient la nouvelle cible.
+                closestBot = troop;
+                cloasestRange = distanceToTroop;
+            }
+        }
+
+        return closestBot;
+    }
+
 }

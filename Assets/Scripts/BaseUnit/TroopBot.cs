@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TroopBot : BotBase
 {
@@ -18,23 +19,35 @@ public class TroopBot : BotBase
         isEnemy = false;
     }
 
-    public void GoToPosition(Vector3 position)
+    public void GoToPosition(Vector3 position, bool otherSwarm = false)
     {
-        agent.SetDestination(position);
-        isAware = false;
-        target = null;
+        if (isSwarm && !otherSwarm) isSwarm.SetEveryPosition(position);
+        else
+        {
+            agent.SetDestination(position);
+            isAware = false;
+            SetTarget(null);
+        }
     }
 
-    public void GoToBot(BotBase target)
+    public void GoToBot(BotBase target, bool otherSwarm = false)
     {
-        isAware = false;
-        this.target = target;
+        if (isSwarm && !otherSwarm) isSwarm.SetEveryTarget(target);
+        else
+        {
+            isAware = false;
+            SetTarget(target);
+        }
     }
 
-    public void AwarePosition(Vector3 mainTarget)
+    public void AwarePosition(Vector3 mainTarget, bool otherSwarm = false)
     {
-        isAware = true;
-        this.target = null;
-        this.mainTarget = mainTarget;  
+        if (isSwarm && !otherSwarm) isSwarm.SetEveryAware(mainTarget);
+        else
+        {
+            isAware = true;
+            SetTarget(null);
+            this.mainTarget = mainTarget;
+        }
     }
 }

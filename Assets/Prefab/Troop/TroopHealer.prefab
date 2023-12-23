@@ -183,14 +183,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  attackController: {fileID: 5587239442055584148}
   healthBar: {fileID: 6218158935578809174}
   maxHealth: 5
   armor: 0
+  armorBoostCount: 0
+  attackController: {fileID: 5587239442055584148}
   moveSpeed: 8
   timeComputeDestination: 0.5
   target: {fileID: 0}
   awareRange: 15
+  isAware: 0
+  voiceRange: 0
   attackRange: 5
   initialShotTime: 0.2
 --- !u!114 &5587239442055584148
@@ -210,7 +213,6 @@ MonoBehaviour:
   attackOrigin: {fileID: 3500237893619273016}
   timeBetweenShot: 1
   projectileSpeed: 5
-  projectileLifeTime: 2
   damage: 1
   specialRange: Infinity
   healRadius: 5
@@ -229,9 +231,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 80
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 1000
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

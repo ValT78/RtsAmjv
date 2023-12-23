@@ -8,6 +8,7 @@ public class Sniper : AttackController
     [SerializeField] private float throwSpeed; // La durée totale du lancer
     [SerializeField] private GameObject trap; // Le prefab du projectile à lancer
 
+
     public override void StartBehavior()
     {
     }

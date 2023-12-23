@@ -15,7 +15,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] protected int damage;
 
     [Header("CapaSpé")]
-    [SerializeField] private float specialRange;
+    [SerializeField] protected float specialRange;
     private bool specialUsed;
 
     [Header("Healer")]
@@ -104,7 +104,10 @@ public class AttackController : MonoBehaviour
         return damage;
     }
 
-   
+   public void SetSpecialUsed(bool specialUsed)
+    {
+        this.specialUsed = specialUsed;
+    }
 
     
 }

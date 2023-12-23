@@ -23,6 +23,8 @@ public class Cloche : MonoBehaviour
         throwDistance = Vector3.Distance(targetPosition, transform.position);
         this.throwDuration = throwDistance/ProjectileSpeed;
         this.isEnemy = isEnemy;
+
+
         transform.position += new Vector3(0f, spawnHeight, 0f);
         v0 = (gravity * throwDuration / 2 - (spawnHeight - endHeight) / throwDuration) / Mathf.Sin(launchAngle);
         StartCoroutine(LifeCycle());
@@ -62,7 +64,7 @@ public class Cloche : MonoBehaviour
     void InstantiateHitEffect(Vector3 position)
     {
         Instantiate(product, transform.position+new Vector3(0f,0.5f,0f), Quaternion.identity);
-        if(product.TryGetComponent<Trap>(out Trap trap))
+        if(product.TryGetComponent(out Trap trap))
         {
             trap.Initialize(isEnemy);
         }

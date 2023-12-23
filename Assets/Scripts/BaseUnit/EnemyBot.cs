@@ -8,7 +8,9 @@ public class EnemyBot : BotBase
 
     public override void UpdateBehavior()
     {
-        target = ClosestBot(GameManager.troopUnits.Select(troopBot => (BotBase)troopBot).ToList(), awareRange);
+        SetTarget(
+            GameManager.ClosestBot(!isEnemy,transform.position, awareRange)
+            );
         base.UpdateBehavior();
         // Logique spécifique aux ennemis, si nécessaire.
     }
