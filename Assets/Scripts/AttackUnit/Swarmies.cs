@@ -59,18 +59,20 @@ public class Swarmies : MonoBehaviour
 
     public void RefillArmy()
     {
+        List<BotBase> newList = new List<BotBase>();
         foreach(BotBase swarm in swarmies)
         {
-            if(swarm == null)
+            if (swarm == null)
             {
-                swarmies.Remove(swarm);
-                swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, 0)));
+                newList.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, 0)));
 
             }
+            else newList.Add(swarm);
         }
+        swarmies = newList;
         foreach (BotBase swarm in swarmies)
         {
-            GetComponent<Swarmy>().SetSpecialUsed(true);
+            swarm.GetComponent<Swarmy>().SetSpecialUsed(true);
             swarm.SetIsSwarm(this);
 
         }

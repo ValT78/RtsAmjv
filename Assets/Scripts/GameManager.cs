@@ -61,9 +61,7 @@ public class GameManager : MonoBehaviour
         }
         else if (botObject.TryGetComponent<TroopBot>(out var troop))
         {
-            print("avant" + troopUnits.Count);
             troopUnits.Remove(troop);
-            print("après" + troopUnits.Count);
             deadAllie++;
         }
 
@@ -92,7 +90,6 @@ public class GameManager : MonoBehaviour
         // Logique pour d�tecter les troupes dans la visionRange.
         foreach (var troop in botList)
         {
-            if(troop == null) continue;
             float distanceToTroop = Vector3.Distance(position, troop.transform.position);
 
             if (distanceToTroop <= cloasestRange)
