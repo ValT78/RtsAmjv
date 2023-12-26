@@ -8,9 +8,7 @@ public class EnemyBot : BotBase
 
     public override void UpdateBehavior()
     {
-        SetTarget(
-            GameManager.ClosestBot(!isEnemy,transform.position, awareRange)
-            );
+        SetTarget(GameManager.ClosestBot(!isEnemy,transform.position, awareRange));
         base.UpdateBehavior();
         // Logique spécifique aux ennemis, si nécessaire.
     }

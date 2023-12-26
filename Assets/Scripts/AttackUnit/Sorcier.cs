@@ -6,6 +6,7 @@ using UnityEngine;
 public class Sorcier : AttackController
 {
     [SerializeField] private float specialStunnedDelay;
+    [SerializeField] private float specialStunnedRadius;
     public override void StartBehavior()
     {
         
@@ -16,10 +17,14 @@ public class Sorcier : AttackController
         
     }
 
-    public override void SpecialAttack(Vector3 targetPosition)
+    public override bool SpecialAttack(Vector3 targetPosition)
     {
-
-        StartCoroutine(GameManager.ClosestBot(!botBase.isEnemy, targetPosition, specialRange).StunnedCoroutine(specialStunnedDelay));
+        if (GameManager.ClosestBot(!botBase.isEnemy, targetPosition, specialStunnedRadius).TryGetComponent(out BotBase var))
+        {
+            StartCoroutine(var.StunnedCoroutine(specialStunnedDelay));
+            return true;
+        }
+        return false;
     }
 
 }

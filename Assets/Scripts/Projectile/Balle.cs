@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private float aliveTime;
     private bool isEnemy;
     private float distance;
     private float bulletSpeed;
@@ -11,6 +12,7 @@ public class Projectile : MonoBehaviour
 
     public void Initialize(bool isEnemy, float distance, float bulletSpeed, int damage)
     {
+
         this.isEnemy = isEnemy;
         this.distance = distance;
         this.bulletSpeed = bulletSpeed;
@@ -30,23 +32,14 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(isEnemy)
+        if(other.TryGetComponent(out AliveObject alive))
         {
-            if (other.TryGetComponent<TroopBot>(out var troop))
-            {
-                troop.ModifyHealth(-damage);
-                Destroy(gameObject);
+            if(this.isEnemy != alive.isEnemy) {
+                alive.ModifyHealth(-damage);
+                Destroy(gameObject, aliveTime);
             }
         }
-        else
-        {
-            if (other.TryGetComponent<EnemyBot>(out var enemy))
-            {
-                enemy.ModifyHealth(-damage);
-                Destroy(gameObject);
-            }
-        }
-        // Vérifier la collision avec la cible.
+        
         
     }
 }

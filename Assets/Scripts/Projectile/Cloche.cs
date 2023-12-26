@@ -63,10 +63,14 @@ public class Cloche : MonoBehaviour
 
     void InstantiateHitEffect(Vector3 position)
     {
-        Instantiate(product, transform.position+new Vector3(0f,0.5f,0f), Quaternion.identity);
-        if(product.TryGetComponent(out Trap trap))
+        GameObject productPrefab = Instantiate(product, transform.position+new Vector3(0f,0.5f,0f), Quaternion.identity);
+        if(productPrefab.TryGetComponent(out Trap trap))
         {
             trap.Initialize(isEnemy);
+        }
+        else if (productPrefab.TryGetComponent(out Bait bait))
+        {
+            bait.Initialize(isEnemy);
         }
     }
 }

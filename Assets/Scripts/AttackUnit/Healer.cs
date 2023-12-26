@@ -13,7 +13,7 @@ public class Healer : AttackController
 
     public override void BasicAttack()
     {
-        foreach (var troop in GameManager.GetCrewBots(botBase.isEnemy))
+        foreach (var troop in GameManager.GetCrewAlive(botBase.isEnemy))
         {
             float distance = Vector3.Distance(transform.position, troop.transform.position);
             if (distance < healRadius && distance != 0)
@@ -23,16 +23,22 @@ public class Healer : AttackController
         }
     }
 
-    public override void SpecialAttack(Vector3 targetPosition)
+    public override bool SpecialAttack(Vector3 targetPosition)
     {
-        foreach (var troop in GameManager.GetCrewBots(botBase.isEnemy))
+        bool flag = false;
+        foreach (var troop in GameManager.GetCrewBot(botBase.isEnemy))
         {
             float distance = Vector3.Distance(transform.position, troop.transform.position);
             if (distance < boostRadius && distance != 0)
             {
-                StartCoroutine(troop.attackController.HealerBoost(boostDamage, boostDuration));
+                if(troop.TryGetComponent(out BotBase var))
+                {
+                    StartCoroutine(var.attackController.HealerBoost(boostDamage, boostDuration));
+                    flag = true;
+                }
             }
         }
+        return flag;
 
     }
 }

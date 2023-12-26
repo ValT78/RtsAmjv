@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 40144070619993636}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.97, y: 0, z: -3.04}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -155,11 +155,10 @@ MonoBehaviour:
   healthBar: {fileID: 3943048012943540169}
   maxHealth: 1
   armor: 0
+  dodgeCount: 0
   armorBoostCount: 0
   attackController: {fileID: -106877691336824406}
-  moveSpeed: 2
   timeComputeDestination: 0.5
-  target: {fileID: 0}
   awareRange: 20
   isAware: 0
   voiceRange: 0

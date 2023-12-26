@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +10,6 @@ public class BotBase : AliveObject
     protected Camera mainCamera;
 
     [Header("Deplacements")]
-    [SerializeField] private float moveSpeed;
     [SerializeField] private float timeComputeDestination;
     private float timerComputeDestination;
     protected NavMeshAgent agent;
@@ -17,7 +17,7 @@ public class BotBase : AliveObject
     [SerializeField] protected float awareRange;
     [SerializeField] protected bool isAware;
     [SerializeField] protected float voiceRange;
-    [SerializeField] protected Swarmies isSwarm;
+    protected Swarmies isSwarm;
     protected Vector3 mainTarget;
 
     [Header("Ciblage")]
@@ -30,7 +30,7 @@ public class BotBase : AliveObject
     [Header("Miscellaneous")]
     private Transform crown;
     private bool hasCrown;
-    private AliveObject kingTarget;
+    private BotBase kingTarget;
     private bool isStunned =false;
 
 
@@ -43,7 +43,6 @@ public class BotBase : AliveObject
         agent = GetComponent<NavMeshAgent>();
         mainTarget = transform.position;
         attackController = GetComponent<AttackController>();
-        agent.speed = moveSpeed;
     }
 
 
@@ -57,7 +56,9 @@ public class BotBase : AliveObject
         }
 
         if (toShoot != null)
-        {   transform.LookAt(toShoot.transform.position);
+        {
+/*          print("toShoot de " + this.ToString() + " : " + toShoot.ToString());
+*/          transform.LookAt(toShoot.transform.position);
             initialShotTimer -= Time.deltaTime;
             // Passer � l'�tat d'attaque si la cible est � port�e.
             if (initialShotTimer < 0 && !isAttacking)
@@ -71,7 +72,7 @@ public class BotBase : AliveObject
 
             if (isAware)
             {
-                BotBase newTarget = GameManager.ClosestBot(!isEnemy, transform.position, awareRange);
+                AliveObject newTarget = GameManager.ClosestAlive(!isEnemy, transform.position, awareRange);
                 if (newTarget != null)
                 {
                     SetTarget(newTarget);
@@ -100,6 +101,7 @@ public class BotBase : AliveObject
 
             if (target != null)
             {
+
                 PathFind(target.transform.position);
             }
             else
@@ -107,6 +109,8 @@ public class BotBase : AliveObject
                 // Nothing
             }
         }
+/*        print("target de " + this.ToString() + " : " + target.ToString());
+*/
         FindToShoot();
 
     }
@@ -128,9 +132,11 @@ public class BotBase : AliveObject
         else
         {
             // ON cherche 
-            AliveObject newToShoot = GameManager.ClosestBot(!isEnemy,transform.position, attackRange);
+            AliveObject newToShoot = GameManager.ClosestAlive(!isEnemy,transform.position, attackRange);
+            print(this.name + ":::::::::" + newToShoot);
             if (newToShoot == null)
             {
+                print(this.name +"::::"+ toShoot);
                 toShoot = null;
             }
             else if (toShoot == null)
@@ -188,7 +194,7 @@ public class BotBase : AliveObject
         crown.gameObject.SetActive(true);
         hasCrown = true;
     }
-    public void SetKingTarget(AliveObject target)
+    public void SetKingTarget(BotBase target)
     {
         kingTarget = target;
     }

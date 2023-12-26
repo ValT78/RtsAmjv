@@ -15,8 +15,9 @@ public class Swarmy : AttackController
 
     }
 
-    public override void SpecialAttack(Vector3 targetPosition)
+    public override bool SpecialAttack(Vector3 targetPosition)
     {
-        botBase.GetIsSwarm().RefillArmy();
+        if(botBase.GetIsSwarm().RefillArmy()) return true;
+        return false;
     }
 }

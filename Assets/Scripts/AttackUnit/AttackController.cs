@@ -26,7 +26,7 @@ public class AttackController : MonoBehaviour
 
     public virtual void BasicAttack() { }
 
-    public virtual void SpecialAttack(Vector3 targetPosition) { }
+    public virtual bool SpecialAttack(Vector3 targetPosition) { return true; }
 
     public void Start()
     {
@@ -76,11 +76,10 @@ public class AttackController : MonoBehaviour
         }
         else
         {
-            //specialUsed = true;
             // Vérifiez si le rayon touche un objet
             if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit) && Vector3.Distance(transform.position, hit.point) < specialRange)
             {
-                SpecialAttack(hit.point);
+                if(SpecialAttack(hit.point)) specialUsed = true;
 
             }
             

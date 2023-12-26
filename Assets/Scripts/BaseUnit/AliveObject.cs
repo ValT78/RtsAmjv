@@ -10,6 +10,7 @@ public class AliveObject : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
     [SerializeField] private int armor;
+    [SerializeField] private int dodgeCount;
     private int health;
 
     [Header("Tank")]
@@ -41,10 +42,18 @@ public class AliveObject : MonoBehaviour
 
     public void ModifyHealth(int value)
     {
+
         if (value < 0)
         {
-            value = Mathf.Min(armor + value, 0);
-
+            if (dodgeCount > 0)
+            {
+                dodgeCount--;
+                value = 0;
+            }
+            else
+            {
+                value = Mathf.Min(armor + value, 0);
+            }
         }
         health = Mathf.Min(health + value, maxHealth);
         

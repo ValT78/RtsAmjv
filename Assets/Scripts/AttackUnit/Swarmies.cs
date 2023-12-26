@@ -57,18 +57,20 @@ public class Swarmies : MonoBehaviour
         }
     }
 
-    public void RefillArmy()
+    public bool RefillArmy()
     {
+        bool flag = false;
         List<BotBase> newList = new List<BotBase>();
         foreach(BotBase swarm in swarmies)
         {
             if (swarm == null)
             {
                 newList.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, 0)));
-
+                flag = true;
             }
             else newList.Add(swarm);
         }
+        if (!flag) return false;
         swarmies = newList;
         foreach (BotBase swarm in swarmies)
         {
@@ -76,6 +78,7 @@ public class Swarmies : MonoBehaviour
             swarm.SetIsSwarm(this);
 
         }
+        return flag;
     }
 
 }

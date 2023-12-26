@@ -23,7 +23,7 @@ public class Tank : AttackController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
+        if (isBoostActive && other.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
         {
             obj.SwitchBoostArmor(boostArmor);
 
@@ -32,16 +32,17 @@ public class Tank : AttackController
 
     private void OnTriggerExit(Collider other)
     {
-        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
+        if (isBoostActive && other.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
         {
             obj.SwitchBoostArmor(-boostArmor);
 
         }
     }
 
-    public override void SpecialAttack(Vector3 target)
+    public override bool SpecialAttack(Vector3 target)
     {
         StartCoroutine(BoostTimer());
+        return true;
     }
 
     private IEnumerator BoostTimer()
@@ -49,7 +50,7 @@ public class Tank : AttackController
         isBoostActive = true;
         foreach (Collider col in Physics.OverlapSphere(transform.position, boostRadius))
         {
-            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
+            if (col.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
             {
                 obj.SwitchBoostArmor(boostArmor);
 
@@ -61,7 +62,7 @@ public class Tank : AttackController
 
         foreach (Collider col in Physics.OverlapSphere(transform.position, boostRadius))
         {
-            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
+            if (col.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
             {
                 obj.SwitchBoostArmor(-boostArmor);
             }
