@@ -154,14 +154,13 @@ MonoBehaviour:
   healthBar: {fileID: 2350869983450444934}
   maxHealth: 5
   armor: 0
+  dodgeCount: 0
   armorBoostCount: 0
   attackController: {fileID: 4277713741257113156}
-  moveSpeed: 8
   timeComputeDestination: 0.5
-  target: {fileID: 0}
   awareRange: 15
   isAware: 0
-  voiceRange: 0
+  voiceRange: 5
   attackRange: 5
   initialShotTime: 0.2
 --- !u!114 &4277713741257113156

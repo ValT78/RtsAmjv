@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class Swarmies : MonoBehaviour
 {
-    [SerializeField] private List<BotBase> swarmies;
+    private List<BotBase> swarmies;
     [SerializeField] private GameObject swarmPrefab;
 
     private void Start()
