@@ -6,17 +6,17 @@ using UnityEngine.UIElements;
 
 public class Swarmies : MonoBehaviour
 {
-    private List<BotBase> swarmies;
+    private List<BotBase> swarmies = new();
     [SerializeField] private GameObject swarmPrefab;
 
     private void Start()
     {
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, 0)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(1.5f, 0, 0)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(-1.5f, 0, 0)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(1f, 0, 1.5f)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(-1f, 0, 1.5f)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, -1.5f)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
         foreach (var swarm in swarmies)
         {
             swarm.SetIsSwarm(this);

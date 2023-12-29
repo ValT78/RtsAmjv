@@ -133,10 +133,8 @@ public class BotBase : AliveObject
         {
             // ON cherche 
             AliveObject newToShoot = GameManager.ClosestAlive(!isEnemy,transform.position, attackRange);
-            print(this.name + ":::::::::" + newToShoot);
             if (newToShoot == null)
             {
-                print(this.name +"::::"+ toShoot);
                 toShoot = null;
             }
             else if (toShoot == null)
