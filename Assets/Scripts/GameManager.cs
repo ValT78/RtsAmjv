@@ -41,18 +41,10 @@ public class GameManager : MonoBehaviour
         if (aliveObject.isEnemy)
         {
             enemyObjects.Add(aliveObject);
-            if (objectPrefab.TryGetComponent(out EnemyBot enemy))
-            {
-                enemyUnits.Add(enemy);
-            }
         }
         else
         {
             troopObjects.Add(aliveObject);
-            if (objectPrefab.TryGetComponent(out TroopBot troop))
-            {
-                troopUnits.Add(troop);
-            }
         }
         return aliveObject;
     }
@@ -60,13 +52,17 @@ public class GameManager : MonoBehaviour
     public static BotBase SpawnBot(GameObject botPrefab, Vector3 position)
     {
         GameObject objectPrefab = Instantiate(botPrefab, position, Quaternion.identity);
+        AliveObject aliveObject = objectPrefab.GetComponent<AliveObject>();
         if (objectPrefab.TryGetComponent(out EnemyBot enemy))
             {
                 enemyUnits.Add(enemy);
+                enemyObjects.Add(aliveObject);
             }
-        if (objectPrefab.TryGetComponent(out TroopBot troop))
+        else if (objectPrefab.TryGetComponent(out TroopBot troop))
             {
                 troopUnits.Add(troop);
+                troopObjects.Add(aliveObject);
+
             }
         return objectPrefab.GetComponent<BotBase>();
     }
@@ -133,7 +129,6 @@ public class GameManager : MonoBehaviour
         foreach (AliveObject troop in aliveList)
         {
             float distanceToTroop = Vector3.Distance(position, troop.transform.position);
-            print("gg" + troop.name + distanceToTroop+ "   "+ cloasestRange+ "   " + troop.transform.position);
 
             if (distanceToTroop <= cloasestRange)
             {

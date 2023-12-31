@@ -6,20 +6,25 @@ using UnityEngine.UI;
 
 public class SelectionCard : MonoBehaviour
 {
-
+    [Header("SpawnPoint")]
+    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private float spawnRadius;
+    [Header("Prefab Unit")]
     [SerializeField] private GameObject healerPrefab;
     [SerializeField] private GameObject assassinPrefab;
     [SerializeField] private GameObject tankPrefab;
     [SerializeField] private GameObject sorcierPrefab;
     [SerializeField] private GameObject swarmiesPrefab;
     [SerializeField] private GameObject sniperPrefab;
+    [Header("Unit Counter")]
     [SerializeField] private TextMeshProUGUI capacityText;
     [SerializeField] private TextMeshProUGUI healerText;
     [SerializeField] private TextMeshProUGUI assassinText;
     [SerializeField] private TextMeshProUGUI tankText;
     [SerializeField] private TextMeshProUGUI sorcierText;
     [SerializeField] private TextMeshProUGUI swarmiesText;
-    [SerializeField] private TextMeshProUGUI sniperText; 
+    [SerializeField] private TextMeshProUGUI sniperText;
+    [Header("Unit Capacity")]
     [SerializeField] private int capacity;
     [SerializeField] private int healerCoast;
     [SerializeField] private int assassinCoast;
@@ -169,27 +174,27 @@ public class SelectionCard : MonoBehaviour
     public void SummonTroops()
     {
         for(int i = 0; i < healerCount; i++) {
-            GameManager.SpawnBot(healerPrefab, new(0, 2, 0));
+            GameManager.SpawnBot(healerPrefab, RandomPosition());
         }
         for (int i = 0; i < assassinCount; i++)
         {
-            GameManager.SpawnBot(assassinPrefab, new(0, 3, 0));
+            GameManager.SpawnBot(assassinPrefab, RandomPosition());
         }
         for (int i = 0; i < tankCount; i++)
         {
-            GameManager.SpawnBot(tankPrefab, new(0, 4, 0));
+            GameManager.SpawnBot(tankPrefab, RandomPosition());
         }
         for (int i = 0; i < sorcierCount; i++)
         {
-            GameManager.SpawnBot(sorcierPrefab, new(0, 5, 0));
+            GameManager.SpawnBot(sorcierPrefab, RandomPosition());
         }
         for (int i = 0; i < swarmiesCount; i++)
         {
-            Instantiate(swarmiesPrefab);
+            Instantiate(swarmiesPrefab, RandomPosition(), Quaternion.identity);
         }
         for (int i = 0; i < sniperCount; i++)
         {
-            GameManager.SpawnBot(sniperPrefab, new(0, 6, 0));
+            GameManager.SpawnBot(sniperPrefab, RandomPosition());
         }
         healerCount = 0;
         assassinCount = 0;
@@ -198,5 +203,19 @@ public class SelectionCard : MonoBehaviour
         swarmiesCount = 0;
         sniperCount = 0;
         gameObject.SetActive(false);
+    }
+    private Vector3 RandomPosition()
+    {
+        float randomAngle = Random.Range(0f, Mathf.PI * 2f);
+        float randomRadius = Random.Range(0f, spawnRadius);
+        if(spawnPoint != null )
+        {
+            return new Vector3(spawnPoint.transform.position.x + randomRadius * Mathf.Cos(randomAngle), spawnPoint.transform.position.y + randomRadius * Mathf.Sin(randomAngle), transform.position.z);
+        }
+
+        return new Vector3(randomRadius * Mathf.Cos(randomAngle), 0, randomRadius * Mathf.Sin(randomAngle));
+
+
+        // Instancier l'unité à la position calculée
     }
 }

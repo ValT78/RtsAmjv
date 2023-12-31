@@ -182,6 +182,8 @@ MonoBehaviour:
   projectileSpeed: 5
   damage: 1
   specialRange: Infinity
+  healParticle: {fileID: 7803489399656490530, guid: bfa739adf1fa05d4785b67a36a559e04, type: 3}
+  healCircle: {fileID: 1408434571643084571, guid: 89c36beb493abda4bbfe28b50ec3bb3b, type: 3}
   healRadius: 5
   healAmount: 1
   boostDamage: 5

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Healer : AttackController
 {
+    [SerializeField] private GameObject healParticle;
+    [SerializeField] private GameObject healCircle;
     [SerializeField] private float healRadius;
     [SerializeField] private int healAmount;
     [SerializeField] private int boostDamage;
@@ -13,6 +15,8 @@ public class Healer : AttackController
 
     public override void BasicAttack()
     {
+        Instantiate(healCircle, transform.position + new Vector3(0f,-0.5f,0f), Quaternion.identity);
+        Instantiate(healParticle, transform.position, Quaternion.Euler(-90,0,0));
         foreach (var troop in GameManager.GetCrewAlive(botBase.isEnemy))
         {
             float distance = Vector3.Distance(transform.position, troop.transform.position);

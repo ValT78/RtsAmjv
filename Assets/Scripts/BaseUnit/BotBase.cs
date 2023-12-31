@@ -57,8 +57,8 @@ public class BotBase : AliveObject
 
         if (toShoot != null)
         {
-/*          print("toShoot de " + this.ToString() + " : " + toShoot.ToString());
-*/          transform.LookAt(toShoot.transform.position);
+            print("toShoot de " + this.ToString() + " : " + toShoot.ToString());
+            transform.LookAt(toShoot.transform.position);
             initialShotTimer -= Time.deltaTime;
             // Passer � l'�tat d'attaque si la cible est � port�e.
             if (initialShotTimer < 0 && !isAttacking)

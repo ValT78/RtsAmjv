@@ -12,11 +12,11 @@ public class Swarmies : MonoBehaviour
     private void Start()
     {
         swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(2,0,0)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(-2, 0, -1.5f)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(-2, 0, 1.5f)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(0.5f, 0, 2)));
+        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(0.5f, 0, -2)));
         foreach (var swarm in swarmies)
         {
             swarm.SetIsSwarm(this);
