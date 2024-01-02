@@ -65,7 +65,7 @@ public class Swarmies : MonoBehaviour
         {
             if (swarm == null)
             {
-                newList.Add(GameManager.SpawnBot(swarmPrefab, new(0, 0, 0)));
+                newList.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
                 flag = true;
             }
             else newList.Add(swarm);

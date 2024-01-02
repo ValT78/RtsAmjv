@@ -15,6 +15,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] protected int damage;
 
     [Header("CapaSpé")]
+    [SerializeField] private GameObject star;
     [SerializeField] protected float specialRange;
     private bool specialUsed;
 
@@ -79,8 +80,11 @@ public class AttackController : MonoBehaviour
             // Vérifiez si le rayon touche un objet
             if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit) && Vector3.Distance(transform.position, hit.point) < specialRange)
             {
-                if(SpecialAttack(hit.point)) specialUsed = true;
-
+                if (SpecialAttack(hit.point))
+                {
+                    specialUsed = true;
+                    star.SetActive(false);
+                }
             }
             
         }

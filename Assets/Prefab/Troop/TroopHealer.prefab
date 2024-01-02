@@ -213,11 +213,14 @@ MonoBehaviour:
   timeBetweenShot: 1
   projectileSpeed: 5
   damage: 1
+  star: {fileID: 6865630243234084841}
   specialRange: Infinity
   healParticle: {fileID: 7803489399656490530, guid: bfa739adf1fa05d4785b67a36a559e04, type: 3}
   healCircle: {fileID: 1408434571643084571, guid: 89c36beb493abda4bbfe28b50ec3bb3b, type: 3}
   healRadius: 5
   healAmount: 1
+  boostParticle: {fileID: 7803489399656490530, guid: e5d077d2015a1c34bbd4d85ffc416d5d, type: 3}
+  boostCircle: {fileID: 1408434571643084571, guid: 7eadf7171b1ce1a418d582e190ad0740, type: 3}
   boostDamage: 5
   boostRadius: 10
   boostDuration: 3
@@ -333,6 +336,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3704565279299197097}
     m_Modifications:
+    - target: {fileID: 5133753332315694605, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133753332315694605, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
+      propertyPath: m_Color.g
+      value: 0.43137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133753332315694605, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6349856094558453253, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
       propertyPath: m_Name
       value: HealthBar
@@ -438,3 +453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9742c422149e5534ba961bebd4542fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6865630243234084841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3866428479421432128, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
+  m_PrefabInstance: {fileID: 7705604412562683561}
+  m_PrefabAsset: {fileID: 0}

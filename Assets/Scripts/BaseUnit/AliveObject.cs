@@ -21,7 +21,7 @@ public class AliveObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ModifyHealth(maxHealth);
+        health = maxHealth;
         StartBehavior();
 
     }

@@ -6,13 +6,21 @@ public class Trap : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private float despawnTime;
+    [SerializeField] private bool despawnAlone;
     private bool isEnemy;
+
+    private void Start()
+    {
+        if(despawnAlone)
+        Destroy(gameObject, despawnTime);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy != isEnemy)
+        if (other.TryGetComponent(out AliveObject obj) && obj.isEnemy != isEnemy)
         {
             obj.ModifyHealth(-damage);
-            Destroy(gameObject, despawnTime);
+            if (!despawnAlone)
+                Destroy(gameObject, despawnTime);
         }
     }
     
