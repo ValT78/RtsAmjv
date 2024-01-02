@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  boostManager: {fileID: 5983684897444040842}
   healthBar: {fileID: 8088721681087110116}
   maxHealth: 7
   armor: 0
@@ -299,6 +300,7 @@ MonoBehaviour:
   timeBetweenShot: 1.5
   projectileSpeed: 5
   damage: 2
+  star: {fileID: 0}
   specialRange: 15
   specialStunnedDelay: 5
   specialStunnedRadius: 0
@@ -430,6 +432,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7317137306036013470, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}
   m_PrefabInstance: {fileID: 5540678215041891867}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5983684897444040842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2300812524713717393, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}
+  m_PrefabInstance: {fileID: 5540678215041891867}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8088721681087110116 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4369785730690688511, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}

@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  boostManager: {fileID: 3532311736726165171}
   healthBar: {fileID: 1319540373541264861}
   maxHealth: 12
   armor: 0
@@ -299,7 +300,10 @@ MonoBehaviour:
   timeBetweenShot: 1
   projectileSpeed: 2
   damage: 3
+  star: {fileID: 0}
   specialRange: Infinity
+  boostParticle: {fileID: 0}
+  boostCircle: {fileID: 0}
   boostRadius: 15
   boostDuration: 10
   boostArmor: 2
@@ -435,6 +439,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9742c422149e5534ba961bebd4542fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3532311736726165171 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2300812524713717393, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}
+  m_PrefabInstance: {fileID: 3380912502930225186}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &5431582624858255804 stripped

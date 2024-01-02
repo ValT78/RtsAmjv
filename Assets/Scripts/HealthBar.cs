@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private Camera m_Camera;
     private float targetHealth;
     [SerializeField] private Image healthBar;
     [SerializeField] private Image holder;
@@ -35,7 +34,6 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        m_Camera = Camera.main;
         initialYPosition = transform.position.y;
         co1 = Shake();
         co2 = Fade();
@@ -49,7 +47,6 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - m_Camera.transform.position);
         if(!lastInteraction)
         {
             healthBar.fillAmount = Mathf.MoveTowards(healthBar.fillAmount, targetHealth, reduceSpeed * Time.deltaTime);

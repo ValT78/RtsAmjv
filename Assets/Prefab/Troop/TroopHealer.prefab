@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  boostManager: {fileID: 8932809053337258459}
   healthBar: {fileID: 6218158935578809174}
   maxHealth: 5
   armor: 0
@@ -223,7 +224,7 @@ MonoBehaviour:
   boostCircle: {fileID: 1408434571643084571, guid: 7eadf7171b1ce1a418d582e190ad0740, type: 3}
   boostDamage: 5
   boostRadius: 10
-  boostDuration: 3
+  boostDuration: 10
 --- !u!195 &1788485675621777814
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -458,3 +459,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3866428479421432128, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
   m_PrefabInstance: {fileID: 7705604412562683561}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8932809053337258459 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1231867412709949298, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
+  m_PrefabInstance: {fileID: 7705604412562683561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

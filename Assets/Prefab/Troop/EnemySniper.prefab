@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  boostManager: {fileID: 5795293002915405777}
   healthBar: {fileID: 8297808084720637119}
   maxHealth: 1
   armor: 0
@@ -349,6 +350,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7317137306036013470, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}
   m_PrefabInstance: {fileID: 5729463304699572544}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5795293002915405777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2300812524713717393, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}
+  m_PrefabInstance: {fileID: 5729463304699572544}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8297808084720637119 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4369785730690688511, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}

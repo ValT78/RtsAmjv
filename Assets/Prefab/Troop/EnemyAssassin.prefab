@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  boostManager: {fileID: 7112926199011733602}
   healthBar: {fileID: 4754825408952597260}
   maxHealth: 3
   armor: 0
@@ -268,6 +269,7 @@ MonoBehaviour:
   timeBetweenShot: 1.5
   projectileSpeed: 0.2
   damage: 3
+  star: {fileID: 0}
   specialRange: 15
   throwSpeed: 3
   bait: {fileID: 8472596363555702958, guid: 6fbe7e2054eecad4aaaac4032d6d3753, type: 3}
@@ -439,5 +441,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9742c422149e5534ba961bebd4542fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7112926199011733602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2300812524713717393, guid: 64c7cde6748a6fa48a0542a96da1be31, type: 3}
+  m_PrefabInstance: {fileID: 9031987178057326323}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

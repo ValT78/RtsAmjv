@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  boostManager: {fileID: 4555600349134659175}
   healthBar: {fileID: 1334295273362818282}
   maxHealth: 12
   armor: 0
@@ -215,6 +216,8 @@ MonoBehaviour:
   damage: 3
   star: {fileID: 1984001338337124437}
   specialRange: Infinity
+  boostParticle: {fileID: 7803489399656490530, guid: 2bf04b91cb2e0e746bdca760f3082700, type: 3}
+  boostCircle: {fileID: 1408434571643084571, guid: f33985eee37276b40a9e1bfb64cafdee, type: 3}
   boostRadius: 15
   boostDuration: 10
   boostArmor: 2
@@ -443,6 +446,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3866428479421432128, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
   m_PrefabInstance: {fileID: 3323874791414669589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4555600349134659175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1231867412709949298, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}
+  m_PrefabInstance: {fileID: 3323874791414669589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5452582751962966155 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7317137306036013470, guid: 7fc8a233d306ee44ebf4867d0f09fc01, type: 3}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tank : AttackController
 {
+    [SerializeField] private GameObject boostParticle;
+    [SerializeField] private GameObject boostCircle;
     [SerializeField] private float boostRadius;
     [SerializeField] private float boostDuration;
     [SerializeField] private int boostArmor;
@@ -42,6 +44,8 @@ public class Tank : AttackController
     public override bool SpecialAttack(Vector3 target)
     {
         StartCoroutine(BoostTimer());
+        Instantiate(boostCircle, transform.position + new Vector3(0f, -0.5f, 0f), Quaternion.identity);
+        Instantiate(boostParticle, transform.position, Quaternion.Euler(-90, 0, 0));
         return true;
     }
 

@@ -32,6 +32,7 @@ public class AttackController : MonoBehaviour
     public void Start()
     {
         mainCamera = Camera.main;
+        if(!botBase.isEnemy) star.SetActive(true);
         StartBehavior();
     }
 
@@ -92,12 +93,20 @@ public class AttackController : MonoBehaviour
 
     public IEnumerator HealerBoost(int damageBoost, float boostDuration)
     {
-        if(damageBoostNumber==0) ModifyDamage(damageBoost);
+        if (damageBoostNumber == 0)
+        {
+            ModifyDamage(damageBoost);
+            botBase.boostManager.ActivateBoost(1);
+        }
         damageBoostNumber++;
         
         yield return new WaitForSeconds(boostDuration);
         damageBoostNumber--;
-        if(damageBoostNumber==0) ModifyDamage(-damageBoost);
+        if (damageBoostNumber == 0)
+        {
+            ModifyDamage(-damageBoost);
+            botBase.boostManager.ActivateBoost(1);
+        }
 
     }
 

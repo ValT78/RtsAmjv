@@ -7,6 +7,7 @@ public class AliveObject : MonoBehaviour
     public bool isEnemy;
 
     [Header("Vie")]
+    public BoostUIManager boostManager;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
     [SerializeField] private int armor;
@@ -22,6 +23,7 @@ public class AliveObject : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        if(dodgeCount != 0) boostManager.ActivateBoost(2);
         StartBehavior();
 
     }
@@ -49,6 +51,7 @@ public class AliveObject : MonoBehaviour
             {
                 dodgeCount--;
                 value = 0;
+                if(dodgeCount == 0) boostManager.ActivateBoost(2);
             }
             else
             {
@@ -76,13 +79,21 @@ public class AliveObject : MonoBehaviour
     public void SwitchBoostArmor(int value)
     {
         if(value > 0) {
-            if (armorBoostCount == 0) ModifyArmor(value);
+            if (armorBoostCount == 0)
+            {
+                ModifyArmor(value);
+                boostManager.ActivateBoost(0);
+            }
             armorBoostCount++;
         }
         else
         {
             armorBoostCount--;
-            if (armorBoostCount == 0) ModifyArmor(value);
+            if (armorBoostCount == 0)
+            {
+                ModifyArmor(value);
+                boostManager.ActivateBoost(0);
+            }
         }
 
     }
