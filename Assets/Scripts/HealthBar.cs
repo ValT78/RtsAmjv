@@ -74,6 +74,7 @@ public class HealthBar : MonoBehaviour
         holder.color = new Color(255, 255, 255, 1);
         healBar.color = new Color(255, 255, 255, 1);
         StopCoroutine(co1);
+        StopCoroutine(co2);
         co1 = Shake();
         StartCoroutine(co1);
     }
@@ -116,7 +117,7 @@ public class HealthBar : MonoBehaviour
     private IEnumerator Fade()
     {
         yield return new WaitForSeconds(timeBeforeFade);
-        while (fadeTimer > 0)
+        while (fadeTimer > 0 && !lastInteraction)
         {
             fadeTimer -= Time.deltaTime;
 
@@ -127,9 +128,9 @@ public class HealthBar : MonoBehaviour
                 holder.color = new Color(255, 255, 255, alpha);
                 healBar.color = new Color(255, 255, 255, alpha);
             }
+            else sigle.anchoredPosition = new(0f, 0);
             yield return new WaitForFixedUpdate();
         }
-        sigle.anchoredPosition = new(0f, 0);
 
     }
 }

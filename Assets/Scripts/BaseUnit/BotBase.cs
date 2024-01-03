@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class BotBase : AliveObject
 {
-    [HideInInspector] public AttackController attackController;
+    public AttackController attackController;
     protected Camera mainCamera;
 
     [Header("Deplacements")]
@@ -42,7 +42,6 @@ public class BotBase : AliveObject
         initialShotTimer = initialShotTime;
         agent = GetComponent<NavMeshAgent>();
         mainTarget = transform.position;
-        attackController = GetComponent<AttackController>();
     }
 
 

@@ -8,16 +8,18 @@ public class Swarmies : MonoBehaviour
 {
     private List<BotBase> swarmies = new();
     [SerializeField] private GameObject swarmPrefab;
+    [SerializeField] private int armySize;
+    [SerializeField] private float armyRadius;
 
     private void Start()
     {
         swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(2,0,0)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(-2, 0, -1.5f)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(-2, 0, 1.5f)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(0.5f, 0, 2)));
-        swarmies.Add(GameManager.SpawnBot(swarmPrefab, transform.position + new Vector3(0.5f, 0, -2)));
-        foreach (var swarm in swarmies)
+        for (int spawnAngle = 1; spawnAngle < armySize; spawnAngle++)
+        {
+            swarmies.Add(GameManager.SpawnBot(swarmPrefab, new Vector3(transform.position.x + armyRadius * Mathf.Cos(2*Mathf.PI*spawnAngle/(armySize-1)),transform.position.y, transform.position.z + armyRadius * Mathf.Sin(2 * Mathf.PI * spawnAngle / (armySize-1)))));
+        }
+        
+        foreach (BotBase swarm in swarmies)
         {
             swarm.SetIsSwarm(this);
         }
@@ -60,13 +62,15 @@ public class Swarmies : MonoBehaviour
     public bool RefillArmy()
     {
         bool flag = false;
-        List<BotBase> newList = new List<BotBase>();
+        List<BotBase> newList = new();
+        int spawnAngle = 0;
         foreach(BotBase swarm in swarmies)
         {
             if (swarm == null)
             {
-                newList.Add(GameManager.SpawnBot(swarmPrefab, transform.position));
+                newList.Add(GameManager.SpawnBot(swarmPrefab, new Vector3(transform.position.x + armyRadius * Mathf.Cos(2 * Mathf.PI * spawnAngle / (armySize - 1)), transform.position.y, transform.position.z + armyRadius * Mathf.Sin(2 * Mathf.PI * spawnAngle / (armySize - 1)))));
                 flag = true;
+                spawnAngle++;
             }
             else newList.Add(swarm);
         }
@@ -74,8 +78,10 @@ public class Swarmies : MonoBehaviour
         swarmies = newList;
         foreach (BotBase swarm in swarmies)
         {
-            swarm.GetComponent<Swarmy>().SetSpecialUsed(true);
+            print(swarm.transform.position);
+            swarm.attackController.SetSpecialUsed(true);
             swarm.SetIsSwarm(this);
+            
 
         }
         return flag;

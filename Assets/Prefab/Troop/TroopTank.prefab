@@ -189,7 +189,7 @@ MonoBehaviour:
   armor: 0
   dodgeCount: 0
   armorBoostCount: 0
-  attackController: {fileID: 0}
+  attackController: {fileID: 2917927243862473565}
   timeComputeDestination: 0.5
   awareRange: 15
   isAware: 0

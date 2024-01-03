@@ -437,7 +437,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcf96c17c76c1824eabcd34b582b7b8a, type: 3}
---- !u!1001 &1861382204
+--- !u!1001 &2057639162
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -445,18 +445,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3500068791071031104, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
-      propertyPath: spawnRadius
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3940702090873673201, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 757339115}
-    - target: {fileID: 3940702090873673201, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4305777909028273324, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.7765652
@@ -496,10 +488,6 @@ PrefabInstance:
     - target: {fileID: 4305777909028273324, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4428144054230799431, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7422038100354390669, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
       propertyPath: m_Name
@@ -577,7 +565,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 757339116}
   - {fileID: 262236884}
-  - {fileID: 1861382204}
   - {fileID: 1746443563}
   - {fileID: 2132236230}
   - {fileID: 1397697840}
+  - {fileID: 2057639162}

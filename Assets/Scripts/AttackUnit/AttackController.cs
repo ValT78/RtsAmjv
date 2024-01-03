@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackController : MonoBehaviour
@@ -29,10 +30,14 @@ public class AttackController : MonoBehaviour
 
     public virtual bool SpecialAttack(Vector3 targetPosition) { return true; }
 
+    public void Awake()
+    {
+        if (!botBase.isEnemy) star.SetActive(true);
+    }
+
     public void Start()
     {
         mainCamera = Camera.main;
-        if(!botBase.isEnemy) star.SetActive(true);
         StartBehavior();
     }
 
@@ -119,7 +124,9 @@ public class AttackController : MonoBehaviour
    public void SetSpecialUsed(bool specialUsed)
     {
         this.specialUsed = specialUsed;
+        print(specialUsed);
+        star.SetActive(!specialUsed);
+
     }
 
-    
 }

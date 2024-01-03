@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swarmPrefab: {fileID: 8660318895565672486, guid: 5278f625279ad4040bd4049870e75ba1, type: 3}
+  armySize: 6
+  armyRadius: 3
