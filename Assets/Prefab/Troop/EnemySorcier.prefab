@@ -302,6 +302,8 @@ MonoBehaviour:
   damage: 2
   star: {fileID: 0}
   specialRange: 15
+  freezeParticle: {fileID: 7803489399656490530, guid: cc50de4fe594a6d4b88d60bbc15af2f0, type: 3}
+  freezeCircle: {fileID: 1408434571643084571, guid: cc695843ace1a6847aaa3a9b0b2e813e, type: 3}
   specialStunnedDelay: 5
   specialStunnedRadius: 0
 --- !u!195 &3127240302293923785

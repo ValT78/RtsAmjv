@@ -15,7 +15,7 @@ public class BoostUIManager : MonoBehaviour
     private void Awake()
     {
         m_Camera = Camera.main;
-        activeSprites = new bool[] { false, false, false} ;
+        activeSprites = new bool[sprites.Count] ;
         foreach (Image image in sprites)
         {
             image.enabled = false;

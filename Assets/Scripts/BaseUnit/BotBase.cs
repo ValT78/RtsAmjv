@@ -199,9 +199,11 @@ public class BotBase : AliveObject
     public IEnumerator StunnedCoroutine(float delay)
     {
         isStunned = true;
+        boostManager.ActivateBoost(3);
         agent.ResetPath();        
         yield return new WaitForSeconds(delay);
         isStunned = false;
+        boostManager.ActivateBoost(3);
     }
 
     public void SetIsSwarm(Swarmies swarmies)
