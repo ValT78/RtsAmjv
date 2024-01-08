@@ -9,16 +9,22 @@ public class Cloche : MonoBehaviour
     [SerializeField] private float launchAngle = 1.57f;
     [SerializeField] private float spawnHeight = 1;
     [SerializeField] private float endHeight = -0.5f;
+    private float throwDistance;
 
 
     private Vector3 targetPosition;
     private float throwDuration;
     private float v0;
+    private bool isEnemy;
 
-    public void Initialize(Vector3 targetPosition, float throwDuration)
+    public void Initialize(Vector3 targetPosition, float ProjectileSpeed, bool isEnemy)
     {
         this.targetPosition = targetPosition;
-        this.throwDuration = throwDuration;
+        throwDistance = Vector3.Distance(targetPosition, transform.position);
+        this.throwDuration = throwDistance/ProjectileSpeed;
+        this.isEnemy = isEnemy;
+
+
         transform.position += new Vector3(0f, spawnHeight, 0f);
         v0 = (gravity * throwDuration / 2 - (spawnHeight - endHeight) / throwDuration) / Mathf.Sin(launchAngle);
         StartCoroutine(LifeCycle());
@@ -50,13 +56,21 @@ public class Cloche : MonoBehaviour
         // Interpolez la position en fonction du temps normalisé
         Vector3 interpolatedPosition = Vector3.Lerp(launchPosition, targetPosition, t);
 
-        interpolatedPosition.y = Mathf.Sin(launchAngle) * v0 * t - Mathf.Pow(t, 2) * gravity / 2 + spawnHeight;
+        interpolatedPosition.y = Mathf.Sin(launchAngle) * v0 * t*throwDuration - Mathf.Pow(t*throwDuration, 2) * gravity / 2 + spawnHeight;
 
         return interpolatedPosition;
     }
 
     void InstantiateHitEffect(Vector3 position)
     {
-        Instantiate(product, transform.position+new Vector3(0f,0.5f,0f), Quaternion.identity);
+        GameObject productPrefab = Instantiate(product, transform.position+new Vector3(0f,0f,0f), Quaternion.identity);
+        if(productPrefab.TryGetComponent(out Trap trap))
+        {
+            trap.Initialize(isEnemy);
+        }
+        else if (productPrefab.TryGetComponent(out Bait bait))
+        {
+            bait.Initialize(isEnemy);
+        }
     }
 }

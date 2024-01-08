@@ -15,9 +15,13 @@ public class FlagController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.transform.TryGetComponent<TroopBot>(out TroopBot player) && !hasFlag) return;
+        if (!other.transform.TryGetComponent(out TroopBot player) && !hasFlag) return;
         player.GiveCrown();
         crown.SetActive(false);
         hasFlag = false;
+        foreach(EnemyBot enemy in GameManager.enemyUnits)
+        {
+            enemy.SetKingTarget(player);
+        }
     }
 }

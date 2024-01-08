@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BotBase : AliveObject
 {
-    [HideInInspector] public AttackController attackController;
+    public AttackController attackController;
     protected Camera mainCamera;
 
     [Header("Deplacements")]
-    [SerializeField] private float moveSpeed;
     [SerializeField] private float timeComputeDestination;
     private float timerComputeDestination;
     protected NavMeshAgent agent;
-    [HideInInspector] public AliveObject target;
+    private AliveObject target;
     [SerializeField] protected float awareRange;
     [SerializeField] protected bool isAware;
+    [SerializeField] protected float voiceRange;
+    protected Swarmies isSwarm;
     protected Vector3 mainTarget;
 
     [Header("Ciblage")]
-    [SerializeField] private float attackRange;
+    public float attackRange;
     [SerializeField] private float initialShotTime;
     private float initialShotTimer;
     protected AliveObject toShoot;
@@ -28,6 +30,9 @@ public class BotBase : AliveObject
     [Header("Miscellaneous")]
     private Transform crown;
     private bool hasCrown;
+    private BotBase kingTarget;
+    private bool isStunned =false;
+
 
     public override void StartBehavior()
     {
@@ -37,20 +42,22 @@ public class BotBase : AliveObject
         initialShotTimer = initialShotTime;
         agent = GetComponent<NavMeshAgent>();
         mainTarget = transform.position;
-        attackController = GetComponent<AttackController>();
     }
 
 
     public override void UpdateBehavior()
     {
         base.UpdateBehavior();
+        if (isStunned) return;
         if (Input.GetKeyDown(KeyCode.Space) && !isEnemy)
         {
             attackController.Special();
         }
 
         if (toShoot != null)
-        {   transform.LookAt(toShoot.transform.position);
+        {
+/*            print("toShoot de " + this.ToString() + " : " + toShoot.ToString());
+*/            transform.LookAt(toShoot.transform.position);
             initialShotTimer -= Time.deltaTime;
             // Passer � l'�tat d'attaque si la cible est � port�e.
             if (initialShotTimer < 0 && !isAttacking)
@@ -61,23 +68,39 @@ public class BotBase : AliveObject
         }
         else
         {
+
             if (isAware)
             {
-                // Rajouter ici : if (isEnemy && y'a un roi sur la map) {target = le roi} else { ce qui est en dessous}
-                BotBase newTarget = ClosestBot(GameManager.GetCrewBots(!isEnemy), awareRange);
+                AliveObject newTarget = GameManager.ClosestAlive(!isEnemy, transform.position, awareRange);
                 if (newTarget != null)
                 {
-                    target = newTarget;
+                    SetTarget(newTarget);
+
+                    if(isEnemy)
+                    {
+                        foreach (EnemyBot enemy in GameManager.enemyUnits)
+                        {
+                            if(Vector3.Distance(transform.position, enemy.transform.position) < voiceRange && enemy.GetTarget() == null)
+                            {
+                               enemy.SetTarget(target);
+                               
+                            }
+                            
+                        }
+
+                    }
                 }
                 else if (target == null)
                 {
-                    PathFind(mainTarget);
+                    if (kingTarget != null) PathFind(kingTarget.transform.position);
+                    else PathFind(mainTarget);
                 }
 
             }
 
             if (target != null)
             {
+
                 PathFind(target.transform.position);
             }
             else
@@ -85,30 +108,13 @@ public class BotBase : AliveObject
                 // Nothing
             }
         }
+/*        print("target de " + this.ToString() + " : " + target.ToString());
+*/
         FindToShoot();
 
     }
 
-    protected BotBase ClosestBot(List<BotBase> troupList, float maxRange)
-    {
-        if (troupList.Count == 0) return null;
-        float cloasestRange = maxRange;
-        BotBase closestBot = null;
-        // Logique pour d�tecter les troupes dans la visionRange.
-        foreach (var troop in troupList)
-        {
-            float distanceToTroop = Vector3.Distance(transform.position, troop.transform.position);
-            if (distanceToTroop <= cloasestRange)
-            {
-                // La troupe d�tect�e devient la nouvelle cible.
-                closestBot = troop;
-                cloasestRange = distanceToTroop;
-            }
-        }
-
-        return closestBot;
-    }
-
+    
     private void FindToShoot()
     {
         // Les unités contrôlées par le joueur vise forcément leur target si elle est dans leur range d'attaque
@@ -125,7 +131,7 @@ public class BotBase : AliveObject
         else
         {
             // ON cherche 
-            AliveObject newToShoot = ClosestBot(GameManager.GetCrewBots(!isEnemy), attackRange);
+            AliveObject newToShoot = GameManager.ClosestAlive(!isEnemy,transform.position, attackRange);
             if (newToShoot == null)
             {
                 toShoot = null;
@@ -161,6 +167,21 @@ public class BotBase : AliveObject
         return target;
     }
 
+    public void SetTarget(AliveObject target, bool otherSwarm = false)
+    {
+
+        if (isSwarm && !otherSwarm)
+        {
+            isSwarm.SetEveryTarget(target);
+        }
+        else
+        {
+            this.target = target;
+            isAware = false;
+        }
+
+    }
+
     public AliveObject GetToShoot()
     {
         return toShoot;
@@ -170,4 +191,28 @@ public class BotBase : AliveObject
         crown.gameObject.SetActive(true);
         hasCrown = true;
     }
+    public void SetKingTarget(BotBase target)
+    {
+        kingTarget = target;
+    }
+
+    public IEnumerator StunnedCoroutine(float delay)
+    {
+        isStunned = true;
+        boostManager.ActivateBoost(3);
+        agent.ResetPath();        
+        yield return new WaitForSeconds(delay);
+        isStunned = false;
+        boostManager.ActivateBoost(3);
+    }
+
+    public void SetIsSwarm(Swarmies swarmies)
+    {
+        isSwarm = swarmies;
+    }
+    public Swarmies GetIsSwarm()
+    {
+        return isSwarm;
+    }
+
 }

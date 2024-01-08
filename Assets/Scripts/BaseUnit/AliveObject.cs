@@ -7,20 +7,23 @@ public class AliveObject : MonoBehaviour
     public bool isEnemy;
 
     [Header("Vie")]
+    public BoostUIManager boostManager;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
     [SerializeField] private int armor;
+    [SerializeField] private int dodgeCount;
     private int health;
 
     [Header("Tank")]
-    [HideInInspector] public bool isArmorBoosted;
+    [HideInInspector] public int armorBoostCount;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        ModifyHealth(maxHealth);
+        health = maxHealth;
+        if(dodgeCount != 0) boostManager.ActivateBoost(2);
         StartBehavior();
 
     }
@@ -41,10 +44,19 @@ public class AliveObject : MonoBehaviour
 
     public void ModifyHealth(int value)
     {
+
         if (value < 0)
         {
-            value = Mathf.Min(armor + value, 0);
-
+            if (dodgeCount > 0)
+            {
+                dodgeCount--;
+                value = 0;
+                if(dodgeCount == 0) boostManager.ActivateBoost(2);
+            }
+            else
+            {
+                value = Mathf.Min(armor + value, 0);
+            }
         }
         health = Mathf.Min(health + value, maxHealth);
         
@@ -62,6 +74,28 @@ public class AliveObject : MonoBehaviour
         {
             GameManager.KillBot(gameObject);
         }
+    }
+
+    public void SwitchBoostArmor(int value)
+    {
+        if(value > 0) {
+            if (armorBoostCount == 0)
+            {
+                ModifyArmor(value);
+                boostManager.ActivateBoost(0);
+            }
+            armorBoostCount++;
+        }
+        else
+        {
+            armorBoostCount--;
+            if (armorBoostCount == 0)
+            {
+                ModifyArmor(value);
+                boostManager.ActivateBoost(0);
+            }
+        }
+
     }
 
     public void ModifyArmor(int value)

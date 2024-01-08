@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class EnemyBot : BotBase
 {
-   
-    // Implémentation spécifique pour les ennemis.
+
     public override void UpdateBehavior()
     {
-        target = ClosestBot(GameManager.troopUnits.Select(troopBot => (BotBase)troopBot).ToList(), awareRange);
+        SetTarget(GameManager.ClosestBot(!isEnemy,transform.position, awareRange));
         base.UpdateBehavior();
         // Logique spécifique aux ennemis, si nécessaire.
     }
@@ -20,6 +19,6 @@ public class EnemyBot : BotBase
         isEnemy = true;
         isAware = true;
     }
-
+    
 
 }

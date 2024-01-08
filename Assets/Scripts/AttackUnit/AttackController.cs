@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackController : MonoBehaviour
@@ -12,11 +13,11 @@ public class AttackController : MonoBehaviour
     [SerializeField] private Transform attackOrigin;
     [SerializeField] protected float timeBetweenShot;
     [SerializeField] private float projectileSpeed;
-    [SerializeField] private float projectileLifeTime;
     [SerializeField] protected int damage;
 
     [Header("CapaSpé")]
-    [SerializeField] private float specialRange;
+    [SerializeField] private GameObject star;
+    [SerializeField] protected float specialRange;
     private bool specialUsed;
 
     [Header("Healer")]
@@ -27,7 +28,12 @@ public class AttackController : MonoBehaviour
 
     public virtual void BasicAttack() { }
 
-    public virtual void SpecialAttack(Vector3 targetPosition) { }
+    public virtual bool SpecialAttack(Vector3 targetPosition) { return true; }
+
+    public void Awake()
+    {
+        if (!botBase.isEnemy) star.SetActive(true);
+    }
 
     public void Start()
     {
@@ -53,12 +59,14 @@ public class AttackController : MonoBehaviour
     public IEnumerator Basic(AliveObject toShoot)
     {
         // Logique pour attaquer la cible en lançant un projectile.
-        GameObject projectile = Instantiate(projectilePrefab, attackOrigin.position, attackOrigin.rotation);
-        projectile.GetComponent<Rigidbody>().AddForce((toShoot.transform.position - attackOrigin.position).normalized * projectileSpeed, ForceMode.Impulse);
+        GameObject projectile = Instantiate(projectilePrefab, attackOrigin.position, transform.rotation);
         if (projectile.TryGetComponent<Projectile>(out var projectileScript))
         {
-            projectileScript.Initialize(botBase.isEnemy, projectileLifeTime, damage);
-
+            projectileScript.Initialize(botBase.isEnemy, botBase.attackRange, projectileSpeed, damage);
+        }
+        else if (projectile.TryGetComponent<Cloche>(out var clocheScript))
+        {
+            clocheScript.Initialize(toShoot.transform.position, projectileSpeed, botBase.isEnemy);
         }
 
         BasicAttack();
@@ -75,12 +83,14 @@ public class AttackController : MonoBehaviour
         }
         else
         {
-            //specialUsed = true;
             // Vérifiez si le rayon touche un objet
             if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit) && Vector3.Distance(transform.position, hit.point) < specialRange)
             {
-                SpecialAttack(hit.point);
-
+                if (SpecialAttack(hit.point))
+                {
+                    specialUsed = true;
+                    star.SetActive(false);
+                }
             }
             
         }
@@ -88,12 +98,20 @@ public class AttackController : MonoBehaviour
 
     public IEnumerator HealerBoost(int damageBoost, float boostDuration)
     {
-        if(damageBoostNumber==0) ModifyDamage(damageBoost);
+        if (damageBoostNumber == 0)
+        {
+            ModifyDamage(damageBoost);
+            botBase.boostManager.ActivateBoost(1);
+        }
         damageBoostNumber++;
         
         yield return new WaitForSeconds(boostDuration);
         damageBoostNumber--;
-        if(damageBoostNumber==0) ModifyDamage(-damageBoost);
+        if (damageBoostNumber == 0)
+        {
+            ModifyDamage(-damageBoost);
+            botBase.boostManager.ActivateBoost(1);
+        }
 
     }
 
@@ -103,7 +121,12 @@ public class AttackController : MonoBehaviour
         return damage;
     }
 
-   
+   public void SetSpecialUsed(bool specialUsed)
+    {
+        this.specialUsed = specialUsed;
+        print(specialUsed);
+        star.SetActive(!specialUsed);
 
-    
+    }
+
 }

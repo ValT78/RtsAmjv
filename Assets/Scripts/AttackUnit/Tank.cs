@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tank : AttackController
 {
+    [SerializeField] private GameObject boostParticle;
+    [SerializeField] private GameObject boostCircle;
     [SerializeField] private float boostRadius;
     [SerializeField] private float boostDuration;
     [SerializeField] private int boostArmor;
@@ -23,27 +25,28 @@ public class Tank : AttackController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && !obj.isArmorBoosted)
+        if (isBoostActive && other.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
         {
-            obj.ModifyArmor(boostArmor);
-            obj.isArmorBoosted = true;
+            obj.SwitchBoostArmor(boostArmor);
 
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (isBoostActive && other.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && obj.isArmorBoosted)
+        if (isBoostActive && other.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
         {
-            obj.ModifyArmor(-boostArmor);
-            obj.isArmorBoosted = false;
+            obj.SwitchBoostArmor(-boostArmor);
 
         }
     }
 
-    public override void SpecialAttack(Vector3 target)
+    public override bool SpecialAttack(Vector3 target)
     {
         StartCoroutine(BoostTimer());
+        Instantiate(boostCircle, transform.position + new Vector3(0f, -0.5f, 0f), Quaternion.identity);
+        Instantiate(boostParticle, transform.position, Quaternion.Euler(-90, 0, 0));
+        return true;
     }
 
     private IEnumerator BoostTimer()
@@ -51,10 +54,9 @@ public class Tank : AttackController
         isBoostActive = true;
         foreach (Collider col in Physics.OverlapSphere(transform.position, boostRadius))
         {
-            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && !obj.isArmorBoosted)
+            if (col.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
             {
-                obj.ModifyArmor(boostArmor);
-                obj.isArmorBoosted = true;
+                obj.SwitchBoostArmor(boostArmor);
 
             }
         }
@@ -64,11 +66,12 @@ public class Tank : AttackController
 
         foreach (Collider col in Physics.OverlapSphere(transform.position, boostRadius))
         {
-            if (col.TryGetComponent<AliveObject>(out AliveObject obj) && obj.isEnemy == botBase.isEnemy && obj.isArmorBoosted)
+            if (col.TryGetComponent(out AliveObject obj) && obj.isEnemy == botBase.isEnemy)
             {
-                obj.ModifyArmor(-boostArmor);
-                obj.isArmorBoosted = false;
+                obj.SwitchBoostArmor(-boostArmor);
             }
         }
     }
+
+    
 }
