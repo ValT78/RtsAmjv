@@ -54,7 +54,6 @@ public class UIController : MonoBehaviour
         DeadAllieCount.text = GameManager.deadAllie.ToString();
         DeadEnemyCount.text = GameManager.deadEnemy.ToString();
         TimeCount.text = FormatTime(DateTime.Now - start);
-
     }
     private String FormatTime(TimeSpan time)
     {
@@ -76,7 +75,7 @@ public class UIController : MonoBehaviour
 
     public void QuitAction()
     {
-
+        Application.Quit();
     }
 
     [ContextMenu("ActiveSettingsUI")]
@@ -103,11 +102,6 @@ public class UIController : MonoBehaviour
         ResolutionDrop.AddOptions(options);
         ResolutionDrop.value = currentRes;
         ResolutionDrop.RefreshShownValue();
-    }
-
-    private void BackAction()
-    {
-
     }
 
     [ContextMenu("SetSettings")]
