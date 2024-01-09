@@ -15,6 +15,7 @@ public class UnitController : MonoBehaviour
     [SerializeField] private float maxSelectDist;
     private bool capacitiActive;
     private EnemyBot target;
+    private Vector3 barycenter;
 
     // Update is called once per frame
     void Update()
@@ -50,7 +51,7 @@ public class UnitController : MonoBehaviour
                 if (capacitiActive)
                 {
                     foreach (TroopBot troop in selectedTroops) troop.attackController.Special();
-                } 
+                }
                 else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                 {
                     foreach (TroopBot troop in selectedTroops) troop.AwarePosition(hita.point);
@@ -59,8 +60,12 @@ public class UnitController : MonoBehaviour
                 {
                     foreach (TroopBot troop in selectedTroops) troop.GoToBot(target);
                 }
-                else foreach (TroopBot troop in selectedTroops) troop.GoToPosition(hita.point);
-
+                else foreach (TroopBot troop in selectedTroops)
+                {
+                    barycenter = calculateBarycenter();
+                    Vector3 offset = troop.transform.position - barycenter;
+                    troop.GoToPosition(hita.point + offset);
+                }
 
             }
 
@@ -153,7 +158,10 @@ public class UnitController : MonoBehaviour
         foreach (TroopBot troop in GameManager.troopUnits)
         {
             Vector2 pos = new Vector2(troop.transform.position.x, troop.transform.position.z);
-            if (zone.Contains(pos)) selectedTroops.Add(troop);
+            if (zone.Contains(pos))
+            {
+                selectedTroops.Add(troop);
+            }
         }
         return selectedTroops.Count != 0;
     }
@@ -174,5 +182,15 @@ public class UnitController : MonoBehaviour
             }
         }
         return target != null;
+    }
+
+    private Vector3 calculateBarycenter()
+    {
+        barycenter = Vector3.zero;
+        foreach (TroopBot troop in selectedTroops)
+        {
+            barycenter += troop.transform.position;
+        }
+        return barycenter / selectedTroops.Count();
     }
 }
