@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1795008490207137730
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832443416773340395, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5281f98bc2775f54db968a7b81d7efe5, type: 2}
+    - target: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_Name
+      value: TroopBase Variant 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5819863423678909310}
+  m_SourcePrefab: {fileID: 100100000, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+--- !u!1 &6289505517203625705 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5819863423678909310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6289505517203625705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d251e72448c3b4d9d9cbeaed10c966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botBase: {fileID: 8108620969600205151, guid: 50b7828cc236a054cac7e6730f9ac045, type: 3}
+  projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
+  attackOrigin: {fileID: 3500237893619273016, guid: 50b7828cc236a054cac7e6730f9ac045, type: 3}
+  timeBetweenShot: 1
+  projectileSpeed: 5
+  damage: 1
+  star: {fileID: 6865630243234084841, guid: 50b7828cc236a054cac7e6730f9ac045, type: 3}
+  specialRange: Infinity
+  healParticle: {fileID: 7803489399656490530, guid: bfa739adf1fa05d4785b67a36a559e04, type: 3}
+  healCircle: {fileID: 1408434571643084571, guid: 89c36beb493abda4bbfe28b50ec3bb3b, type: 3}
+  healRadius: 5
+  healAmount: 1
+  boostParticle: {fileID: 7803489399656490530, guid: e5d077d2015a1c34bbd4d85ffc416d5d, type: 3}
+  boostCircle: {fileID: 1408434571643084571, guid: 7eadf7171b1ce1a418d582e190ad0740, type: 3}
+  boostDamage: 5
+  boostRadius: 10
+  boostDuration: 10

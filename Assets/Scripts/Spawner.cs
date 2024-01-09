@@ -34,7 +34,7 @@ public class Spawner : AliveObject
         ticksCount -= delay;
         PurgeList();
         if (population.Count >= maxPopulation) return; // try to spawn a unit if population is not cap
-        population.Add(GameManager.SpawnBot(botPrefab,transform.position));
+        population.Add(GameManager.SpawnBot(botPrefab,transform.position)); 
     }
 
     private void PurgeList()
