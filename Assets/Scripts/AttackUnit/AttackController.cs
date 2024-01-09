@@ -84,7 +84,8 @@ public class AttackController : MonoBehaviour
         else
         {
             // Vérifiez si le rayon touche un objet
-            if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit) && Vector3.Distance(transform.position, hit.point) < specialRange)
+            Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit);
+            if (!hit.IsUnityNull() && Vector3.Distance(transform.position, hit.point) < specialRange)
             {
                 if (SpecialAttack(hit.point))
                 {

@@ -21,8 +21,8 @@ public class Sorcier : AttackController
 
     public override bool SpecialAttack(Vector3 targetPosition)
     {
-        
-        if (GameManager.ClosestBot(!botBase.isEnemy, targetPosition, specialStunnedRadius).TryGetComponent(out BotBase target))
+        BotBase bot = GameManager.ClosestBot(!botBase.isEnemy, targetPosition, specialStunnedRadius);
+        if (bot!= null && bot.TryGetComponent(out BotBase target))
         {
             StartCoroutine(target.StunnedCoroutine(specialStunnedDelay));
             Instantiate(freezeCircle, target.transform.position + new Vector3(0f, -0.5f, 0f), Quaternion.identity);
