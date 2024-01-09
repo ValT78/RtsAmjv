@@ -21,7 +21,7 @@ public class Spawner : AliveObject
     void Update()
     {
         
-        Debug.Log(pS.shape.arcSpeed.constant);
+        // Debug.Log(pS.shape.arcSpeed.constant);
         ParticleSystem.ShapeModule shape = pS.shape;
         shape.arcSpeed = Mathf.Lerp(0f, 5f, (ticksCount + 0f) / delay);
 
