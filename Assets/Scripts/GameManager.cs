@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         if (aliveObject.isEnemy)
         {
             enemyObjects.Remove(aliveObject);
+
             if (botObject.TryGetComponent(out EnemyBot enemyBot))
             {
                 enemyUnits.Remove(enemyBot);
@@ -84,13 +85,12 @@ public class GameManager : MonoBehaviour
         else
         {
             troopObjects.Remove(aliveObject);
-            if (botObject.TryGetComponent(out TroopBot troop))
+            if (botObject.TryGetComponent(out TroopBot troopBot))
             {
                 deadAllie++;
-                troopUnits.Remove(troop);
+                troopUnits.Remove(troopBot);
             }
         }
-        
         Destroy(botObject);
     }
 
@@ -128,14 +128,18 @@ public class GameManager : MonoBehaviour
         // Logique pour d�tecter les troupes dans la visionRange.
         foreach (AliveObject troop in aliveList)
         {
-            float distanceToTroop = Vector3.Distance(position, troop.transform.position);
-
-            if (distanceToTroop <= cloasestRange)
+            if (troop != null)
             {
-                // La troupe détectee devient la nouvelle cible.
-                closestAlive = troop;
-                cloasestRange = distanceToTroop;
+                float distanceToTroop = Vector3.Distance(position, troop.transform.position);
+
+                if (distanceToTroop <= cloasestRange)
+                {
+                    // La troupe détectee devient la nouvelle cible.
+                    closestAlive = troop;
+                    cloasestRange = distanceToTroop;
+                }
             }
+            else aliveList.Remove(troop);
         }
 
         return closestAlive;

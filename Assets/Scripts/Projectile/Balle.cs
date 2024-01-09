@@ -32,12 +32,10 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out AliveObject alive))
+        if(other.TryGetComponent(out AliveObject alive) && this.isEnemy != alive.isEnemy)
         {
-            if(this.isEnemy != alive.isEnemy) {
-                alive.ModifyHealth(-damage);
-                Destroy(gameObject, aliveTime);
-            }
+            alive.ModifyHealth(-damage);
+            Destroy(gameObject, aliveTime);
         }
         
         

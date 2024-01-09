@@ -78,13 +78,32 @@ public class Swarmies : MonoBehaviour
         swarmies = newList;
         foreach (BotBase swarm in swarmies)
         {
-            print(swarm.transform.position);
             swarm.attackController.SetSpecialUsed(true);
             swarm.SetIsSwarm(this);
             
 
         }
         return flag;
+    }
+
+    public IEnumerator AddToSpawner(List<BotBase> population)
+    {
+        while(swarmies.Count != armySize)
+        {
+            yield return null;
+        }
+        AddToSpawner2(population);
+    }
+
+    public void AddToSpawner2(List<BotBase> population)
+    {
+        foreach (BotBase swarm in swarmies)
+        {
+            if (swarm != null)
+            {
+                population.Add(swarm);
+            }
+        }
     }
 
 }

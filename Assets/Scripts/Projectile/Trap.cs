@@ -14,7 +14,7 @@ public class Trap : MonoBehaviour
         if(despawnAlone)
         Destroy(gameObject, despawnTime);
     }
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out AliveObject obj) && obj.isEnemy != isEnemy)
         {
