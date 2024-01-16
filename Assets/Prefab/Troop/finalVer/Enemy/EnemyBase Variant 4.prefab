@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBase Variant 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+      propertyPath: attackController
+      value: 
+      objectReference: {fileID: -4514144474752268263}
     - target: {fileID: 8713988393631401323, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -64,6 +68,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -4514144474752268263}
   m_SourcePrefab: {fileID: 100100000, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+--- !u!114 &1701222318050406532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+  m_PrefabInstance: {fileID: 4616598203724988424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994737915125477539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e66a347e554d24198320fe234fc725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8994737915125477539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4378283756054032555, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
@@ -81,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd0ce3a8f210d94688e4c15c7611ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botBase: {fileID: 8813437412977739975, guid: 5278f625279ad4040bd4049870e75ba1, type: 3}
+  botBase: {fileID: 1701222318050406532}
   projectilePrefab: {fileID: 8383230088678087748, guid: fdf0ccc3803a8124fb795063dfa56bec, type: 3}
   attackOrigin: {fileID: 8498022559565107913, guid: 5278f625279ad4040bd4049870e75ba1, type: 3}
   timeBetweenShot: 1

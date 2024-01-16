@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: maxHealth
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: attackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: initialShotTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: attackController
+      value: 
+      objectReference: {fileID: 5398437863520276934}
     - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -64,6 +80,27 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5398437863520276934}
   m_SourcePrefab: {fileID: 100100000, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+--- !u!4 &2069763927041264010 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 310856012538906184, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2279643798933026480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6289505517203625705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333a89b319c06d742b8c3038df76936e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2723332700400388369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4405116506816988883, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6289505517203625705 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
@@ -81,13 +118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22eedb4bfd3a8e042a4de9d332b5add5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botBase: {fileID: 6432930986465823170, guid: 1d06259ddd1c9ee4aa13dc824a43f8ee, type: 3}
+  botBase: {fileID: 2279643798933026480}
   projectilePrefab: {fileID: 7206827929623731085, guid: af304000f3caf2841a7c4e87326d7f94, type: 3}
-  attackOrigin: {fileID: 7773598308485628686, guid: 1d06259ddd1c9ee4aa13dc824a43f8ee, type: 3}
+  attackOrigin: {fileID: 2069763927041264010}
   timeBetweenShot: 1.5
   projectileSpeed: 5
   damage: 2
-  star: {fileID: 1740633505247951239, guid: 1d06259ddd1c9ee4aa13dc824a43f8ee, type: 3}
+  star: {fileID: 2723332700400388369}
   specialRange: 15
   freezeParticle: {fileID: 7803489399656490530, guid: cc50de4fe594a6d4b88d60bbc15af2f0, type: 3}
   freezeCircle: {fileID: 1408434571643084571, guid: cc695843ace1a6847aaa3a9b0b2e813e, type: 3}

@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: dodgeCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: boostManager
+      value: 
+      objectReference: {fileID: 106697143573083939}
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: attackController
+      value: 
+      objectReference: {fileID: 2731905514984345803}
     - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -60,6 +72,38 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2731905514984345803}
   m_SourcePrefab: {fileID: 100100000, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+--- !u!114 &106697143573083939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1842595441957648609, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2069763927041264010 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 310856012538906184, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2279643798933026480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6289505517203625705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333a89b319c06d742b8c3038df76936e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2723332700400388369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4405116506816988883, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+  m_PrefabInstance: {fileID: 1795008490207137730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6289505517203625705 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
@@ -77,13 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fe493dd9ce7864fa4a8394203810fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botBase: {fileID: 6997084055352533985, guid: db2715aaa573a2f48a6b7b8897520583, type: 3}
+  botBase: {fileID: 2279643798933026480}
   projectilePrefab: {fileID: 4308667870325143751, guid: 4b9a5a1c6aeb18e46858be5f1032e14f, type: 3}
-  attackOrigin: {fileID: 6504586699675826249, guid: db2715aaa573a2f48a6b7b8897520583, type: 3}
+  attackOrigin: {fileID: 2069763927041264010}
   timeBetweenShot: 1.5
   projectileSpeed: 0.2
   damage: 3
-  star: {fileID: 3007808562191130380, guid: db2715aaa573a2f48a6b7b8897520583, type: 3}
+  star: {fileID: 2723332700400388369}
   specialRange: 15
   throwSpeed: 3
   bait: {fileID: 8472596363555702958, guid: 6fbe7e2054eecad4aaaac4032d6d3753, type: 3}

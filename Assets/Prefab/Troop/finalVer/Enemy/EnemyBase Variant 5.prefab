@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBase Variant 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+      propertyPath: maxHealth
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+      propertyPath: attackController
+      value: 
+      objectReference: {fileID: 6826797932562654338}
     - target: {fileID: 8713988393631401323, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -64,6 +72,22 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6826797932562654338}
   m_SourcePrefab: {fileID: 100100000, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+--- !u!114 &1701222318050406532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+  m_PrefabInstance: {fileID: 4616598203724988424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994737915125477539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e66a347e554d24198320fe234fc725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &3972793727997767616 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8589280672634957768, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+  m_PrefabInstance: {fileID: 4616598203724988424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8994737915125477539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4378283756054032555, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
@@ -81,16 +105,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3b87c07dae71c47a09cbda3e744cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botBase: {fileID: 6273177686272498927, guid: df46b0a7e3e0d454ba1ba30d6d0911b1, type: 3}
+  botBase: {fileID: 1701222318050406532}
   projectilePrefab: {fileID: 1306530339962960709, guid: fe4020059a5bbde4ab0c11b69ccc4ab2, type: 3}
-  attackOrigin: {fileID: 3353315115862206678, guid: df46b0a7e3e0d454ba1ba30d6d0911b1, type: 3}
+  attackOrigin: {fileID: 3972793727997767616}
   timeBetweenShot: 1
   projectileSpeed: 2
   damage: 3
   star: {fileID: 0}
   specialRange: Infinity
-  boostParticle: {fileID: 0}
-  boostCircle: {fileID: 0}
+  boostParticle: {fileID: 7803489399656490530, guid: 2bf04b91cb2e0e746bdca760f3082700, type: 3}
+  boostCircle: {fileID: 1408434571643084571, guid: f33985eee37276b40a9e1bfb64cafdee, type: 3}
   boostRadius: 15
   boostDuration: 10
   boostArmor: 2

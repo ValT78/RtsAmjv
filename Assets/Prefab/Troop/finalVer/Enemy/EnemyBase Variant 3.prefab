@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBase Variant 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+      propertyPath: attackController
+      value: 
+      objectReference: {fileID: -3865473429456827233}
     - target: {fileID: 8713988393631401323, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -64,6 +68,22 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -3865473429456827233}
   m_SourcePrefab: {fileID: 100100000, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+--- !u!114 &1701222318050406532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+  m_PrefabInstance: {fileID: 4616598203724988424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994737915125477539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e66a347e554d24198320fe234fc725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &3972793727997767616 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8589280672634957768, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+  m_PrefabInstance: {fileID: 4616598203724988424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8994737915125477539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4378283756054032555, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
@@ -81,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22eedb4bfd3a8e042a4de9d332b5add5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botBase: {fileID: 6387569761065115108, guid: eef27c50d86ca3944ab630c31d48b957, type: 3}
+  botBase: {fileID: 1701222318050406532}
   projectilePrefab: {fileID: 7206827929623731085, guid: af304000f3caf2841a7c4e87326d7f94, type: 3}
-  attackOrigin: {fileID: 8317823271584076905, guid: eef27c50d86ca3944ab630c31d48b957, type: 3}
+  attackOrigin: {fileID: 3972793727997767616}
   timeBetweenShot: 1.5
   projectileSpeed: 5
   damage: 2

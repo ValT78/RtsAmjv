@@ -60,6 +60,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6308002885709885580}
   m_SourcePrefab: {fileID: 100100000, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
+--- !u!114 &256572770009565690 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7112926199011733602, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
+  m_PrefabInstance: {fileID: 7005832052056308120}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2361363563689427604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4754825408952597260, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
+  m_PrefabInstance: {fileID: 7005832052056308120}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9742c422149e5534ba961bebd4542fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4378283756054032555 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6772145840793979187, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
@@ -78,11 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
-  boostManager: {fileID: 7112926199011733602, guid: b1a824ffa2a39d442b643155191778f7, type: 3}
-  healthBar: {fileID: 4754825408952597260, guid: b1a824ffa2a39d442b643155191778f7, type: 3}
+  boostManager: {fileID: 256572770009565690}
+  healthBar: {fileID: 2361363563689427604}
   maxHealth: 3
   armor: 0
-  dodgeCount: 2
+  dodgeCount: 0
   armorBoostCount: 0
   attackController: {fileID: 2678709810656838642, guid: b1a824ffa2a39d442b643155191778f7, type: 3}
   timeComputeDestination: 0.5
