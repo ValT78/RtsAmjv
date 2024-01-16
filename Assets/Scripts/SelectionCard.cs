@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class SelectionCard : MonoBehaviour
 {
+    [Header("ExploreMap")]
+    [SerializeField] private GameObject retractMenu;
+
+
     [Header("SpawnPoint")]
     [SerializeField] private GameObject spawnPoint;
     [SerializeField] private float spawnRadius;
@@ -42,6 +46,20 @@ public class SelectionCard : MonoBehaviour
     private void Start()
     {
         capacityText.text= "Capacity\n\n" + capacity.ToString();
+    }
+
+    private void OnEnable()
+    {
+        GameManager.isChosingTroop = true;
+    }
+    private void OnDisable()
+    {
+        GameManager.isChosingTroop = false;
+    }
+
+    public void RetractMenu()
+    {
+        retractMenu.SetActive(!retractMenu.activeSelf);
     }
 
     public void AddHealer()

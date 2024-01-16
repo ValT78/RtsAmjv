@@ -221,10 +221,13 @@ MonoBehaviour:
   armor: 0
   dodgeCount: 0
   armorBoostCount: 0
-  attackController: {fileID: 7593817889861414379, guid: db2715aaa573a2f48a6b7b8897520583, type: 3}
+  attackController: {fileID: 0}
   timeComputeDestination: 0.5
   awareRange: 15
   isAware: 0
   voiceRange: 0
   attackRange: 2
   initialShotTime: 0.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8

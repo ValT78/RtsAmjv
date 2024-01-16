@@ -113,3 +113,6 @@ MonoBehaviour:
   voiceRange: 5
   attackRange: 2
   initialShotTime: 0.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
