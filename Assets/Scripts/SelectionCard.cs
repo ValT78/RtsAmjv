@@ -11,7 +11,7 @@ public class SelectionCard : MonoBehaviour
 
 
     [Header("SpawnPoint")]
-    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private float spawnRadius;
     [Header("Prefab Unit")]
     [SerializeField] private GameObject healerPrefab;
@@ -46,6 +46,7 @@ public class SelectionCard : MonoBehaviour
     private void Start()
     {
         capacityText.text= "Capacity\n\n" + capacity.ToString();
+        spawnPoint = transform.Find("SpawnPoint");
     }
 
     private void OnEnable()
@@ -228,7 +229,7 @@ public class SelectionCard : MonoBehaviour
         float randomRadius = Random.Range(0f, spawnRadius);
         if(spawnPoint != null )
         {
-            return new Vector3(spawnPoint.transform.position.x + randomRadius * Mathf.Cos(randomAngle), spawnPoint.transform.position.y + randomRadius * Mathf.Sin(randomAngle), transform.position.z);
+            return new Vector3(spawnPoint.position.x + randomRadius * Mathf.Cos(randomAngle), spawnPoint.position.y + randomRadius * Mathf.Sin(randomAngle), transform.position.z);
         }
 
         return new Vector3(randomRadius * Mathf.Cos(randomAngle), 0, randomRadius * Mathf.Sin(randomAngle));

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static int deadAllie;
     public static bool isChosingTroop;
     public UIController UIController;
+    public static bool playerAttack;
 
 
 
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
             if(obj.isEnemy) enemyObjects.Add(obj);
             else troopObjects.Add(obj);
         }
+        playerAttack = false;
 
 
         // UIController.ActiveWinUI();
