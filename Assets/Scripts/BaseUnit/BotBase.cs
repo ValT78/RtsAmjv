@@ -90,10 +90,9 @@ public class BotBase : AliveObject
                     }
                 }
                 else if (target == null)
-                            
                 {
-                    if (kingTarget != null) { PathFind(kingTarget.transform.position);
-                    }
+                    if(kingTarget != null) PathFind(kingTarget.transform.position);
+
                     else PathFind(mainTarget);
                 }
 

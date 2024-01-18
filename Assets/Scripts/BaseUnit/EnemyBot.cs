@@ -21,10 +21,8 @@ public class EnemyBot : BotBase
             mainTarget = transform.position;
         else
         {
-            print("yes");
             if (FlagController.crown != null)
                 mainTarget = FlagController.crown.position;
-            print(mainTarget.ToString());
         }
         base.StartBehavior();
         

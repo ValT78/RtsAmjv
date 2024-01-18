@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         foreach (AliveObject obj in FindObjectsOfType<AliveObject>()) { 
             if(obj.isEnemy) enemyObjects.Add(obj);
             else troopObjects.Add(obj);
+            print(obj.name);
         }
         playerAttack = false;
 

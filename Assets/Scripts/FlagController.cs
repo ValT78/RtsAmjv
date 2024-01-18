@@ -6,12 +6,12 @@ public class FlagController : MonoBehaviour
 {
     [SerializeField] static bool hasFlag = true;
 
-    public static Transform spawnPoint;
+    public static SpawnPoint spawnPoint;
     public static Transform crown;
 
     private void Awake()
     {
-        spawnPoint = transform.Find("SpawnPoint");
+        spawnPoint = FindObjectOfType<SpawnPoint>();
         crown = transform;
 
     }
@@ -20,24 +20,25 @@ public class FlagController : MonoBehaviour
     {
         if(GameManager.playerAttack)
         {
-            if (other.transform.TryGetComponent(out TroopBot crowned) && !hasFlag)
+            if (other.transform.TryGetComponent(out TroopBot crowned))
             {
                 crowned.GiveCrown();
-                gameObject.SetActive(false);
                 hasFlag = false;
                 foreach (EnemyBot enemy in GameManager.enemyUnits)
                 {
                     enemy.SetKingTarget(crowned);
                 }
+                gameObject.SetActive(false);
+
             }
-            
+
         }
         else
         {
-            if (other.transform.TryGetComponent(out EnemyBot crowned) && !hasFlag)
+            if (other.transform.TryGetComponent(out EnemyBot crowned))
             {
+
                 crowned.GiveCrown();
-                gameObject.SetActive(false);
                 hasFlag = false;
                 foreach (EnemyBot enemy in GameManager.enemyUnits)
                 {
@@ -45,8 +46,10 @@ public class FlagController : MonoBehaviour
                 }
                 if (spawnPoint != null)
                 {
-                    crowned.SetMainTarget(spawnPoint.position);
+                    crowned.SetMainTarget(spawnPoint.transform.position);
                 }
+                gameObject.SetActive(false);
+
             }
         }
         
