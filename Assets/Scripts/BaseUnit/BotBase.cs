@@ -27,6 +27,7 @@ public class BotBase : AliveObject
     private float initialShotTimer;
     protected AliveObject toShoot;
     private bool isAttacking;
+    [SerializeField] private LayerMask wallLayer;
 
     [Header("Miscellaneous")]
     [SerializeField] private GameObject crown;
@@ -130,12 +131,14 @@ public class BotBase : AliveObject
         {
             // ON cherche 
             AliveObject newToShoot = GameManager.ClosestAlive(!isEnemy,transform.position, attackRange);
+           
             if (newToShoot == null)
             {
                 toShoot = null;
             }
             else if (toShoot == null)
             {
+                print(newToShoot.name + transform.name);
                 if(!WallInRange(newToShoot))
                 {
                     toShoot = newToShoot;
@@ -155,7 +158,7 @@ public class BotBase : AliveObject
 
         bool WallInRange(AliveObject target)
         {
-            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out _, attackRange))
+            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out _, attackRange, wallLayer))
             {
                 return true;
             }
