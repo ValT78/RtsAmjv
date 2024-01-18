@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+[RequireComponent(typeof(SoundManager))]
+[RequireComponent(typeof(BotBase))]
 public class AttackController : MonoBehaviour
 {
     public BotBase botBase;
@@ -23,6 +26,9 @@ public class AttackController : MonoBehaviour
     [Header("Healer")]
     private int damageBoostNumber;
 
+    [Header("Sound")]
+    private SoundManager Sm;
+
     
 
 
@@ -38,6 +44,7 @@ public class AttackController : MonoBehaviour
     public void Start()
     {
         mainCamera = Camera.main;
+        Sm = GetComponent<SoundManager>();
         StartBehavior();
     }
 
@@ -69,6 +76,7 @@ public class AttackController : MonoBehaviour
             clocheScript.Initialize(toShoot.transform.position, projectileSpeed, botBase.isEnemy);
         }
 
+        Sm.PlaySound(SoundManager.SoundType.fire);
         BasicAttack();
 
         yield return new WaitForSeconds(timeBetweenShot);
