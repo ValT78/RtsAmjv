@@ -22,14 +22,14 @@ public class AliveObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
-        if(dodgeCount != 0) boostManager.ActivateBoost(2);
         StartBehavior();
 
     }
     public virtual void StartBehavior()
     {
-
+        health = maxHealth;
+        if (dodgeCount != 0) boostManager.ActivateBoost(2);
+        print("1");
     }
     // Update is called once per frame
     void Update()

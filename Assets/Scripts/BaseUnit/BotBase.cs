@@ -29,7 +29,7 @@ public class BotBase : AliveObject
     private bool isAttacking;
 
     [Header("Miscellaneous")]
-    private Transform crown;
+    [SerializeField] private GameObject crown;
     private bool hasCrown;
     private BotBase kingTarget;
     private bool isStunned =false;
@@ -38,11 +38,10 @@ public class BotBase : AliveObject
     public override void StartBehavior()
     {
         base.StartBehavior();
-        crown = transform.Find("Crown");
         mainCamera = Camera.main;
         initialShotTimer = initialShotTime;
         agent = GetComponent<NavMeshAgent>();
-        mainTarget = transform.position;
+        
     }
 
 
@@ -50,17 +49,17 @@ public class BotBase : AliveObject
     {
         base.UpdateBehavior();
         if (isStunned) return;
-        if (Input.GetKeyDown(KeyCode.Space) && !isEnemy)
+        
+        if(isEnemy && hasCrown)
         {
-            attackController.Special();
+            PathFind(mainTarget);
+            return;
         }
 
         if (toShoot != null)
         {
-/*            print("toShoot de " + this.ToString() + " : " + toShoot.ToString());
-*/            transform.LookAt(toShoot.transform.position);
+            transform.LookAt(toShoot.transform.position);
             initialShotTimer -= Time.deltaTime;
-            // Passer � l'�tat d'attaque si la cible est � port�e.
             if (initialShotTimer < 0 && !isAttacking)
             {
                 StartCoroutine(attackController.Basic(toShoot));
@@ -69,7 +68,6 @@ public class BotBase : AliveObject
         }
         else
         {
-
             if (isAware)
             {
                 AliveObject newTarget = GameManager.ClosestAlive(!isEnemy, transform.position, awareRange);
@@ -92,8 +90,10 @@ public class BotBase : AliveObject
                     }
                 }
                 else if (target == null)
+                            
                 {
-                    if (kingTarget != null) PathFind(kingTarget.transform.position);
+                    if (kingTarget != null) { PathFind(kingTarget.transform.position);
+                    }
                     else PathFind(mainTarget);
                 }
 
@@ -190,7 +190,6 @@ public class BotBase : AliveObject
         else
         {
             this.target = target;
-            isAware = false;
         }
 
     }
@@ -207,6 +206,10 @@ public class BotBase : AliveObject
     public void SetKingTarget(BotBase target)
     {
         kingTarget = target;
+    }
+    public void SetMainTarget(Vector3 target)
+    {
+        mainTarget = target;
     }
 
     public IEnumerator StunnedCoroutine(float delay)

@@ -15,9 +15,19 @@ public class EnemyBot : BotBase
 
     public override void StartBehavior()
     {
-        base.StartBehavior();
         isEnemy = true;
         isAware = true;
+        if (GameManager.playerAttack)
+            mainTarget = transform.position;
+        else
+        {
+            print("yes");
+            if (FlagController.crown != null)
+                mainTarget = FlagController.crown.position;
+            print(mainTarget.ToString());
+        }
+        base.StartBehavior();
+        
     }
     
 

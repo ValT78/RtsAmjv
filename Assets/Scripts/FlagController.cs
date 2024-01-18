@@ -4,24 +4,51 @@ using UnityEngine;
 
 public class FlagController : MonoBehaviour
 {
-    [SerializeField] static bool isForPlayer;
     [SerializeField] static bool hasFlag = true;
-    private GameObject crown;
 
-    private void Start()
+    public static Transform spawnPoint;
+    public static Transform crown;
+
+    private void Awake()
     {
-        crown = transform.Find("Crown").gameObject;
+        spawnPoint = transform.Find("SpawnPoint");
+        crown = transform;
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.transform.TryGetComponent(out TroopBot player) && !hasFlag) return;
-        player.GiveCrown();
-        crown.SetActive(false);
-        hasFlag = false;
-        foreach(EnemyBot enemy in GameManager.enemyUnits)
+        if(GameManager.playerAttack)
         {
-            enemy.SetKingTarget(player);
+            if (other.transform.TryGetComponent(out TroopBot crowned) && !hasFlag)
+            {
+                crowned.GiveCrown();
+                gameObject.SetActive(false);
+                hasFlag = false;
+                foreach (EnemyBot enemy in GameManager.enemyUnits)
+                {
+                    enemy.SetKingTarget(crowned);
+                }
+            }
+            
         }
+        else
+        {
+            if (other.transform.TryGetComponent(out EnemyBot crowned) && !hasFlag)
+            {
+                crowned.GiveCrown();
+                gameObject.SetActive(false);
+                hasFlag = false;
+                foreach (EnemyBot enemy in GameManager.enemyUnits)
+                {
+                    enemy.SetKingTarget(crowned);
+                }
+                if (spawnPoint != null)
+                {
+                    crowned.SetMainTarget(spawnPoint.position);
+                }
+            }
+        }
+        
     }
 }
