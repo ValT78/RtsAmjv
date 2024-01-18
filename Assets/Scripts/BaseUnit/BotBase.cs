@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -108,8 +109,6 @@ public class BotBase : AliveObject
                 // Nothing
             }
         }
-/*        print("target de " + this.ToString() + " : " + target.ToString());
-*/
         FindToShoot();
 
     }
@@ -118,7 +117,7 @@ public class BotBase : AliveObject
     private void FindToShoot()
     {
         // Les unités contrôlées par le joueur vise forcément leur target si elle est dans leur range d'attaque
-        if (!isEnemy && target!= null && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange)
+        if (!isEnemy && target!= null && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange && !WallInRange(target))
         {
             if (toShoot != target)
             {
@@ -138,17 +137,31 @@ public class BotBase : AliveObject
             }
             else if (toShoot == null)
             {
-                toShoot = newToShoot;
-                isAttacking = false;
-                initialShotTimer = initialShotTime;
-                if(isEnemy) agent.ResetPath();
+                if(!WallInRange(newToShoot))
+                {
+                    toShoot = newToShoot;
+                    isAttacking = false;
+                    initialShotTimer = initialShotTime;
+                    if (isEnemy) agent.ResetPath();
+                }
+                
 
             }
-            else if (Vector3.Distance(toShoot.transform.position, transform.position) > attackRange)
+            else if (Vector3.Distance(toShoot.transform.position, transform.position) > attackRange || WallInRange(toShoot))
             {
                 toShoot = null;
 
             }
+        }
+
+        bool WallInRange(AliveObject target)
+        {
+            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out _, attackRange))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 

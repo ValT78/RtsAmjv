@@ -20,6 +20,7 @@ public class UnitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.isChosingTroop) return;
         // Clear selection with escape
         if (Input.GetKeyDown(KeyCode.Escape)) ClearSelection();
 

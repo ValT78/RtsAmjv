@@ -54,7 +54,7 @@ public class AttackController : MonoBehaviour
     }
     public void Update()
     {
-        
+        if (GameManager.isChosingTroop) return;
         UpdateBehavior();
     }
 

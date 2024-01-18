@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static List<AliveObject> enemyObjects = new();
     public static int deadEnemy;
     public static int deadAllie;
+    public static bool isChosingTroop;
     public UIController UIController;
 
 
