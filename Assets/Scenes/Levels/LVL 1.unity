@@ -66431,10 +66431,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5000633816448435139, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7422038100354390669, guid: 9abeb0acbd9d1df4cb671c1ba747e5fe, type: 3}
       propertyPath: m_Name
       value: Managers
@@ -66596,13 +66592,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408306706}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.97908103, z: -0.20347081, w: 0}
-  m_LocalPosition: {x: 0, y: 7.01, z: 10}
+  m_LocalRotation: {x: 0, y: 0.9099613, z: -0.41469327, w: 0}
+  m_LocalPosition: {x: 0, y: 27, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 23.48, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 49, y: 180, z: 0}
 --- !u!114 &1408306710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66615,9 +66611,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f91a066060de1c47832f3bdbec94514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  corner1: {x: -23, y: 0, z: 24}
-  corner2: {x: 64, y: 0, z: -71.3}
+  speed: 30
+  corner1: {x: -8, y: 0, z: 24}
+  corner2: {x: 45, y: 0, z: -71.3}
 --- !u!1001 &1437078477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67310,7 +67306,7 @@ GameObject:
   - component: {fileID: 1680415411}
   - component: {fileID: 1680415410}
   - component: {fileID: 1680415409}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
