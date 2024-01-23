@@ -70,7 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5281f98bc2775f54db968a7b81d7efe5, type: 2}
     - target: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Name
-      value: TroopBase Variant 1
+      value: TroopHealer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -122,7 +126,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
   attackOrigin: {fileID: 2069763927041264010}
   timeBetweenShot: 1
-  projectileSpeed: 5
+  projectileSpeed: 10
   damage: 1
   star: {fileID: 2723332700400388369}
   specialRange: Infinity

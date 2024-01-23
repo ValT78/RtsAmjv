@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1151846247395467573, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4378283756054032555, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Name
-      value: EnemyBase Variant 5
+      value: EnemTank
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: maxHealth

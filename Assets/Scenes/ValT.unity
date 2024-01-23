@@ -528,6 +528,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  corner1: {x: -100, y: -100, z: -100}
+  corner2: {x: 100, y: 100, z: 100}
 --- !u!4 &1561996511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6070834708182665366, guid: bcf96c17c76c1824eabcd34b582b7b8a, type: 3}

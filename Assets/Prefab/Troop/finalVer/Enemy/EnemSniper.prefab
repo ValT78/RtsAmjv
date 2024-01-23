@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1151846247395467573, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Speed
-      value: 3.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4378283756054032555, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Name
-      value: EnemAssassin
+      value: EnemSniper
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: maxHealth
@@ -125,7 +125,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8375048589718216157, guid: d62b65cba1fd51b4bb24e4ad0fdba1a3, type: 3}
   attackOrigin: {fileID: 3972793727997767616}
   timeBetweenShot: 2
-  projectileSpeed: 8
+  projectileSpeed: 15
   damage: 5
   star: {fileID: 0}
   specialRange: 10

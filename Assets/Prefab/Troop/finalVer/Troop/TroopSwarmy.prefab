@@ -58,7 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2ebb1a793db6b364b896b54a14f64bee, type: 2}
     - target: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Name
-      value: TroopBase Variant 4
+      value: TroopSwarmy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

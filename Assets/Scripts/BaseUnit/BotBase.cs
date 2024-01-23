@@ -34,6 +34,7 @@ public class BotBase : AliveObject
     private bool hasCrown;
     private BotBase kingTarget;
     private bool isStunned =false;
+    [SerializeField] private float crownSpeedMultiplier;
 
 
     public override void StartBehavior()
@@ -170,6 +171,7 @@ public class BotBase : AliveObject
         timerComputeDestination -= Time.deltaTime;
         if(timerComputeDestination < 0)
         {
+            print(target);
             agent.SetDestination(target);
             timerComputeDestination = timeComputeDestination;
         }
@@ -202,6 +204,7 @@ public class BotBase : AliveObject
     {
         crown.gameObject.SetActive(true);
         hasCrown = true;
+        agent.speed *= crownSpeedMultiplier;
     }
     public void SetKingTarget(BotBase target)
     {
