@@ -6,11 +6,10 @@ using UnityEngine.UIElements;
 
 public class TroopBot : BotBase
 {
-    
+    [SerializeField] private GameObject Selector;
     public override void UpdateBehavior()
     {
         base.UpdateBehavior();
-
     }
 
     public override void StartBehavior()
@@ -49,5 +48,10 @@ public class TroopBot : BotBase
             SetTarget(null);
             this.mainTarget = mainTarget;
         }
+    }
+
+    public void SelectMode(bool state)
+    {
+        Selector.SetActive(state);
     }
 }
