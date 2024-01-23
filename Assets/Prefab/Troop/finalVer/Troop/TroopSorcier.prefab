@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4fd5b04554ee49845a04136014a81f68, type: 2}
+    - target: {fileID: 1709152192480814898, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709152192480814898, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Name
       value: TroopSorcier

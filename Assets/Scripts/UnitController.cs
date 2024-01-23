@@ -17,7 +17,6 @@ public class UnitController : MonoBehaviour
     private EnemyBot target;
     private Vector3 barycenter;
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.isChosingTroop) return;
@@ -73,10 +72,15 @@ public class UnitController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) capacitiActive = !capacitiActive;
+        if (Input.GetKeyDown(KeyCode.E)) activateCapa(!capacitiActive);
 
     }
 
+    private void activateCapa(bool state)
+    {
+        capacitiActive = state;
+        foreach (TroopBot troop in selectedTroops) troop.ShowCapa(state);
+    } 
     private void ClearSelection()
     {
         isSelected = false;
