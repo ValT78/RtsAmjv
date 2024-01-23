@@ -66616,6 +66616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  corner1: {x: -23, y: 0, z: 24}
+  corner2: {x: 64, y: 0, z: -71.3}
 --- !u!1001 &1437078477
 PrefabInstance:
   m_ObjectHideFlags: 0
