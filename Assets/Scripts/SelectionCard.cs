@@ -46,7 +46,8 @@ public class SelectionCard : MonoBehaviour
     private void Start()
     {
         capacityText.text= "Capacity\n\n" + capacity.ToString();
-        spawnPoint = transform.Find("SpawnPoint");
+        if(GameManager.playerAttack) spawnPoint = FindObjectOfType<SpawnPoint>().transform;
+        else spawnPoint = FindObjectOfType<FlagController>().transform;
     }
 
     private void OnEnable()
@@ -229,7 +230,7 @@ public class SelectionCard : MonoBehaviour
         float randomRadius = Random.Range(0f, spawnRadius);
         if(spawnPoint != null )
         {
-            return new Vector3(spawnPoint.position.x + randomRadius * Mathf.Cos(randomAngle), spawnPoint.position.y + randomRadius * Mathf.Sin(randomAngle), transform.position.z);
+            return new Vector3(spawnPoint.position.x + randomRadius * Mathf.Cos(randomAngle), spawnPoint.position.y, transform.position.z + randomRadius * Mathf.Sin(randomAngle));
         }
 
         return new Vector3(randomRadius * Mathf.Cos(randomAngle), 0, randomRadius * Mathf.Sin(randomAngle));

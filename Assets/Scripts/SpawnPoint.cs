@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        
+        if(GameManager.playerAttack)
+        {
+            if(other.TryGetComponent(out TroopBot bot) && bot.GetHasCrown())
+            {
+                GameManager.SetVictoryScreen(true);
+
+            }
+        }
+        else
+        {
+            if (other.TryGetComponent(out EnemyBot bot) && bot.GetHasCrown())
+            {
+                GameManager.SetVictoryScreen(false);
+
+            }
+        }
     }
 }

@@ -45,7 +45,6 @@ public class BotBase : AliveObject
         
     }
 
-
     public override void UpdateBehavior()
     {
         base.UpdateBehavior();
@@ -138,7 +137,6 @@ public class BotBase : AliveObject
             }
             else if (toShoot == null)
             {
-                print(newToShoot.name + transform.name);
                 if(!WallInRange(newToShoot))
                 {
                     toShoot = newToShoot;
@@ -231,6 +229,11 @@ public class BotBase : AliveObject
     public Swarmies GetIsSwarm()
     {
         return isSwarm;
+    }
+
+    public bool GetHasCrown()
+    {
+        return hasCrown;
     }
 
 }

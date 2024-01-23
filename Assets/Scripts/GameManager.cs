@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public UIController UIController;
     public static bool playerAttack;
 
+    public static GameObject endScreen;
+    public static float timeElapsed;
+
 
 
     private void Start()
@@ -29,12 +32,18 @@ public class GameManager : MonoBehaviour
         foreach (AliveObject obj in FindObjectsOfType<AliveObject>()) { 
             if(obj.isEnemy) enemyObjects.Add(obj);
             else troopObjects.Add(obj);
-            print(obj.name);
         }
         playerAttack = false;
 
+        endScreen = FindObjectOfType<WinScreen>().gameObject;
+        endScreen.SetActive(false);
 
         // UIController.ActiveWinUI();
+    }
+
+    private void Update()
+    {
+        timeElapsed += Time.deltaTime;
     }
 
     // Méthode pour invoquer un prefab de bot à une position spécifique
@@ -83,7 +92,11 @@ public class GameManager : MonoBehaviour
             {
                 enemyUnits.Remove(enemyBot);
                 deadEnemy++;
+                if(enemyBot.GetHasCrown())
+                {
+                    SetVictoryScreen(true);
 
+                }
             }
         }
         else
@@ -93,9 +106,25 @@ public class GameManager : MonoBehaviour
             {
                 deadAllie++;
                 troopUnits.Remove(troopBot);
+                if (troopBot.GetHasCrown())
+                {
+                    SetVictoryScreen(false);
+
+                }
             }
         }
         Destroy(botObject);
+        if(playerAttack)
+        {
+            if (troopObjects.Count <= 0)
+                SetVictoryScreen(false);
+        }
+        else
+        {
+            if (enemyObjects.Count <= 0)
+                SetVictoryScreen(true);
+        }
+        
     }
 
     public static List<BotBase> GetCrewBot(bool isEnemy)
@@ -170,6 +199,13 @@ public class GameManager : MonoBehaviour
         }
 
         return closestBot;
+    }
+
+    public static void SetVictoryScreen(bool isPlayerWinning)
+    {
+        isChosingTroop = true;
+        endScreen.SetActive(true);
+        endScreen.GetComponent<WinScreen>().SetWinner(isPlayerWinning, deadAllie, deadEnemy, timeElapsed);
     }
 
 }

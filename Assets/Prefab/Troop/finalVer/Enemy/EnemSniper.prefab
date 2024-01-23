@@ -126,7 +126,7 @@ MonoBehaviour:
   attackOrigin: {fileID: 3972793727997767616}
   timeBetweenShot: 2
   projectileSpeed: 8
-  damage: 100
+  damage: 5
   star: {fileID: 0}
   specialRange: 10
   throwSpeed: 5

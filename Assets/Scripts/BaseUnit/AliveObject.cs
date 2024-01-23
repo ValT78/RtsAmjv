@@ -29,7 +29,6 @@ public class AliveObject : MonoBehaviour
     {
         health = maxHealth;
         if (dodgeCount != 0) boostManager.ActivateBoost(2);
-        print("1");
     }
     // Update is called once per frame
     void Update()
