@@ -171,7 +171,6 @@ public class BotBase : AliveObject
         timerComputeDestination -= Time.deltaTime;
         if(timerComputeDestination < 0)
         {
-            print(target);
             agent.SetDestination(target);
             timerComputeDestination = timeComputeDestination;
         }

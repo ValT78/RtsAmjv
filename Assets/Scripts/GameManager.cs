@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             if(obj.isEnemy) enemyObjects.Add(obj);
             else troopObjects.Add(obj);
         }
-        playerAttack = false;
+        playerAttack = true;
 
         endScreen = FindObjectOfType<WinScreen>().gameObject;
         endScreen.SetActive(false);

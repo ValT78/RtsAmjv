@@ -5049,7 +5049,7 @@ MonoBehaviour:
   isEnemy: 1
   boostManager: {fileID: 1502736086422224499}
   healthBar: {fileID: 4003826201157989661}
-  maxHealth: 100
+  maxHealth: 10
   armor: 0
   dodgeCount: 0
   armorBoostCount: 0
