@@ -16,6 +16,7 @@ public class UnitController : MonoBehaviour
     private bool capacitiActive;
     private EnemyBot target;
     private Vector3 barycenter;
+    [SerializeField] private GameObject VisuSelect;
 
     void Update()
     {
@@ -27,8 +28,13 @@ public class UnitController : MonoBehaviour
         // selection des unités
         if (!isSelected)
         {
-            if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita)) hitb = hita;
-            if (Input.GetMouseButtonUp(0) && Physics.Raycast(mouseRay, out hitb))
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita))
+            {
+                hitb = hita;
+                VisuSelect.SetActive(true);
+            }
+            if (Input.GetMouseButton(0) && Physics.Raycast(mouseRay, out hitb)) DrawRect(CreateRect(hita.point, hitb.point));
+            if (Input.GetMouseButtonUp(0))
             {
                 if (Vector3.Distance(hita.point, hitb.point) < 0.5f) isSelected = SelectTroop(hita.point); // Single target mode
                 else isSelected = SelectTroop(hita.point, hitb.point); // Multitarget mod
@@ -38,6 +44,7 @@ public class UnitController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita))
             {
+                VisuSelect.SetActive(false);
                 selectedTroops = selectedTroops.FindAll(e => e != null);
                 /* 4 possibilité : 
                  *  - avancer vers une postion avec GoToPosition(Vector3 position) click sur le sol
@@ -51,7 +58,11 @@ public class UnitController : MonoBehaviour
 
                 if (capacitiActive)
                 {
-                    foreach (TroopBot troop in selectedTroops) troop.attackController.Special();
+                    foreach (TroopBot troop in selectedTroops)
+                    {
+                        troop.attackController.Special();
+                        activateCapa(false);
+                    }
                 }
                 else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                 {
@@ -84,10 +95,16 @@ public class UnitController : MonoBehaviour
     private void ClearSelection()
     {
         isSelected = false;
+        capacitiActive = false;
+        VisuSelect.SetActive(false);
         hita = new RaycastHit();
         hitb = new RaycastHit();
         selectedTroops = selectedTroops.FindAll(e => e != null);
-        foreach (TroopBot troop in selectedTroops) troop.SelectMode(false);
+        foreach (TroopBot troop in selectedTroops)
+        {
+            troop.SelectMode(false);
+            troop.ShowCapa(false);
+        }
         selectedTroops.Clear();
     }
 
@@ -135,9 +152,13 @@ public class UnitController : MonoBehaviour
         return new Rect(corner, size);
     }
 
-    void DrawRect(Rect rect)
+    private void DrawRect(Rect rect)
     {
-        Gizmos.DrawWireCube(new Vector3(rect.center.x, 0.01f, rect.center.y), new Vector3(rect.size.x, 0.01f, rect.size.y));
+        //Gizmos.DrawWireCube(new Vector3(rect.center.x, 0.01f, rect.center.y), new Vector3(rect.size.x, 0.01f, rect.size.y));
+        Vector3 pos = new Vector3(rect.center.x, 0.005f, rect.center.y);
+        Vector3 size = new Vector3(rect.size.x/10, 1, rect.size.y/10);
+        VisuSelect.transform.position = pos;
+        VisuSelect.transform.localScale = size;
     }
     private bool SelectTroop(Vector3 hitpoint)
     {
