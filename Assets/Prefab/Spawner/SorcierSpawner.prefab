@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 4942243253359002414, guid: 35bf33a80536dd04791af326da3223d1, type: 3}
       propertyPath: botPrefab
       value: 
-      objectReference: {fileID: 8994737915125477539, guid: df815449b805ec64ba1cbb6e62f5c8ec, type: 3}
+      objectReference: {fileID: 8994737915125477539, guid: 3d2d9c083a1e70849ae68db1c98ef229, type: 3}
     - target: {fileID: 5968847722166392726, guid: 35bf33a80536dd04791af326da3223d1, type: 3}
       propertyPath: m_Name
       value: SorcierSpawner

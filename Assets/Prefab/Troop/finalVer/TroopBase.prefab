@@ -233,4 +233,7 @@ MonoBehaviour:
   voiceRange: 0
   attackRange: 2
   initialShotTime: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
   crown: {fileID: 1948812962908100758}

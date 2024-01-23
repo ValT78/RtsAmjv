@@ -113,6 +113,9 @@ MonoBehaviour:
   voiceRange: 5
   attackRange: 2
   initialShotTime: 0.5
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
   crown: {fileID: 7523460773682983190}
 --- !u!1 &7523460773682983190 stripped
 GameObject:
