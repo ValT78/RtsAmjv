@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: maxHealth
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: attackRange
@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TroopHealer
       objectReference: {fileID: 0}
+    - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -130,7 +134,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7171399488519222362, guid: e857f9e3add165145901689b0d46e1f2, type: 3}
   attackOrigin: {fileID: 2069763927041264010}
   timeBetweenShot: 1
-  projectileSpeed: 5
+  projectileSpeed: 10
   damage: 1
   star: {fileID: 2723332700400388369}
   specialRange: Infinity

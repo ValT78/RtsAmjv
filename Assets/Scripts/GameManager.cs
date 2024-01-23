@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             if(obj.isEnemy) enemyObjects.Add(obj);
             else troopObjects.Add(obj);
         }
-        playerAttack = false;
+        playerAttack = true;
 
         endScreen = FindObjectOfType<WinScreen>().gameObject;
         endScreen.SetActive(false);
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         Destroy(botObject);
         if(playerAttack)
         {
-            if (troopObjects.Count <= 0)
+            if (troopUnits.Count <= 0)
                 SetVictoryScreen(false);
         }
         else

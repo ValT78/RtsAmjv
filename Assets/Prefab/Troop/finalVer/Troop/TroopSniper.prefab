@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: initialShotTime
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: attackController
@@ -74,7 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9f98578d0b63942408c1c2c86822b80c, type: 2}
     - target: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Name
-      value: TroopBase Variant 2
+      value: TroopSniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_Speed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -126,8 +130,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8375048589718216157, guid: d62b65cba1fd51b4bb24e4ad0fdba1a3, type: 3}
   attackOrigin: {fileID: 2069763927041264010}
   timeBetweenShot: 2
-  projectileSpeed: 8
-  damage: 100
+  projectileSpeed: 15
+  damage: 6
   star: {fileID: 2723332700400388369}
   specialRange: 10
   throwSpeed: 5

@@ -323,6 +323,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   crown: {fileID: 1948812962908100758}
+  crownSpeedMultiplier: 0.75
   Selector: {fileID: 7834570370793522436}
   VisuCapa: {fileID: 2035347901957640907}
 --- !u!1 &7834570370793522436 stripped

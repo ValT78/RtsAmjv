@@ -117,6 +117,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   crown: {fileID: 7523460773682983190}
+  crownSpeedMultiplier: 0.75
 --- !u!1 &7523460773682983190 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 671322855071877262, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}

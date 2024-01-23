@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: attackRange
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: initialShotTime
@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TroopSorcier
       objectReference: {fileID: 0}
+    - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: m_Speed
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -130,7 +134,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7206827929623731085, guid: af304000f3caf2841a7c4e87326d7f94, type: 3}
   attackOrigin: {fileID: 2069763927041264010}
   timeBetweenShot: 1.5
-  projectileSpeed: 5
+  projectileSpeed: 10
   damage: 2
   star: {fileID: 2723332700400388369}
   specialRange: 15
