@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class UIController : MonoBehaviour
     [SerializeField] private Button ApplyButton;
     private Resolution[] resolutions;
 
+
+    [Header("Level selection")]
+    [SerializeField] private GameObject LevelMenu;
+    [SerializeField] private Button AttackButton;
+    [SerializeField] private Button DefenceButton;
+    [SerializeField] private Button BackButton2;
+
+
     public void Start()
     {
         start = DateTime.Now;
@@ -45,6 +54,10 @@ public class UIController : MonoBehaviour
 
         BackButton.onClick.AddListener(ActiveMainUI);
         ApplyButton.onClick.AddListener(SetSettings);
+
+        AttackButton.onClick.AddListener(AttackAction);
+        DefenceButton.onClick.AddListener(DefenceAction);
+        BackButton2.onClick.AddListener(ActiveMainUI);
     }
 
     [ContextMenu("ActiveWinUI")]
@@ -65,12 +78,15 @@ public class UIController : MonoBehaviour
     public void ActiveMainUI()
     {
         SettingsMenu.SetActive(false);
+        LevelMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
 
     public void StartAction()
     {
-
+        SettingsMenu.SetActive(false);
+        LevelMenu.SetActive(true);
+        MainMenu.SetActive(false);
     }
 
     public void QuitAction()
@@ -112,6 +128,16 @@ public class UIController : MonoBehaviour
         mixer.SetFloat("MusicVolume", MusicSlider.value);
         QualitySettings.SetQualityLevel(QualityDrop.value);
         Screen.fullScreen = Toggle.isOn;
+    }
+
+    private void AttackAction()
+    {
+        SceneManager.LoadScene("LVL 1");
+    }
+
+    private void DefenceAction()
+    {
+        SceneManager.LoadScene("LVL 2");
     }
 
 }

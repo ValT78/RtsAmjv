@@ -39,6 +39,7 @@ public class UnitController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita))
             {
+                selectedTroops = selectedTroops.FindAll(e => e != null);
                 /* 4 possibilité : 
                  *  - avancer vers une postion avec GoToPosition(Vector3 position) click sur le sol
                  *  - avancer vers un enemy avec GoToBot(AttackController target) clic sur un bot
@@ -81,6 +82,8 @@ public class UnitController : MonoBehaviour
         isSelected = false;
         hita = new RaycastHit();
         hitb = new RaycastHit();
+        selectedTroops = selectedTroops.FindAll(e => e != null);
+        foreach (TroopBot troop in selectedTroops) troop.SelectMode(false);
         selectedTroops.Clear();
     }
 
@@ -149,6 +152,7 @@ public class UnitController : MonoBehaviour
         }
         if (selectedTroop == null) return false;
         selectedTroops.Add(selectedTroop);
+        selectedTroop.SelectMode(true);
         return true;
     }
 
@@ -162,6 +166,7 @@ public class UnitController : MonoBehaviour
             if (zone.Contains(pos))
             {
                 selectedTroops.Add(troop);
+                troop.SelectMode(true);
             }
         }
         return selectedTroops.Count != 0;
