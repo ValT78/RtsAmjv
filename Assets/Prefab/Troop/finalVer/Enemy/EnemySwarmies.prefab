@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ddb9221ba76384781ee46b87f9cca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swarmPrefab: {fileID: 8660318895565672486, guid: 5278f625279ad4040bd4049870e75ba1, type: 3}
+  swarmPrefab: {fileID: 8994737915125477539, guid: 63f0882693bd93340afb69b3e85efcf0, type: 3}
   armySize: 6
   armyRadius: 3

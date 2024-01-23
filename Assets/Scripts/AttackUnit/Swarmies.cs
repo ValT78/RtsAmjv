@@ -58,6 +58,26 @@ public class Swarmies : MonoBehaviour
             }
         }
     }
+    public void SelectEveryMode(bool state)
+    {
+        foreach (TroopBot swarm in swarmies.Cast<TroopBot>())
+        {
+            if (swarm != null)
+            {
+                swarm.SelectMode(state, true);
+            }
+        }
+    }
+    public void ShowEveryCapa(bool state)
+    {
+        foreach (TroopBot swarm in swarmies.Cast<TroopBot>())
+        {
+            if (swarm != null)
+            {
+                swarm.ShowCapa(state, true);
+            }
+        }
+    }
 
     public bool RefillArmy()
     {

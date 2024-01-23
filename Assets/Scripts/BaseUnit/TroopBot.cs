@@ -51,13 +51,21 @@ public class TroopBot : BotBase
         }
     }
 
-    public void SelectMode(bool state)
+    public void SelectMode(bool state, bool otherSwarm = false)
     {
-        Selector.SetActive(state);
+        if (isSwarm && !otherSwarm) isSwarm.SelectEveryMode(state);
+        else
+        {
+            Selector.SetActive(state);
+        }
     }
 
-    public void ShowCapa(bool state)
+    public void ShowCapa(bool state, bool otherSwarm = false)
     {
-        VisuCapa.SetActive(state);
+        if (isSwarm && !otherSwarm) isSwarm.ShowEveryCapa(state);
+        else
+        {
+            VisuCapa.SetActive(state);
+        }
     }
 }
