@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1151846247395467573, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4378283756054032555, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Name
@@ -129,5 +129,6 @@ MonoBehaviour:
   damage: 7
   star: {fileID: 0}
   specialRange: 10
+  specialUsed: 0
   throwSpeed: 5
   trap: {fileID: 558324709960684974, guid: 3bf0e105e0992224380b812a9f708904, type: 3}

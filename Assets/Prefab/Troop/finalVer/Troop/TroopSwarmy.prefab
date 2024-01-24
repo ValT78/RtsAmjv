@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Speed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -130,3 +130,4 @@ MonoBehaviour:
   damage: 2
   star: {fileID: 2723332700400388369}
   specialRange: Infinity
+  specialUsed: 0

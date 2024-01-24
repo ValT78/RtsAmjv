@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1151846247395467573, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Speed
-      value: 2.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4378283756054032555, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Name
@@ -129,5 +129,4 @@ MonoBehaviour:
   freezeParticle: {fileID: 7803489399656490530, guid: cc50de4fe594a6d4b88d60bbc15af2f0, type: 3}
   freezeCircle: {fileID: 1408434571643084571, guid: cc695843ace1a6847aaa3a9b0b2e813e, type: 3}
   specialStunnedDelay: 5
-  specialStunnedRadius: 0
   freezeRadius: 2
