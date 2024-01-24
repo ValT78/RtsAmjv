@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public UIController UIController;
     public static bool playerAttack;
 
-    public static GameObject endScreen;
+    public static WinScreen endScreen;
     public static float timeElapsed;
 
 
@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
         }
         playerAttack = false;
 
-        endScreen = FindObjectOfType<WinScreen>().gameObject;
-        endScreen.SetActive(false);
+        endScreen = FindObjectOfType<WinScreen>();
+        endScreen.gameObject.SetActive(false);
 
         // UIController.ActiveWinUI();
     }
@@ -204,8 +204,8 @@ public class GameManager : MonoBehaviour
     public static void SetVictoryScreen(bool isPlayerWinning)
     {
         isChosingTroop = true;
-        endScreen.SetActive(true);
-        endScreen.GetComponent<WinScreen>().SetWinner(isPlayerWinning, deadAllie, deadEnemy, timeElapsed);
+        endScreen.gameObject.SetActive(true);
+        endScreen.SetWinner(isPlayerWinning, deadAllie, deadEnemy, timeElapsed);
     }
 
 }

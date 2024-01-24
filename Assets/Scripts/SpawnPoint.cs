@@ -12,7 +12,6 @@ public class SpawnPoint : MonoBehaviour
             if(other.TryGetComponent(out TroopBot bot) && bot.GetHasCrown())
             {
                 GameManager.SetVictoryScreen(true);
-
             }
         }
         else
