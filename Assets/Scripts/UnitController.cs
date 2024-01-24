@@ -158,7 +158,7 @@ public class UnitController : MonoBehaviour
     private void DrawRect(Rect rect)
     {
         //Gizmos.DrawWireCube(new Vector3(rect.center.x, 0.01f, rect.center.y), new Vector3(rect.size.x, 0.01f, rect.size.y));
-        Vector3 pos = new Vector3(rect.center.x, 0.005f, rect.center.y);
+        Vector3 pos = new Vector3(rect.center.x, VisuSelect.transform.position.y, rect.center.y);
         Vector3 size = new Vector3(rect.size.x/10, 1, rect.size.y/10);
         VisuSelect.transform.position = pos;
         VisuSelect.transform.localScale = size;

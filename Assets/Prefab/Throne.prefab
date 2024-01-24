@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7524728971709233758}
   - component: {fileID: 8073234581513574928}
   - component: {fileID: 8809599958740281888}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9063629577471015667}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 1009207714707651957}
   - component: {fileID: 6231866728026735775}
   - component: {fileID: 8534468735266119094}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 3801920428969100452}
   - component: {fileID: 6736085001308594508}
   - component: {fileID: 2497494520369637085}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 423674550460982831}
   - component: {fileID: 8754408918230048257}
   - component: {fileID: 3602412760380680095}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 8137428359118143811}
   - component: {fileID: 5204963396856705461}
   - component: {fileID: 9034427825333439883}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 8092501004609219859}
   - component: {fileID: 8733957126732350362}
   - component: {fileID: 8369213708275274212}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 5961502578213006622}
   - component: {fileID: 3715961805096291011}
   - component: {fileID: 5837265068391168068}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6545130223267098125}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Throne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,7 +687,7 @@ GameObject:
   - component: {fileID: 199414673323694969}
   - component: {fileID: 3738382093963928010}
   - component: {fileID: 591962449361235610}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 1613642814421573710}
   - component: {fileID: 541824859772811056}
   - component: {fileID: 7571540497019353419}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +853,7 @@ GameObject:
   - component: {fileID: 3975414085774094898}
   - component: {fileID: 2397863476634686205}
   - component: {fileID: 4891294048344003561}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pillier (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +934,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 908918359952676951}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1047,6 +1047,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9ec827927f365d244abb6432173a79a0, type: 3}
       propertyPath: m_Name
       value: Crown
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ec827927f365d244abb6432173a79a0, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ec827927f365d244abb6432173a79a0, type: 3}
       propertyPath: m_StaticEditorFlags

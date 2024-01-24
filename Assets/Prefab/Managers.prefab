@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIController: {fileID: 0}
+  _playerAttack: 0
 --- !u!1 &2487343333856397120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,6 +1943,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3823253841725402084, guid: 2571a85164156b14599a7e0e4cd95a5e, type: 3}
+      propertyPath: tankPrefab
+      value: 
+      objectReference: {fileID: 6289505517203625705, guid: c4c93912f55e03246bc5be782f789d03, type: 3}
+    - target: {fileID: 3823253841725402084, guid: 2571a85164156b14599a7e0e4cd95a5e, type: 3}
+      propertyPath: healerPrefab
+      value: 
+      objectReference: {fileID: 6289505517203625705, guid: 06d926e500e5a6444934d4d83b2d157c, type: 3}
+    - target: {fileID: 3823253841725402084, guid: 2571a85164156b14599a7e0e4cd95a5e, type: 3}
+      propertyPath: sniperPrefab
+      value: 
+      objectReference: {fileID: 6289505517203625705, guid: 2abf9f3f799f5304996f9c6bc79d3e16, type: 3}
+    - target: {fileID: 3823253841725402084, guid: 2571a85164156b14599a7e0e4cd95a5e, type: 3}
+      propertyPath: sorcierPrefab
+      value: 
+      objectReference: {fileID: 6289505517203625705, guid: 9b3649a88e1d2c74395bfd101369f089, type: 3}
     - target: {fileID: 4102707345361453283, guid: 2571a85164156b14599a7e0e4cd95a5e, type: 3}
       propertyPath: m_Name
       value: MenuChoixTroops
