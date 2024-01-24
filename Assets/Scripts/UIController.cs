@@ -39,8 +39,10 @@ public class UIController : MonoBehaviour
 
     [Header("Level selection")]
     [SerializeField] private GameObject LevelMenu;
-    [SerializeField] private Button AttackButton;
-    [SerializeField] private Button DefenceButton;
+    [SerializeField] private Button Lvl1AttackButton;
+    [SerializeField] private Button Lvl1DefenceButton;
+    [SerializeField] private Button Lvl2AttackButton;
+    [SerializeField] private Button Lvl2DefenceButton;
     [SerializeField] private Button BackButton2;
 
 
@@ -55,8 +57,10 @@ public class UIController : MonoBehaviour
         BackButton.onClick.AddListener(ActiveMainUI);
         ApplyButton.onClick.AddListener(SetSettings);
 
-        AttackButton.onClick.AddListener(AttackAction);
-        DefenceButton.onClick.AddListener(DefenceAction);
+        Lvl1AttackButton.onClick.AddListener(Attack1Action);
+        Lvl1DefenceButton.onClick.AddListener(Defence1Action);
+        Lvl2AttackButton.onClick.AddListener(Attack2Action);
+        Lvl2DefenceButton.onClick.AddListener(Defence2Action);
         BackButton2.onClick.AddListener(ActiveMainUI);
     }
 
@@ -130,13 +134,26 @@ public class UIController : MonoBehaviour
         Screen.fullScreen = Toggle.isOn;
     }
 
-    private void AttackAction()
+    private void Attack1Action()
     {
+        GameManager.playerAttack = true;
         SceneManager.LoadScene("LVL 1");
     }
 
-    private void DefenceAction()
+    private void Defence1Action()
     {
+        GameManager.playerAttack = false;
+        SceneManager.LoadScene("LVL 1");
+    }
+    private void Attack2Action()
+    {
+        GameManager.playerAttack = true;
+        SceneManager.LoadScene("LVL 2");
+    }
+
+    private void Defence2Action()
+    {
+        GameManager.playerAttack = false;
         SceneManager.LoadScene("LVL 2");
     }
 
