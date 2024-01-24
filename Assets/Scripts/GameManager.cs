@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(playerAttack);
         timeElapsed += Time.deltaTime;
     }
 
