@@ -13,6 +13,10 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: initialShotTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: attackController
       value: 
       objectReference: {fileID: -2741832468043322463}
@@ -125,7 +129,7 @@ MonoBehaviour:
   botBase: {fileID: 2279643798933026480}
   projectilePrefab: {fileID: 1306530339962960709, guid: fe4020059a5bbde4ab0c11b69ccc4ab2, type: 3}
   attackOrigin: {fileID: 2069763927041264010}
-  timeBetweenShot: 1
+  timeBetweenShot: 0.5
   projectileSpeed: 2
   damage: 3
   star: {fileID: 2723332700400388369}

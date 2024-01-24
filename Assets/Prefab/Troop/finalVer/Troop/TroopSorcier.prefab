@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: attackRange
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: initialShotTime
@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: attackController
       value: 
       objectReference: {fileID: 5398437863520276934}
+    - target: {fileID: 525739469740472690, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
+      propertyPath: wallLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 592421396769743795, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -119,6 +119,7 @@ public class BotBase : AliveObject
         // Les unités contrôlées par le joueur vise forcément leur target si elle est dans leur range d'attaque
         if (!isEnemy && target!= null && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange && !WallInRange(target))
         {
+            print("yes");
             if (toShoot != target)
             {
                 agent.ResetPath();
@@ -138,8 +139,10 @@ public class BotBase : AliveObject
             }
             else if (toShoot == null)
             {
+                print("rond");
                 if(!WallInRange(newToShoot))
                 {
+                    print("quadratique");
                     toShoot = newToShoot;
                     isAttacking = false;
                     initialShotTimer = initialShotTime;

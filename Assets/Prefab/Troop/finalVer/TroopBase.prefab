@@ -321,7 +321,7 @@ MonoBehaviour:
   initialShotTime: 0.5
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   crown: {fileID: 1948812962908100758}
   crownSpeedMultiplier: 0.75
   Selector: {fileID: 7834570370793522436}

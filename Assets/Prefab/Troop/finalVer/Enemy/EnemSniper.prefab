@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: maxHealth
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: awareRange
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: initialShotTime
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: attackController
@@ -124,9 +124,9 @@ MonoBehaviour:
   botBase: {fileID: 1701222318050406532}
   projectilePrefab: {fileID: 8375048589718216157, guid: d62b65cba1fd51b4bb24e4ad0fdba1a3, type: 3}
   attackOrigin: {fileID: 3972793727997767616}
-  timeBetweenShot: 2
+  timeBetweenShot: 1.5
   projectileSpeed: 15
-  damage: 5
+  damage: 7
   star: {fileID: 0}
   specialRange: 10
   throwSpeed: 5

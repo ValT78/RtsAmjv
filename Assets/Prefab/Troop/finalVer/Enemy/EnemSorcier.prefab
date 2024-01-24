@@ -22,12 +22,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: attackRange
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: attackController
       value: 
       objectReference: {fileID: -3865473429456827233}
+    - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+      propertyPath: wallLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8713988393631401323, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
