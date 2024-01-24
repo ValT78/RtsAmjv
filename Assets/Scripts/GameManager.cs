@@ -16,14 +16,20 @@ public class GameManager : MonoBehaviour
     public static bool isChosingTroop;
     public UIController UIController;
     public static bool playerAttack;
+    [SerializeField] private bool _playerAttack;
 
     public static WinScreen endScreen;
     public static float timeElapsed;
 
+    private void Awake()
+    {
+        playerAttack = _playerAttack;
 
+    }
 
     private void Start()
     {
+        Debug.Log(playerAttack);
         // Récupérer toutes les unités de troupe dans la scène et les ajouter à la liste
         troopUnits.AddRange(FindObjectsOfType<TroopBot>().ToArray());
         // Récupérer toutes les unités d'ennemi dans la scène et les ajouter à la liste
@@ -33,7 +39,6 @@ public class GameManager : MonoBehaviour
             if(obj.isEnemy) enemyObjects.Add(obj);
             else troopObjects.Add(obj);
         }
-        playerAttack = false;
 
         endScreen = FindObjectOfType<WinScreen>();
         endScreen.gameObject.SetActive(false);
