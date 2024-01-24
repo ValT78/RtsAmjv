@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public static bool isChosingTroop;
     public UIController UIController;
     public static bool playerAttack;
+    [SerializeField] private bool _playerAttack;
 
     public static GameObject endScreen;
     public static float timeElapsed;
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        playerAttack = _playerAttack;
+
         // Récupérer toutes les unités de troupe dans la scène et les ajouter à la liste
         troopUnits.AddRange(FindObjectsOfType<TroopBot>().ToArray());
         // Récupérer toutes les unités d'ennemi dans la scène et les ajouter à la liste
