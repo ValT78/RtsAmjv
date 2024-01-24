@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public static bool playerAttack;
     [SerializeField] private bool _playerAttack;
 
-    public static GameObject endScreen;
+    public static WinScreen endScreen;
     public static float timeElapsed;
 
     private void Awake()
@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
             else troopObjects.Add(obj);
         }
 
-        endScreen = FindObjectOfType<WinScreen>().gameObject;
-        endScreen.SetActive(false);
+        endScreen = FindObjectOfType<WinScreen>();
+        endScreen.gameObject.SetActive(false);
 
         // UIController.ActiveWinUI();
     }
@@ -208,8 +208,8 @@ public class GameManager : MonoBehaviour
     public static void SetVictoryScreen(bool isPlayerWinning)
     {
         isChosingTroop = true;
-        endScreen.SetActive(true);
-        endScreen.GetComponent<WinScreen>().SetWinner(isPlayerWinning, deadAllie, deadEnemy, timeElapsed);
+        endScreen.gameObject.SetActive(true);
+        endScreen.SetWinner(isPlayerWinning, deadAllie, deadEnemy, timeElapsed);
     }
 
 }

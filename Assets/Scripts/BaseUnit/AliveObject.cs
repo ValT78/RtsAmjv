@@ -44,7 +44,6 @@ public class AliveObject : MonoBehaviour
 
     public void ModifyHealth(int value)
     {
-        // print(name + ": " + value);
         if (value < 0)
         {
             if (dodgeCount > 0)
