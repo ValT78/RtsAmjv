@@ -702,7 +702,15 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 785309cb84f27c84f821059fa76c7a2c, type: 3}
     - target: {fileID: 994597021975197246, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302032733113121884, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302032733113121884, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 540
       objectReference: {fileID: 0}
     - target: {fileID: 2108064528069533664, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_Color.b
@@ -800,9 +808,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3903323763054923742, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903323763054923742, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7c532f52630766d4288dcf7d37c3cd1f, type: 3}
     - target: {fileID: 3906111933343681902, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043144195644387733, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043144195644387733, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 540
       objectReference: {fileID: 0}
     - target: {fileID: 4429368082989088646, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_Color.b
@@ -820,6 +844,14 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 2800000, guid: 785309cb84f27c84f821059fa76c7a2c, type: 3}
+    - target: {fileID: 4802906480249858341, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802906480249858341, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 540
+      objectReference: {fileID: 0}
     - target: {fileID: 5291259593268601956, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_Name
       value: Lvl 1
@@ -852,6 +884,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -154.08948
       objectReference: {fileID: 0}
+    - target: {fileID: 7833415804595326660, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 19c206b616a1f104bab2472e84d40ac2, type: 3}
     - target: {fileID: 9091187495774596494, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -154.08948
