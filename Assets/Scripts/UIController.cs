@@ -136,25 +136,21 @@ public class UIController : MonoBehaviour
 
     private void Attack1Action()
     {
-        GameManager.playerAttack = true;
         SceneManager.LoadScene("LVL 1");
     }
 
     private void Defence1Action()
     {
-        GameManager.playerAttack = false;
-        SceneManager.LoadScene("LVL 1");
+        SceneManager.LoadScene("LVL 3");
     }
     private void Attack2Action()
     {
-        GameManager.playerAttack = true;
         SceneManager.LoadScene("LVL 2");
     }
 
     private void Defence2Action()
     {
-        GameManager.playerAttack = false;
-        SceneManager.LoadScene("LVL 2");
+        SceneManager.LoadScene("LVL 4");
     }
 
 }

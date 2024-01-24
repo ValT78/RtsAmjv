@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class TroopBot : BotBase
 {
-    [SerializeField] private GameObject Selector;
     [SerializeField] private GameObject VisuCapa;
     public override void UpdateBehavior()
     {
@@ -51,11 +50,7 @@ public class TroopBot : BotBase
         }
     }
 
-    public void SelectMode(bool state)
-    {
-       Selector.SetActive(state);
-       
-    }
+    
 
     public void ShowCapa(bool state, bool otherSwarm = false)
     {

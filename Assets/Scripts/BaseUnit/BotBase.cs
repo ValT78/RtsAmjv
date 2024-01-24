@@ -35,6 +35,7 @@ public class BotBase : AliveObject
     private BotBase kingTarget;
     private bool isStunned =false;
     [SerializeField] private float crownSpeedMultiplier;
+    [SerializeField] private GameObject Selector;
 
 
     public override void StartBehavior()
@@ -190,7 +191,15 @@ public class BotBase : AliveObject
         }
         else
         {
+            if (this.target != null && this.target.GetType() == typeof(EnemyBot))
+            {
+                ((EnemyBot)this.target).SelectMode(false);
+            }
             this.target = target;
+            if (this.target != null && this.target.GetType() == typeof(EnemyBot))
+            {
+                ((EnemyBot)this.target).SelectMode(true);
+            }
         }
 
     }
@@ -237,6 +246,8 @@ public class BotBase : AliveObject
     {
         return hasCrown;
     }
-    
-
+    public void SelectMode(bool state)
+    {
+        Selector.SetActive(state);
+    }
 }

@@ -680,6 +680,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 406219324724786803, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 978884998859910858, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 978884998859910858, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 978884998859910858, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 978884998859910858, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 785309cb84f27c84f821059fa76c7a2c, type: 3}
+    - target: {fileID: 994597021975197246, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108064528069533664, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108064528069533664, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108064528069533664, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2108064528069533664, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 785309cb84f27c84f821059fa76c7a2c, type: 3}
     - target: {fileID: 3654120245842816620, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -764,6 +804,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4429368082989088646, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429368082989088646, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429368082989088646, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429368082989088646, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 785309cb84f27c84f821059fa76c7a2c, type: 3}
     - target: {fileID: 5291259593268601956, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_Name
       value: Lvl 1
@@ -784,6 +840,10 @@ PrefabInstance:
       propertyPath: Lvl2DefenceButton
       value: 
       objectReference: {fileID: 8496635396575048665}
+    - target: {fileID: 6340881372652053200, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7050818846527800983, guid: 72877e5108577a24f9a600b0b19462c3, type: 3}
       propertyPath: m_Name
       value: Lvl 2

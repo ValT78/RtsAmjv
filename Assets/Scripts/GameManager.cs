@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(playerAttack);
         // Récupérer toutes les unités de troupe dans la scène et les ajouter à la liste
         troopUnits.AddRange(FindObjectsOfType<TroopBot>().ToArray());
         // Récupérer toutes les unités d'ennemi dans la scène et les ajouter à la liste

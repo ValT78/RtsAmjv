@@ -48,9 +48,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6431328793071271790, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f5cee835a5c2bf46a73c32e9b5496b8, type: 2}
     - target: {fileID: 6772145840793979187, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
       propertyPath: m_Name
       value: EnemyBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143270118842406172, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -71,6 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d573eba80bb184dbdac9b239fb6b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2295389509213695108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9143270118842406172, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
+  m_PrefabInstance: {fileID: 7005832052056308120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2361363563689427604 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4754825408952597260, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
@@ -118,6 +131,7 @@ MonoBehaviour:
     m_Bits: 8
   crown: {fileID: 7523460773682983190}
   crownSpeedMultiplier: 0.75
+  Selector: {fileID: 2295389509213695108}
 --- !u!1 &7523460773682983190 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 671322855071877262, guid: 4a1b9c9df30596d4994408ba892db605, type: 3}
