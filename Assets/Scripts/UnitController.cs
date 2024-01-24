@@ -42,12 +42,6 @@ public class UnitController : MonoBehaviour
         }
         else
         {
-            if (!capacitiActive)
-            {
-                foreach (TroopBot troop in selectedTroops) troop.ShowCapa(true);
-                capacitiActive = true;
-
-            }
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita))
             {
                 VisuSelect.SetActive(false);
@@ -61,39 +55,44 @@ public class UnitController : MonoBehaviour
                  *  
                  *  Pour faciliter et optimiser la résoltion de ces évenement on va les faire dans l'odre 3 4 2 1
                  */
-                
-                if (SelectEnemy(hita.point))
+
+                if (capacitiActive)
+                {
+                    foreach (TroopBot troop in selectedTroops)
+                    {
+                        troop.attackController.Special();
+                        activateCapa(false);
+                    }
+                }
+                else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                {
+                    foreach (TroopBot troop in selectedTroops) troop.AwarePosition(hita.point);
+                }
+                else if (SelectEnemy(hita.point))
                 {
                     foreach (TroopBot troop in selectedTroops) troop.GoToBot(target);
                 }
                 else foreach (TroopBot troop in selectedTroops)
-                {
-                    barycenter = calculateBarycenter();
-                    Vector3 offset = troop.transform.position - barycenter;
-                    troop.GoToPosition(hita.point + offset);
-                }
+                    {
+                        barycenter = calculateBarycenter();
+                        Vector3 offset = (troop.transform.position - barycenter)*0.80f;
+                        troop.GoToPosition(hita.point + offset);
+                    }
 
             }
-            else if (Input.GetMouseButtonDown(1) && Physics.Raycast(mouseRay, out hita))
-            {
-                foreach (TroopBot troop in selectedTroops) troop.AwarePosition(hita.point);
-            }
-            if (Input.GetKeyDown(KeyCode.E)) activateCapa();
+
         }
 
-       
+        if (Input.GetKeyDown(KeyCode.E)) activateCapa(!capacitiActive);
+
+
 
     }
 
-    private void activateCapa()
+    private void activateCapa(bool state)
     {
-        foreach (TroopBot troop in selectedTroops)
-        {
-            troop.ShowCapa(false);
-            troop.attackController.Special();
-        }
-        capacitiActive = false;
-
+        capacitiActive = state;
+        foreach (TroopBot troop in selectedTroops) troop.ShowCapa(state);
     }
     private void ClearSelection()
     {
@@ -193,7 +192,6 @@ public class UnitController : MonoBehaviour
             if (zone.Contains(pos))
             {
                 AddTroop(troop);
-                
             }
         }
         return selectedTroops.Count != 0;

@@ -57,8 +57,7 @@ public class TroopBot : BotBase
         if (isSwarm && !otherSwarm) isSwarm.ShowEveryCapa(state);
         else
         {
-            if(!attackController.specialUsed)
-                VisuCapa.SetActive(state);
+             VisuCapa.SetActive(state && !attackController.specialUsed);
         }
     }
 }
