@@ -70,11 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5281f98bc2775f54db968a7b81d7efe5, type: 2}
     - target: {fileID: 1709152192480814898, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1709152192480814898, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5738123895531329835, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Name
@@ -138,12 +138,13 @@ MonoBehaviour:
   damage: 1
   star: {fileID: 2723332700400388369}
   specialRange: Infinity
+  specialUsed: 0
   healParticle: {fileID: 7803489399656490530, guid: bfa739adf1fa05d4785b67a36a559e04, type: 3}
   healCircle: {fileID: 1408434571643084571, guid: 89c36beb493abda4bbfe28b50ec3bb3b, type: 3}
   healRadius: 5
   healAmount: 1
   boostParticle: {fileID: 7803489399656490530, guid: e5d077d2015a1c34bbd4d85ffc416d5d, type: 3}
   boostCircle: {fileID: 1408434571643084571, guid: 7eadf7171b1ce1a418d582e190ad0740, type: 3}
-  boostDamage: 5
-  boostRadius: 10
-  boostDuration: 10
+  boostDamage: 3
+  boostRadius: 6
+  boostDuration: 15

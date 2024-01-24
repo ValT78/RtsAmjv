@@ -58,16 +58,7 @@ public class Swarmies : MonoBehaviour
             }
         }
     }
-    public void SelectEveryMode(bool state)
-    {
-        foreach (TroopBot swarm in swarmies.Cast<TroopBot>())
-        {
-            if (swarm != null)
-            {
-                swarm.SelectMode(state, true);
-            }
-        }
-    }
+    
     public void ShowEveryCapa(bool state)
     {
         foreach (TroopBot swarm in swarmies.Cast<TroopBot>())
@@ -78,6 +69,17 @@ public class Swarmies : MonoBehaviour
             }
         }
     }
+
+    public void AddEveryTroop(UnitController uc) {
+        foreach (TroopBot swarm in swarmies.Cast<TroopBot>())
+        {
+            if (swarm != null)
+            {
+                uc.AddTroop(swarm, true);
+            }
+        }
+    }
+
 
     public bool RefillArmy()
     {

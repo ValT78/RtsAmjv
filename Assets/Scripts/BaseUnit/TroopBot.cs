@@ -30,7 +30,7 @@ public class TroopBot : BotBase
         }
     }
 
-    public void GoToBot(BotBase target, bool otherSwarm = false)
+    public void GoToBot(AliveObject target, bool otherSwarm = false)
     {
         if (isSwarm && !otherSwarm) isSwarm.SetEveryTarget(target);
         else
@@ -51,13 +51,10 @@ public class TroopBot : BotBase
         }
     }
 
-    public void SelectMode(bool state, bool otherSwarm = false)
+    public void SelectMode(bool state)
     {
-        if (isSwarm && !otherSwarm) isSwarm.SelectEveryMode(state);
-        else
-        {
-            Selector.SetActive(state);
-        }
+       Selector.SetActive(state);
+       
     }
 
     public void ShowCapa(bool state, bool otherSwarm = false)
@@ -65,7 +62,8 @@ public class TroopBot : BotBase
         if (isSwarm && !otherSwarm) isSwarm.ShowEveryCapa(state);
         else
         {
-            VisuCapa.SetActive(state);
+            if(!attackController.specialUsed)
+                VisuCapa.SetActive(state);
         }
     }
 }

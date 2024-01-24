@@ -8,7 +8,7 @@ public class Sorcier : AttackController
     [SerializeField] private GameObject freezeParticle;
     [SerializeField] private GameObject freezeCircle;
     [SerializeField] private float specialStunnedDelay;
-    [SerializeField] private float specialStunnedRadius;
+    [SerializeField] private float freezeRadius;
     public override void StartBehavior()
     {
         
@@ -21,15 +21,20 @@ public class Sorcier : AttackController
 
     public override bool SpecialAttack(Vector3 targetPosition)
     {
-        BotBase bot = GameManager.ClosestBot(!botBase.isEnemy, targetPosition, specialStunnedRadius);
-        if (bot!= null && bot.TryGetComponent(out BotBase target))
+        bool flag=false;
+        foreach(Collider bot in Physics.OverlapSphere(targetPosition, freezeRadius))
         {
-            StartCoroutine(target.StunnedCoroutine(specialStunnedDelay));
-            Instantiate(freezeCircle, target.transform.position + new Vector3(0f, -0.5f, 0f), Quaternion.identity);
-            Instantiate(freezeParticle, target.transform.position, Quaternion.Euler(-90, 0, 0));
-            return true;
+            if(bot.TryGetComponent(out BotBase botB) && botB.isEnemy != botBase.isEnemy)
+            {
+                StartCoroutine(botB.StunnedCoroutine(specialStunnedDelay));
+                Instantiate(freezeParticle, botB.transform.position, Quaternion.Euler(-90, 0, 0));
+                flag = true;
+            }
         }
-        return false;
+        if(flag) Instantiate(freezeCircle, targetPosition, Quaternion.identity);
+
+
+        return flag;
     }
 
 }

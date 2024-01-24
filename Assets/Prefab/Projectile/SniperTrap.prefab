@@ -98,6 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   product: {fileID: 9081460233057175428, guid: 863a85f198e385c49bee7f61ddc65602, type: 3}
   gravity: 9.81
-  launchAngle: 1.57
+  launchAngle: 1.3
   spawnHeight: 1
   endHeight: -0.5

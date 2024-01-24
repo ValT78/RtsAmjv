@@ -22,12 +22,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: attackRange
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: attackController
       value: 
       objectReference: {fileID: -3865473429456827233}
+    - target: {fileID: 6308002885709885580, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
+      propertyPath: wallLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8713988393631401323, guid: b4a6601531e8e67458bcf2240f369162, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -121,7 +125,9 @@ MonoBehaviour:
   damage: 2
   star: {fileID: 0}
   specialRange: 15
+  specialUsed: 0
   freezeParticle: {fileID: 7803489399656490530, guid: cc50de4fe594a6d4b88d60bbc15af2f0, type: 3}
   freezeCircle: {fileID: 1408434571643084571, guid: cc695843ace1a6847aaa3a9b0b2e813e, type: 3}
   specialStunnedDelay: 5
   specialStunnedRadius: 0
+  freezeRadius: 2

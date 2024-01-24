@@ -122,11 +122,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  boostManager: {fileID: 0}
   healthBar: {fileID: 3226883008106371422}
-  maxHealth: 10
+  maxHealth: 25
   armor: 0
   dodgeCount: 0
   armorBoostCount: 0
+  baitRadius: 12
 --- !u!1001 &1183505552451255457
 PrefabInstance:
   m_ObjectHideFlags: 0
