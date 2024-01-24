@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Speed
-      value: 2.5
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -146,5 +146,4 @@ MonoBehaviour:
   freezeParticle: {fileID: 7803489399656490530, guid: cc50de4fe594a6d4b88d60bbc15af2f0, type: 3}
   freezeCircle: {fileID: 1408434571643084571, guid: cc695843ace1a6847aaa3a9b0b2e813e, type: 3}
   specialStunnedDelay: 10
-  specialStunnedRadius: 3
   freezeRadius: 3

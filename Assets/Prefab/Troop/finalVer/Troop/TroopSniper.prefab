@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8979912304652601525, guid: 299f10d566a20a64eb9be8b369451029, type: 3}
       propertyPath: m_Speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -134,5 +134,6 @@ MonoBehaviour:
   damage: 7
   star: {fileID: 2723332700400388369}
   specialRange: 10
+  specialUsed: 0
   throwSpeed: 5
   trap: {fileID: 558324709960684974, guid: 3bf0e105e0992224380b812a9f708904, type: 3}
