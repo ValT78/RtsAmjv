@@ -149,5 +149,5 @@ MonoBehaviour:
   damage: 3
   star: {fileID: 2723332700400388369}
   specialRange: 15
-  throwSpeed: 3
+  throwSpeed: 5
   bait: {fileID: 8472596363555702958, guid: 6fbe7e2054eecad4aaaac4032d6d3753, type: 3}

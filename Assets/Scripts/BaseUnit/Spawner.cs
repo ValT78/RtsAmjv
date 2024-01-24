@@ -13,6 +13,7 @@ public class Spawner : AliveObject
     public List<BotBase> population = new List<BotBase>();
     [SerializeField] private ParticleSystem pS;
     [SerializeField] private float spawnRadius;
+    [SerializeField] private float desactivationRadius;
 
 
     public override void UpdateBehavior()
@@ -32,6 +33,7 @@ public class Spawner : AliveObject
 
     private void FixedUpdate()
     {   
+        if(GameManager.ClosestBot(!isEnemy, transform.position, desactivationRadius) == null)
         ticksCount++;
         if (ticksCount < delay) return; // every delay amount of tick
         ticksCount -= delay;

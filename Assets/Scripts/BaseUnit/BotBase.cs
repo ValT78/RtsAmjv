@@ -101,7 +101,6 @@ public class BotBase : AliveObject
 
             if (target != null)
             {
-
                 PathFind(target.transform.position);
             }
             else
@@ -116,10 +115,10 @@ public class BotBase : AliveObject
     
     private void FindToShoot()
     {
+        
         // Les unités contrôlées par le joueur vise forcément leur target si elle est dans leur range d'attaque
         if (!isEnemy && target!= null && target.isEnemy && Vector3.Distance(target.transform.position, transform.position) <= attackRange && !WallInRange(target))
         {
-            print("yes");
             if (toShoot != target)
             {
                 agent.ResetPath();
@@ -139,10 +138,8 @@ public class BotBase : AliveObject
             }
             else if (toShoot == null)
             {
-                print("rond");
                 if(!WallInRange(newToShoot))
                 {
-                    print("quadratique");
                     toShoot = newToShoot;
                     isAttacking = false;
                     initialShotTimer = initialShotTime;
@@ -204,7 +201,7 @@ public class BotBase : AliveObject
     }
     public void GiveCrown()
     {
-        crown.gameObject.SetActive(true);
+        crown.SetActive(true);
         hasCrown = true;
         agent.speed *= crownSpeedMultiplier;
     }
@@ -240,5 +237,6 @@ public class BotBase : AliveObject
     {
         return hasCrown;
     }
+    
 
 }

@@ -5049,7 +5049,7 @@ MonoBehaviour:
   isEnemy: 1
   boostManager: {fileID: 1502736086422224499}
   healthBar: {fileID: 4003826201157989661}
-  maxHealth: 10
+  maxHealth: 12
   armor: 0
   dodgeCount: 0
   armorBoostCount: 0
@@ -5059,6 +5059,7 @@ MonoBehaviour:
   population: []
   pS: {fileID: 1305206850385610404}
   spawnRadius: 2
+  desactivationRadius: 9
 --- !u!136 &7358707794394119031
 CapsuleCollider:
   m_ObjectHideFlags: 0

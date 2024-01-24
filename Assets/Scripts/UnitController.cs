@@ -14,7 +14,7 @@ public class UnitController : MonoBehaviour
     [SerializeField] private bool isSelected;
     [SerializeField] private float maxSelectDist;
     private bool capacitiActive;
-    private EnemyBot target;
+    private AliveObject target;
     private Vector3 barycenter;
     [SerializeField] private GameObject VisuSelect;
 
@@ -42,6 +42,12 @@ public class UnitController : MonoBehaviour
         }
         else
         {
+            if (!capacitiActive)
+            {
+                foreach (TroopBot troop in selectedTroops) troop.ShowCapa(true);
+                capacitiActive = true;
+
+            }
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(mouseRay, out hita))
             {
                 VisuSelect.SetActive(false);
@@ -55,20 +61,8 @@ public class UnitController : MonoBehaviour
                  *  
                  *  Pour faciliter et optimiser la résoltion de ces évenement on va les faire dans l'odre 3 4 2 1
                  */
-
-                if (capacitiActive)
-                {
-                    foreach (TroopBot troop in selectedTroops)
-                    {
-                        troop.attackController.Special();
-                        activateCapa(false);
-                    }
-                }
-                else if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                {
-                    foreach (TroopBot troop in selectedTroops) troop.AwarePosition(hita.point);
-                }
-                else if (SelectEnemy(hita.point))
+                
+                if (SelectEnemy(hita.point))
                 {
                     foreach (TroopBot troop in selectedTroops) troop.GoToBot(target);
                 }
@@ -80,18 +74,27 @@ public class UnitController : MonoBehaviour
                 }
 
             }
-
+            else if (Input.GetMouseButtonDown(1) && Physics.Raycast(mouseRay, out hita))
+            {
+                foreach (TroopBot troop in selectedTroops) troop.AwarePosition(hita.point);
+            }
+            if (Input.GetKeyDown(KeyCode.E)) activateCapa();
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) activateCapa(!capacitiActive);
+       
 
     }
 
-    private void activateCapa(bool state)
+    private void activateCapa()
     {
-        capacitiActive = state;
-        foreach (TroopBot troop in selectedTroops) troop.ShowCapa(state);
-    } 
+        foreach (TroopBot troop in selectedTroops)
+        {
+            troop.ShowCapa(false);
+            troop.attackController.Special();
+        }
+        capacitiActive = false;
+
+    }
     private void ClearSelection()
     {
         isSelected = false;
@@ -176,8 +179,7 @@ public class UnitController : MonoBehaviour
             }
         }
         if (selectedTroop == null) return false;
-        selectedTroops.Add(selectedTroop);
-        selectedTroop.SelectMode(true);
+        AddTroop(selectedTroop);
         return true;
     }
 
@@ -190,11 +192,25 @@ public class UnitController : MonoBehaviour
             Vector2 pos = new Vector2(troop.transform.position.x, troop.transform.position.z);
             if (zone.Contains(pos))
             {
-                selectedTroops.Add(troop);
-                troop.SelectMode(true);
+                AddTroop(troop);
+                
             }
         }
         return selectedTroops.Count != 0;
+    }
+
+    public void AddTroop(TroopBot troop, bool otherSwarm = false)
+    {
+        if (troop.GetIsSwarm() && !otherSwarm)
+        {
+            troop.GetIsSwarm().AddEveryTroop(this);
+        }
+        else
+        {
+            selectedTroops.Add(troop);
+            troop.SelectMode(true);
+        }
+        
     }
 
     private bool SelectEnemy(Vector3 hitpoint)
@@ -203,7 +219,7 @@ public class UnitController : MonoBehaviour
         float mindist = maxSelectDist;
         float dist;
         target = null;
-        foreach (EnemyBot troop in GameManager.enemyUnits)
+        foreach (AliveObject troop in GameManager.enemyObjects)
         {
             dist = Vector3.Distance(hitpoint, troop.transform.position);
             if (dist < mindist)

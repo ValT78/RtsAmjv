@@ -21,7 +21,7 @@ public class AttackController : MonoBehaviour
     [Header("CapaSpé")]
     [SerializeField] private GameObject star;
     [SerializeField] protected float specialRange;
-    private bool specialUsed;
+    [HideInInspector] public bool specialUsed;
 
     [Header("Healer")]
     private int damageBoostNumber;
@@ -133,7 +133,6 @@ public class AttackController : MonoBehaviour
    public void SetSpecialUsed(bool specialUsed)
     {
         this.specialUsed = specialUsed;
-        print(specialUsed);
         star.SetActive(!specialUsed);
 
     }

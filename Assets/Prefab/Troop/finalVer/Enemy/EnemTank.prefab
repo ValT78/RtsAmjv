@@ -121,8 +121,9 @@ MonoBehaviour:
   damage: 3
   star: {fileID: 0}
   specialRange: Infinity
+  specialUsed: 0
   boostParticle: {fileID: 7803489399656490530, guid: 2bf04b91cb2e0e746bdca760f3082700, type: 3}
   boostCircle: {fileID: 1408434571643084571, guid: f33985eee37276b40a9e1bfb64cafdee, type: 3}
-  boostRadius: 15
-  boostDuration: 10
+  boostRadius: 10
+  boostDuration: 15
   boostArmor: 2
