@@ -112,7 +112,7 @@ public class UIController : MonoBehaviour
         for(var i =0; i<resolutions.Length;i++)
         {
             Resolution res = resolutions[i];
-            options.Add(res.width + " x " + res.height);
+            options.Add(res.width + " x " + res.height + " " + Mathf.Round((int)res.refreshRateRatio.value)+" Hz");
             if(res.width == Screen.currentResolution.width && res.height == Screen.currentResolution.height)
             {
                 currentRes = i;
@@ -127,11 +127,18 @@ public class UIController : MonoBehaviour
     [ContextMenu("SetSettings")]
     private void SetSettings()
     {
-        mixer.SetFloat("MainVolume", GeneralSlider.value);
-        mixer.SetFloat("EffectVolume", EffectSlider.value);
-        mixer.SetFloat("MusicVolume", MusicSlider.value);
+        mixer.SetFloat("MainVolume", LinToDb(GeneralSlider.value));
+        mixer.SetFloat("EffectVolume", LinToDb(EffectSlider.value));
+        mixer.SetFloat("MusicVolume", LinToDb(MusicSlider.value));
         QualitySettings.SetQualityLevel(QualityDrop.value);
-        Screen.fullScreen = Toggle.isOn;
+        Resolution res = Screen.resolutions[ResolutionDrop.value];
+        Screen.SetResolution(res.width, res.height, Toggle.isOn);
+        Debug.Log(res);
+    }
+
+    private float LinToDb(float x)
+    {
+        return 20 * Mathf.Log10(x);
     }
 
     private void Attack1Action()

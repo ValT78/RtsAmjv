@@ -8,7 +8,7 @@ public class Cloche : MonoBehaviour
     [SerializeField] private float gravity = 9.81f;
     [SerializeField] private float launchAngle = 1.57f;
     [SerializeField] private float spawnHeight = 1;
-    [SerializeField] private float endHeight = -0.5f;
+    [SerializeField] private float endHeight = 0.0f;
     private float throwDistance;
 
 
@@ -47,7 +47,7 @@ public class Cloche : MonoBehaviour
         }
 
         // Lorsque le projectile atteint le sol, instanciez le prefab de l'effet de touche et détruisez le projectile
-        InstantiateHitEffect(transform.position);
+        InstantiateHitEffect(targetPosition);
         Destroy(gameObject);
     }
 
@@ -63,7 +63,9 @@ public class Cloche : MonoBehaviour
 
     void InstantiateHitEffect(Vector3 position)
     {
-        GameObject productPrefab = Instantiate(product, transform.position+new Vector3(0f,0f,0f), Quaternion.identity);
+        Vector3 pos = transform.position;
+        pos.y = 0f;
+        GameObject productPrefab = Instantiate(product, pos, Quaternion.identity);
         if(productPrefab.TryGetComponent(out Trap trap))
         {
             trap.Initialize(isEnemy);
